@@ -1,0 +1,22 @@
+User-Agent: *
+Disallow: /page35921957.html
+Disallow: /header
+Disallow: /page39668611.html
+Disallow: /footer
+Disallow: /tilda/form*
+Disallow: /tilda/rec*
+Disallow: /tilda/click*
+Disallow: /tilda/scroll*
+Disallow: /tilda/popup*
+Disallow: /tilda/cart*
+Disallow: /tilda/product*
+Disallow: /tilda/event*
+Disallow: /*_escaped_fragment_*
+Disallow: /members/login*
+Disallow: /members/signup*
+Disallow:
+
+
+Sitemap: https://moodbox-ek.ru/sitemap.xml
+Sitemap: https://moodbox-ek.ru/sitemap-store.xml
+Host: https://moodbox-ek.ru
