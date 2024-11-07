@@ -1,0 +1,116 @@
+
+# Скомпилированные в байтах / оптимизированные / DLL файлы
+__pycache__/
+.py*[cod]
+*$py.class
+
+# Расширения C
+*.so
+
+# Распространение / упаковка
+.Python
+env/
+сборка/
+разработка-eggs/
+dist/
+Загрузки/
+яйца/
+.eggs/
+библиотека/
+lib64/
+части/
+sdist/
+var/
+колеса/
+.egg-информация*/
+.установлен.cfg
+*.egg
+
+# PyInstaller
+# Обычно эти файлы записываются скриптом python из шаблона
+# перед тем, как PyInstaller создаст исполняемый файл, чтобы добавить в него дату и другую информацию.
+*.manifest
+*.спецификация
+
+# Журналы установки
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Модульное тестирование / отчеты о покрытии
+htmlcov/
+.tox/
+.покрытие
+.покрытие.*
+.кэш
+nosetests.xml
+coverage.xml
+*.обложка
+.гипотеза/
+
+# Переводы
+*.mo
+*.pot
+
+# Материал Django:
+*.log
+local_settings.py
+
+# Flask stuff:
+экземпляр/
+.webassets-кэш
+
+# Scrapy stuff:
+.scrapy
+
+# Документация Sphinx
+документы/_build/
+
+# PyBuilder
+цель/
+
+# Записная книжка Jupyter
+.ipynb_checkpoints
+
+# pyenv
+.python-версия
+
+# файл расписания ритмов сельдерея
+celerybeat-расписание
+
+# Проанализированные файлы SageMath
+*.sage.py
+
+# dotenv
+.env
+
+# virtualenv
+.venv
+venv/
+ENV/
+.vscode
+# Настройки проекта Spyder
+.spyderproject
+.spyproject
+
+# Настройки проекта Rope
+.ropeproject
+
+# документация mkdocs
+/сайт
+
+# mypy
+.mypy_cache/
+
+.DS_Store
+*.sqlite3
+Медиафайлы/
+*.pyc
+*.db
+*.pid
+
+# Игнорируйте миграции Django при разработке, если вы работаете в команде
+
+# Только для разработки
+# **/миграции/**
+# !**/миграции
+# !**/migrations/__init__.py

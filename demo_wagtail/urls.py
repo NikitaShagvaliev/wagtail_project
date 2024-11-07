@@ -17,13 +17,11 @@ api_router = WagtailAPIRouter('wagtailapi')
 api_router.register_endpoint('pages', PagesAPIEndpoint)
 
 urlpatterns = [
-    re_path(r'^blog/', include('blog.urls', namespace="blog")),
-    re_path(r'^django-admin/', admin.site.urls),
-    re_path(r'^admin/', include(wagtailadmin_urls)),
-    re_path(r'^comments/', include('django_comments_xtd.urls')),
-    re_path(r'^api/v2/', api_router.urls),
-    re_path(r'', include(wagtail_urls)),
+    path('admin/', admin.site.urls),
+    path('moysklad/', include('moysklad.urls')),
+    path('cms/', include('wagtail.urls')),
 ]
+
 
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
