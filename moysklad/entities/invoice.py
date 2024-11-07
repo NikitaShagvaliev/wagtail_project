@@ -45,3 +45,4 @@ class InvoiceClient(MoySkladAPIClient):
             return True
         else:
             raise Exception(f"Failed to delete invoice: {response.status_code}")
+            
