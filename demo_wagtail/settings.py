@@ -56,7 +56,7 @@ INSTALLED_APPS = (
     'wagtail.sites',
     'wagtail.api.v2',
 
-    'blog',
+    'moysklad'
 )
 
 MIDDLEWARE = (
