@@ -1,0 +1,74 @@
+ErrorDocument 403 /404.html
+ErrorDocument 404 /404.html
+
+DirectoryIndex page40704823.html
+
+RewriteEngine On
+
+RewriteCond %{HTTP:X-Forwarded-Proto} =http
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} /robots.txt
+RewriteCond "%{DOCUMENT_ROOT}/robots_%{HTTP_HOST}.txt" -f
+RewriteRule ^(.*)$ robots_%{HTTP_HOST}.txt [NC,L]
+RewriteRule ^home$ page40704823.html [NC]
+RewriteRule ^home/$ page40704823.html [NC]
+
+RewriteRule ^catalog$ page35795171.html [NC]
+RewriteRule ^catalog/$ page35795171.html [NC]
+
+RewriteRule ^company$ page39279451.html [NC]
+RewriteRule ^company/$ page39279451.html [NC]
+
+RewriteRule ^delivery$ page39291201.html [NC]
+RewriteRule ^delivery/$ page39291201.html [NC]
+
+RewriteRule ^contacts$ page39291702.html [NC]
+RewriteRule ^contacts/$ page39291702.html [NC]
+
+RewriteRule ^yourpersonalbox$ page39039820.html [NC]
+RewriteRule ^yourpersonalbox/$ page39039820.html [NC]
+
+RewriteRule ^anketaend$ page39920401.html [NC]
+RewriteRule ^anketaend/$ page39920401.html [NC]
+
+RewriteRule ^boxirina$ page38780310.html [NC]
+RewriteRule ^boxirina/$ page38780310.html [NC]
+
+RewriteRule ^try-it-please$ page40079902.html [NC]
+RewriteRule ^try-it-please/$ page40079902.html [NC]
+
+RewriteRule ^payment-success$ page41033213.html [NC]
+RewriteRule ^payment-success/$ page41033213.html [NC]
+
+RewriteRule ^home-preview$ page41149241.html [NC]
+RewriteRule ^home-preview/$ page41149241.html [NC]
+
+RewriteRule ^astrology$ page42095808.html [NC]
+RewriteRule ^astrology/$ page42095808.html [NC]
+
+RewriteRule ^home_ol$ page39295612.html [NC]
+RewriteRule ^home_ol/$ page39295612.html [NC]
+
+RewriteRule ^n_home$ page36100311.html [NC]
+RewriteRule ^n_home/$ page36100311.html [NC]
+
+RewriteRule ^header$ page35921957.html [NC]
+RewriteRule ^header/$ page35921957.html [NC]
+
+RewriteRule ^footer$ page39668611.html [NC]
+RewriteRule ^footer/$ page39668611.html [NC]
+
+RewriteRule ^spring-giveaway$ page44590025.html [NC]
+RewriteRule ^spring-giveaway/$ page44590025.html [NC]
+
+RewriteRule ^catalog_footer$ page54113489.html [NC]
+RewriteRule ^catalog_footer/$ page54113489.html [NC]
+
+RewriteRule ^moodbox$ https://moodbox-ek\.ru/ [R=301,NC]
+
+RewriteRule ^home$ https://moodbox-ek\.ru/ [R=301,NC]
+
+RewriteRule ^members/ ma_start.html [NC]
+
+
