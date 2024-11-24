@@ -1,16 +1,17 @@
 from django.urls import path
-from .views import (
+
+from .views import (moysklad,
     get_counterparties, create_counterparty, update_counterparty, delete_counterparty,
     get_products, create_product, update_product, delete_product,
     get_customer_orders, create_customer_order, update_customer_order, delete_customer_order,
-    get_purchase_orders, create_purchase_order, update_purchase_order, delete_purchase_order,
+    get_purchase_orders, create_purchase_order, 
     get_invoices, create_invoice, update_invoice, delete_invoice,
     get_stores, create_store, update_store, delete_store,
-    get_organizations, create_organization, update_organization, delete_organization,
-    get_stock_by_store, get_current_stock_by_store
+    get_organizations, create_organization
 )
 
 urlpatterns = [
+    path('', moysklad, name='moysklad'),
     # Counterparty URLs
     path('counterparties/', get_counterparties, name='get_counterparties'),
     path('counterparties/create/', create_counterparty, name='create_counterparty'),
@@ -32,8 +33,8 @@ urlpatterns = [
     # Purchase Order URLs
     path('purchase-orders/', get_purchase_orders, name='get_purchase_orders'),
     path('purchase-orders/create/', create_purchase_order, name='create_purchase_order'),
-    path('purchase-orders/update/<str:order_id>/', update_purchase_order, name='update_purchase_order'),
-    path('purchase-orders/delete/<str:order_id>/', delete_purchase_order, name='delete_purchase_order'),
+    # path('purchase-orders/update/<str:order_id>/', update_purchase_order, name='update_purchase_order'),
+    # path('purchase-orders/delete/<str:order_id>/', delete_purchase_order, name='delete_purchase_order'),
 
     # Invoice URLs
     path('invoices/', get_invoices, name='get_invoices'),
@@ -49,11 +50,11 @@ urlpatterns = [
 
     # Organization URLs
     path('organizations/', get_organizations, name='get_organizations'),
-    path('organizations/create/', create_organization, name='create_organization'),
-    path('organizations/update/<str:organization_id>/', update_organization, name='update_organization'),
-    path('organizations/delete/<str:organization_id>/', delete_organization, name='delete_organization'),
+    # path('organizations/create/', create_organization, name='create_organization'),
+    # path('organizations/update/<str:organization_id>/', update_organization, name='update_organization'),
+    # path('organizations/delete/<str:organization_id>/', delete_organization, name='delete_organization'),
 
-    # Stock URLs
-    path('stock/by-store/', get_stock_by_store, name='get_stock_by_store'),
-    path('stock/current-by-store/', get_current_stock_by_store, name='get_current_stock_by_store'),
+    # # Stock URLs
+    # path('stock/by-store/', get_stock_by_store, name='get_stock_by_store'),
+    # path('stock/current-by-store/', get_current_stock_by_store, name='get_current_stock_by_store'),
 ]

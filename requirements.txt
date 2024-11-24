@@ -1,0 +1,3 @@
+pip install django-contrib-comments
+pip install django-comments-xtd
+pip install requests

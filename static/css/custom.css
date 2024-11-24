@@ -1,0 +1,23 @@
+.js-store-prod-charcs {
+  display: none !important;
+}
+
+/* Compensate drukwide font headings */
+.t-descr, .t-name, .t-input, .t-btn {
+    font-family: 'Montserrat', Arial, Sans-Serif;
+}
+
+.t-store__card__mark {
+    padding: 10px 10px;
+    font-family: 'Montserrat', Arial, Sans-Serif;
+    width: auto;
+    height: auto;
+}
+
+.t772 .t-section__topwrapper {
+    margin-bottom: 20px;
+}
+
+.t-cover__wrapper {
+    height: auto;
+}
