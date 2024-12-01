@@ -9,6 +9,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 SITE_ID = 1
+WAGTAIL_SITE_NAME=168
 
 INSTALLED_APPS = [
     'django_comments',
@@ -36,8 +37,9 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail',
-
-    'moysklad'
+    'demo',
+    'moysklad',
+    'home'
 ]
 
 MIDDLEWARE = [

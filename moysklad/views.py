@@ -1,330 +1,373 @@
 from django.shortcuts import render
-from django.http import JsonResponse
-from moysklad.oauth import MoySkladClient
-from .entities.counterparty import CounterpartyClient
-from .entities.product import ProductClient
-from .entities.customer_order import CustomerOrderClient
-from .entities.purchase_order import PurchaseOrderClient
-from .entities.invoice import InvoiceClient
-from .entities.store import StoreClient
-from .entities.organization import OrganizationClient
-from .entities.stock import StockClient
+from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseServerError
+from .entities.MoySkladApi import *
 
-
-# Пример использования
-login = "admin@egort123"
-password = "egor86"
+# Замените ваши логин и пароль на реальные, но только для тестирования!
+# В продакшне используйте OAuth 2.0!
+MOYSKLAD_LOGIN = "admin@egort123"
+MOYSKLAD_PASSWORD = "egor86"
+MOYSKLAD_BASE_URL =  "https://api.moysklad.ru/api/remap/1.2" # Замените на ваш базовый URL
 
 def moysklad(request):
     return render(request, 'moysklad/moysklad.html')
 
+def get_moysklad_client(entity_client_class):
+    return entity_client_class(MOYSKLAD_LOGIN, MOYSKLAD_PASSWORD, MOYSKLAD_BASE_URL, verify_ssl=False)
+
+
+def handle_api_request(request, client, method, id=None, data=None):
+    try:
+        if method == 'GET':
+            response_data = client.get(id)
+        elif method == 'POST':
+            response_data = client.post(data)
+        elif method == 'PUT':
+            response_data = client.put(id, data)
+        elif method == 'DELETE':
+            client.delete(id)
+            return JsonResponse({"success": True})
+        else:
+            return HttpResponseBadRequest("Invalid request method")
+        return JsonResponse(response_data)
+    except Exception as e:
+        print(f"Error during API request: {e}")
+        return HttpResponseServerError(f"API request failed: {e}")
+
+
 # Customer Order Views
+
 def get_customer_orders(request):
-    oauth = MoySkladClient("login", "password")
-    access_token = oauth.get_access_token()
-    api_client = CustomerOrderClient(access_token)
-    orders = api_client.get_customer_orders()
-    return JsonResponse(orders)
+    client = get_moysklad_client(CustomerOrderClient)
+    return handle_api_request(request, client, 'GET')
 
 def create_customer_order(request):
     if request.method == "POST":
-        organization = request.POST.get("organization")
-        agent = request.POST.get("agent")
-        positions = request.POST.get("positions")
-
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = CustomerOrderClient(access_token)
-        new_order = api_client.create_customer_order(organization, agent, positions)
-        return JsonResponse(new_order)
+        try:
+            data = {
+                'organization': request.POST.get('organization'),
+                'agent': request.POST.get('agent'),
+                'positions': request.POST.get('positions') #Это нужно парсить в json, если positions - это JSON строка
+            }
+            client = get_moysklad_client(CustomerOrderClient)
+            return handle_api_request(request, client, 'POST', data=data)
+        except Exception as e:
+            return HttpResponseBadRequest(f"Invalid request data: {e}")
     else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
+        return HttpResponseBadRequest("Invalid request method")
 
-def update_customer_order(request, order_id):
+def update_or_delete_customer_order(request, order_id):
+    client = get_moysklad_client(CustomerOrderClient)
     if request.method == "PUT":
-        organization = request.PUT.get("organization")
-        agent = request.PUT.get("agent")
-        positions = request.PUT.get("positions")
-
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = CustomerOrderClient(access_token)
-        updated_order = api_client.update_customer_order(order_id, organization, agent, positions)
-        return JsonResponse(updated_order)
+        try:
+            data = {
+                'organization': request.POST.get('organization'),
+                'agent': request.POST.get('agent'),
+                'positions': request.POST.get('positions') #Это нужно парсить в json, если positions - это JSON строка
+            }
+            return handle_api_request(request, client, 'PUT', id=order_id, data=data)
+        except Exception as e:
+            return HttpResponseBadRequest(f"Invalid request data: {e}")
+    elif request.method == "DELETE":
+        return handle_api_request(request, client, 'DELETE', id=order_id)
     else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
+        return HttpResponseBadRequest("Invalid request method")
 
-def delete_customer_order(request, order_id):
-    if request.method == "DELETE":
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = CustomerOrderClient(access_token)
-        success = api_client.delete_customer_order(order_id)
-        if success:
-            return JsonResponse({"success": True})
-        else:
-            return JsonResponse({"error": "Failed to delete customer order"}, status=500)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
-
-# Purchase Order Views
-def get_purchase_orders(request):
-    oauth = MoySkladClient("login", "password")
-    access_token = oauth.get_access_token()
-    api_client = PurchaseOrderClient(access_token)
-    orders = api_client.get_purchase_orders()
-    return JsonResponse(orders)
-
-def create_purchase_order(request):
-    if request.method == "POST":
-        organization = request.POST.get("organization")
-        agent = request.POST.get("agent")
-        positions = request.POST.get("positions")
-
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = PurchaseOrderClient(access_token)
-        new_order = api_client.create_purchase_order(organization, agent, positions)
-        return JsonResponse(new_order)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
-
-def update_purchase_order(request, order_id):
-    if request.method == "PUT":
-        organization = request.PUT.get("organization")
-        agent = request.PUT.get("agent")
-        positions = request.PUT.get("positions")
-
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = PurchaseOrderClient(access_token)
-        updated_order = api_client.update_purchase_order(order_id, organization, agent, positions)
-        return JsonResponse(updated_order)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
-
-def delete_purchase_order(request, order_id):
-    if request.method == "DELETE":
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = PurchaseOrderClient(access_token)
-        success = api_client.delete_purchase_order(order_id)
-        if success:
-            return JsonResponse({"success": True})
-        else:
-            return JsonResponse({"error": "Failed to delete purchase order"}, status=500)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
 
 # Counterparty Views
 def get_counterparties(request):
-    oauth = MoySkladClient("login", "password")
-    access_token = oauth.get_access_token()
-    api_client = CounterpartyClient(access_token)
-    counterparties = api_client.get_counterparties()
-    return JsonResponse(counterparties)
+    client = get_moysklad_client(CounterpartyClient)
+    return handle_api_request(request, client, 'GET')
 
 def create_counterparty(request):
     if request.method == "POST":
-        name = request.POST.get("name")
-        phone = request.POST.get("phone")
-        email = request.POST.get("email")
-
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = CounterpartyClient(access_token)
-        new_counterparty = api_client.create_counterparty(name, phone, email)
-        return JsonResponse(new_counterparty)
+        try:
+            data = {
+                "name": request.POST.get("name"),
+                "phone": request.POST.get("phone"),
+                "email": request.POST.get("email"),
+            }
+            client = get_moysklad_client(CounterpartyClient)
+            return handle_api_request(request, client, 'POST', data=data)
+        except Exception as e:
+            return HttpResponseBadRequest(f"Invalid data: {e}")
     else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
+        return HttpResponseBadRequest("Invalid request method")
 
-def update_counterparty(request, counterparty_id):
+def update_or_delete_counterparty(request, counterparty_id):
+    client = get_moysklad_client(CounterpartyClient)
     if request.method == "PUT":
-        name = request.PUT.get("name")
-        phone = request.PUT.get("phone")
-        email = request.PUT.get("email")
-
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = CounterpartyClient(access_token)
-        updated_counterparty = api_client.update_counterparty(counterparty_id, name, phone, email)
-        return JsonResponse(updated_counterparty)
+        try:
+            data = {
+                "name": request.POST.get("name"),
+                "phone": request.POST.get("phone"),
+                "email": request.POST.get("email"),
+            }
+            return handle_api_request(request, client, 'PUT', id=counterparty_id, data=data)
+        except Exception as e:
+            return HttpResponseBadRequest(f"Invalid data: {e}")
+    elif request.method == "DELETE":
+        return handle_api_request(request, client, 'DELETE', id=counterparty_id)
     else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
+        return HttpResponseBadRequest("Invalid request method")
 
-def delete_counterparty(request, counterparty_id):
-    if request.method == "DELETE":
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = CounterpartyClient(access_token)
-        success = api_client.delete_counterparty(counterparty_id)
-        if success:
+
+# Общая функция для создания клиента
+def get_moysklad_client(entity_client_class):
+    return entity_client_class(MOYSKLAD_LOGIN, MOYSKLAD_PASSWORD, MOYSKLAD_BASE_URL, verify_ssl=False)
+
+def handle_api_request(request, client, method, id=None, data=None):
+    try:
+        if method == 'GET':
+            response_data = client.get(id)
+        elif method == 'POST':
+            response_data = client.post(data)
+        elif method == 'PUT':
+            response_data = client.put(id, data)
+        elif method == 'DELETE':
+            client.delete(id)
             return JsonResponse({"success": True})
         else:
-            return JsonResponse({"error": "Failed to delete counterparty"}, status=500)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
+            return HttpResponseBadRequest("Invalid request method")
+        return JsonResponse(response_data)
+    except Exception as e:
+        print(f"Error during API request: {e}")
+        return HttpResponseServerError(f"API request failed: {e}")
 
-# Product Views
+# Customers
+def get_customers(request):
+    client = get_moysklad_client(CustomerClient)
+    return handle_api_request(request, client, 'GET')
+
+def create_customer(request):
+    if request.method == "POST":
+        data = {
+            "name": request.POST.get("name"),
+            "phone": request.POST.get("phone"),
+            "email": request.POST.get("email"),
+            "addresses": request.POST.get("addresses"),  # JSON строка
+        }
+        client = get_moysklad_client(CustomerClient)
+        return handle_api_request(request, client, 'POST', data=data)
+    return HttpResponseBadRequest("Invalid request method")
+
+def update_or_delete_customer(request, customer_id):
+    client = get_moysklad_client(CustomerClient)
+    if request.method == "PUT":
+        data = {
+            "name": request.POST.get("name"),
+            "phone": request.POST.get("phone"),
+            "email": request.POST.get("email"),
+            "addresses": request.POST.get("addresses"),  # JSON строка
+        }
+        return handle_api_request(request, client, 'PUT', id=customer_id, data=data)
+    elif request.method == "DELETE":
+        return handle_api_request(request, client, 'DELETE', id=customer_id)
+    return HttpResponseBadRequest("Invalid request method")
+
+# Products
 def get_products(request):
-    oauth = MoySkladClient("login", "password")
-    access_token = oauth.get_access_token()
-    api_client = ProductClient(access_token)
-    products = api_client.get_products()
-    return JsonResponse(products)
+    client = get_moysklad_client(ProductClient)
+    return handle_api_request(request, client, 'GET')
 
 def create_product(request):
     if request.method == "POST":
-        name = request.POST.get("name")
-        code = request.POST.get("code")
-        description = request.POST.get("description")
+        data = {
+            "name": request.POST.get("name"),
+            "price": request.POST.get("price"),
+            "description": request.POST.get("description"),
+            "image_url": request.POST.get("image_url"),
+            "stock": request.POST.get("stock"),
+        }
+        client = get_moysklad_client(ProductClient)
+        return handle_api_request(request, client, 'POST', data=data)
+    return HttpResponseBadRequest("Invalid request method")
 
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = ProductClient(access_token)
-        new_product = api_client.create_product(name, code, description)
-        return JsonResponse(new_product)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
-
-def update_product(request, product_id):
+def update_or_delete_product(request, product_id):
+    client = get_moysklad_client(ProductClient)
     if request.method == "PUT":
-        name = request.PUT.get("name")
-        code = request.PUT.get("code")
-        description = request.PUT.get("description")
+        data = {
+            "name": request.POST.get("name"),
+            "price": request.POST.get("price"),
+            "description": request.POST.get("description"),
+            "image_url": request.POST.get("image_url"),
+            "stock": request.POST.get("stock"),
+        }
+        return handle_api_request(request, client, 'PUT', id=product_id, data=data)
+    elif request.method == "DELETE":
+        return handle_api_request(request, client, 'DELETE', id=product_id)
+    return HttpResponseBadRequest("Invalid request method")
 
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = ProductClient(access_token)
-        updated_product = api_client.update_product(product_id, name, code, description)
-        return JsonResponse(updated_product)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
+# Остальные сущности (аналогично)
+# Product Categories
+def get_product_categories(request):
+    client = get_moysklad_client(ProductCategoryClient)
+    return handle_api_request(request, client, 'GET')
 
-def delete_product(request, product_id):
-    if request.method == "DELETE":
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = ProductClient(access_token)
-        success = api_client.delete_product(product_id)
-        if success:
-            return JsonResponse({"success": True})
-        else:
-            return JsonResponse({"error": "Failed to delete product"}, status=500)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
-
-# Invoice Views
-def get_invoices(request):
-    oauth = MoySkladClient("login", "password")
-    access_token = oauth.get_access_token()
-    api_client = InvoiceClient(access_token)
-    invoices = api_client.get_invoices()
-    return JsonResponse(invoices)
-
-def create_invoice(request):
+def create_product_category(request):
     if request.method == "POST":
-        organization = request.POST.get("organization")
-        agent = request.POST.get("agent")
-        positions = request.POST.get("positions")
+        data = {"name": request.POST.get("name")}
+        client = get_moysklad_client(ProductCategoryClient)
+        return handle_api_request(request, client, 'POST', data=data)
+    return HttpResponseBadRequest("Invalid request method")
 
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = InvoiceClient(access_token)
-        new_invoice = api_client.create_invoice(organization, agent, positions)
-        return JsonResponse(new_invoice)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
-
-def update_invoice(request, invoice_id):
+def update_or_delete_product_category(request, category_id):
+    client = get_moysklad_client(ProductCategoryClient)
     if request.method == "PUT":
-        organization = request.PUT.get("organization")
-        agent = request.PUT.get("agent")
-        positions = request.PUT.get("positions")
+        data = {"name": request.POST.get("name")}
+        return handle_api_request(request, client, 'PUT', id=category_id, data=data)
+    elif request.method == "DELETE":
+        return handle_api_request(request, client, 'DELETE', id=category_id)
+    return HttpResponseBadRequest("Invalid request method")
 
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = InvoiceClient(access_token)
-        updated_invoice = api_client.update_invoice(invoice_id, organization, agent, positions)
-        return JsonResponse(updated_invoice)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
+# Orders
+def get_orders(request):
+    client = get_moysklad_client(OrderClient)
+    return handle_api_request(request, client, 'GET')
 
-def delete_invoice(request, invoice_id):
-    if request.method == "DELETE":
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = InvoiceClient(access_token)
-        success = api_client.delete_invoice(invoice_id)
-        if success:
-            return JsonResponse({"success": True})
-        else:
-            return JsonResponse({"error": "Failed to delete invoice"}, status=500)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
-
-# Store Views
-def get_stores(request):
-    oauth = MoySkladClient("login", "password")
-    access_token = oauth.get_access_token()
-    api_client = StoreClient(access_token)
-    stores = api_client.get_stores()
-    return JsonResponse(stores)
-
-def create_store(request):
+def create_order(request):
     if request.method == "POST":
-        name = request.POST.get("name")
+        data = {
+            "customer": request.POST.get("customer"),  # ID клиента
+            "items": request.POST.get("items"),  # JSON строка с товарами
+            "status": request.POST.get("status"),
+            "delivery_info": request.POST.get("delivery_info"),  # JSON строка с информацией о доставке
+            "payment_info": request.POST.get("payment_info"),  # JSON строка с информацией о платеже
+        }
+        client = get_moysklad_client(OrderClient)
+        return handle_api_request(request, client, 'POST', data=data)
+    return HttpResponseBadRequest("Invalid request method")
 
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = StoreClient(access_token)
-        new_store = api_client.create_store(name)
-        return JsonResponse(new_store)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
-
-def update_store(request, store_id):
+def update_or_delete_order(request, order_id):
+    client = get_moysklad_client(OrderClient)
     if request.method == "PUT":
-        name = request.PUT.get("name")
+        data = {
+            "customer": request.POST.get("customer"),  # ID клиента
+            "items": request.POST.get("items"),  # JSON строка с товарами
+            "status": request.POST.get("status"),
+            "delivery_info": request.POST.get("delivery_info"),  # JSON строка с информацией о доставке
+            "payment_info": request.POST.get("payment_info"),  # JSON строка с информацией о платеже
+        }
+        return handle_api_request(request, client, 'PUT', id=order_id, data=data)
+    elif request.method == "DELETE":
+        return handle_api_request(request, client, 'DELETE', id=order_id)
+    return HttpResponseBadRequest("Invalid request method")
 
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = StoreClient(access_token)
-        updated_store = api_client.update_store(store_id, name)
-        return JsonResponse(updated_store)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
+# Payment Methods
+def get_payment_methods(request):
+    client = get_moysklad_client(PaymentMethodClient)
+    return handle_api_request(request, client, 'GET')
 
-def delete_store(request, store_id):
-    if request.method == "DELETE":
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = StoreClient(access_token)
-        success = api_client.delete_store(store_id)
-        if success:
-            return JsonResponse({"success": True})
-        else:
-            return JsonResponse({"error": "Failed to delete store"}, status=500)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
-
-# Organization Views
-def get_organizations(request):
-    oauth = MoySkladClient("login", "password")
-    access_token = oauth.get_access_token()
-    api_client = OrganizationClient(access_token)
-    organizations = api_client.get_organizations()
-    return JsonResponse(organizations)
-
-
-def create_organization(request):
+def create_payment_method(request):
     if request.method == "POST":
-        name = request.POST.get("name")
+        data = {
+            "name": request.POST.get("name"),  # Название способа оплаты
+            "description": request.POST.get("description"),  # Описание
+        }
+        client = get_moysklad_client(PaymentMethodClient)
+        return handle_api_request(request, client, 'POST', data=data)
+    return HttpResponseBadRequest("Invalid request method")
 
-        oauth = MoySkladClient("login", "password")
-        access_token = oauth.get_access_token()
-        api_client = OrganizationClient(access_token)
-        new_organization = api_client.create_organization(name)
-        return JsonResponse(new_organization)
-    else:
-        return JsonResponse({"error": "Invalid request method"}, status=400)
+def update_or_delete_payment_method(request, method_id):
+    client = get_moysklad_client(PaymentMethodClient)
+    if request.method == "PUT":
+        data = {
+            "name": request.POST.get("name"),  # Название способа оплаты
+            "description": request.POST.get("description"),  # Описание
+        }
+        return handle_api_request(request, client, 'PUT', id=method_id, data=data)
+    elif request.method == "DELETE":
+        return handle_api_request(request, client, 'DELETE', id=method_id)
+    return HttpResponseBadRequest("Invalid request method")
+
+# Shipping Methods
+def get_shipping_methods(request):
+    client = get_moysklad_client(ShippingMethodClient)
+    return handle_api_request(request, client, 'GET')
+
+def create_shipping_method(request):
+    if request.method == "POST":
+        data = {
+            "name": request.POST.get("name"),  # Название способа доставки
+            "description": request.POST.get("description"),  # Описание
+            "cost": request.POST.get("cost"),  # Стоимость доставки
+        }
+        client = get_moysklad_client(ShippingMethodClient)
+        return handle_api_request(request, client, 'POST', data=data)
+    return HttpResponseBadRequest("Invalid request method")
+
+def update_or_delete_shipping_method(request, method_id):
+    client = get_moysklad_client(ShippingMethodClient)
+    if request.method == "PUT":
+        data = {
+            "name": request.POST.get("name"),  # Название способа доставки
+            "description": request.POST.get("description"),  # Описание
+            "cost": request.POST.get("cost"),  # Стоимость доставки
+        }
+        return handle_api_request(request, client, 'PUT', id=method_id, data=data)
+    elif request.method == "DELETE":
+        return handle_api_request(request, client, 'DELETE', id=method_id)
+    return HttpResponseBadRequest("Invalid request method")
+
+# Reviews
+def get_reviews(request):
+    client = get_moysklad_client(ReviewClient)
+    return handle_api_request(request, client, 'GET')
+
+def create_review(request):
+    if request.method == "POST":
+        data = {
+            "product": request.POST.get("product"),  # ID товара
+            "customer": request.POST.get("customer"),  # ID клиента
+            "rating": request.POST.get("rating"),  # Оценка (например, 1-5)
+            "comment": request.POST.get("comment"),  # Текст отзыва
+        }
+        client = get_moysklad_client(ReviewClient)
+        return handle_api_request(request, client, 'POST', data=data)
+    return HttpResponseBadRequest("Invalid request method")
+
+def update_or_delete_review(request, review_id):
+    client = get_moysklad_client(ReviewClient)
+    if request.method == "PUT":
+        data = {
+            "product": request.POST.get("product"),  # ID товара
+            "customer": request.POST.get("customer"),  # ID клиента
+            "rating": request.POST.get("rating"),  # Оценка
+            "comment": request.POST.get("comment"),  # Текст отзыва
+        }
+        return handle_api_request(request, client, 'PUT', id=review_id, data=data)
+    elif request.method == "DELETE":
+        return handle_api_request(request, client, 'DELETE', id=review_id)
+    return HttpResponseBadRequest("Invalid request method")
+
+# Shipping Addresses
+def get_shipping_addresses(request):
+    client = get_moysklad_client(ShippingAddressClient)
+    return handle_api_request(request, client, 'GET')
+
+def create_shipping_address(request):
+    if request.method == "POST":
+        data = {
+            "customer": request.POST.get("customer"),  # ID клиента
+            "address": request.POST.get("address"),  # Адрес доставки
+            "city": request.POST.get("city"),
+            "postal_code": request.POST.get("postal_code"),
+            "country": request.POST.get("country"),
+        }
+        client = get_moysklad_client(ShippingAddressClient)
+        return handle_api_request(request, client, 'POST', data=data)
+    return HttpResponseBadRequest("Invalid request method")
+
+def update_or_delete_shipping_address(request, address_id):
+    client = get_moysklad_client(ShippingAddressClient)
+    if request.method == "PUT":
+        data = {
+            "customer": request.POST.get("customer"),  # ID клиента
+            "address": request.POST.get("address"),  # Адрес доставки
+            "city": request.POST.get("city"),
+            "postal_code": request.POST.get("postal_code"),
+            "country": request.POST.get("country"),
+        }
+        return handle_api_request(request, client, 'PUT', id=address_id, data=data)
+    elif request.method == "DELETE":
+        return handle_api_request(request, client, 'DELETE', id=address_id)
+    return HttpResponseBadRequest("Invalid request method")

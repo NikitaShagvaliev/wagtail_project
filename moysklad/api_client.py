@@ -1,52 +1,44 @@
 import requests
 import base64
 
-class MoySkladAPIClient:
-    BASE_URL = "https://api.moysklad.ru/api/remap/1.2"
-
-    def __init__(self, login, password):
+class MoySkladBaseClient:
+    def __init__(self, login, password, base_url, entity_name, verify_ssl=True):
         self.login = login
         self.password = password
+        self.base_url = base_url
+        self.entity_name = entity_name
+        self.session = requests.Session()
+        self.session.verify = verify_ssl  # Управление верификацией SSL
 
-    def get_basic_auth_header(self):
+    def _get_auth_header(self):
         credentials = f"{self.login}:{self.password}"
         encoded_credentials = base64.b64encode(credentials.encode('utf-8')).decode('utf-8')
-        return {
-            "Authorization": f"Basic {encoded_credentials}",
-            "Content-Type": "application/json"
-        }
+        return {"Authorization": f"Basic {encoded_credentials}"}
 
-    def get_counterparties(self):
-        url = f"{self.BASE_URL}/entity/counterparty"
-        response = requests.get(url, headers=self.get_basic_auth_header())
-        if response.status_code == 200:
-            return response.json()
-        else:
-            raise Exception(f"Failed to get counterparties: {response.status_code}, {response.text}")
+    def get(self, id=None):
+        url = f"{self.base_url}/entity/{self.entity_name}{f'/{id}' if id else ''}"
+        response = self.session.get(url, headers=self._get_auth_header())
+        self._handle_response(response)
+        return response.json()
 
-    def create_counterparty(self, name, phone=None, email=None):
-        url = f"{self.BASE_URL}/entity/counterparty"
-        data = {
-            "name": name,
-            "phone": phone,
-            "email": email
-        }
-        response = requests.post(url, headers=self.get_basic_auth_header(), json=data)
-        if response.status_code == 200:
-            return response.json()
-        else:
-            raise Exception(f"Failed to create counterparty: {response.status_code}, {response.text}")
+    def post(self, data):
+        url = f"{self.base_url}/entity/{self.entity_name}"
+        response = self.session.post(url, headers=self._get_auth_header(), json=data)
+        self._handle_response(response)
+        return response.json()
 
-# Пример использования
-login = "admin@egort123"
-password = "egor86"
+    def put(self, id, data):
+        url = f"{self.base_url}/entity/{self.entity_name}/{id}"
+        response = self.session.put(url, headers=self._get_auth_header(), json=data)
+        self._handle_response(response)
+        return response.json()
 
-client = MoySkladAPIClient(login, password)
-try:
-    counterparties = client.get_counterparties()
-    print(counterparties)
+    def delete(self, id):
+        url = f"{self.base_url}/entity/{self.entity_name}/{id}"
+        response = self.session.delete(url, headers=self._get_auth_header())
+        self._handle_response(response)
+        return True
 
-    new_counterparty = client.create_counterparty("New Counterparty", phone="123456789", email="new@example.com")
-    print(new_counterparty)
-except Exception as e:
-    print(f"Error: {e}")
+    def _handle_response(self, response):
+        if response.status_code != 200 and response.status_code != 204: # 204 - No Content for DELETE
+            raise Exception(f"Request failed with status code {response.status_code}: {response.text}")

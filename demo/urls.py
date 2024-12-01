@@ -1,4 +1,3 @@
-# demo/urls.py
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -9,14 +8,12 @@ from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtaildocs_urls
 
-from .views import index
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cms/', include(wagtailadmin_urls)),
     path('documents/', include(wagtaildocs_urls)),
-    path('', index, name='index'),
-    path('moysklad/', include('moysklad.urls'))
+    path('moysklad/', include('moysklad.urls')),
+    path('', include('home.urls')),  # Главная страница
 ]
 
 if settings.DEBUG:
