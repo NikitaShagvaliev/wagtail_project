@@ -1,60 +1,44 @@
-import os
 import requests
 import base64
 
-# Отключение проверки SSL-сертификатов (не рекомендуется для производственного использования)
-os.environ['CURL_CA_BUNDLE'] = ''
-
-class MoySkladAPIClient:
-    BASE_URL = "https://api.moysklad.ru/api/remap/1.2"
-
-    def __init__(self, login, password, verify_ssl=True):
+class MoySkladBaseClient:
+    def __init__(self, login, password, base_url, entity_name, verify_ssl=True):
         self.login = login
         self.password = password
-        self.access_token = None
+        self.base_url = base_url
+        self.entity_name = entity_name
         self.session = requests.Session()
-        self.session.verify = verify_ssl  # Устанавливаем проверку SSL-сертификатов
+        self.session.verify = verify_ssl  # Управление верификацией SSL
 
-    def get_basic_auth_header(self):
+    def _get_auth_header(self):
         credentials = f"{self.login}:{self.password}"
         encoded_credentials = base64.b64encode(credentials.encode('utf-8')).decode('utf-8')
-        return {
-            "Authorization": f"Basic {encoded_credentials}",
-            "Content-Type": "application/json"
-        }
+        return {"Authorization": f"Basic {encoded_credentials}"}
 
-    def get_token_auth_header(self):
-        if not self.access_token:
-            raise Exception("Access token is not set")
-        return {
-            "Authorization": f"Bearer {self.access_token}"
-        }
+    def get(self, id=None):
+        url = f"{self.base_url}/entity/{self.entity_name}{f'/{id}' if id else ''}"
+        response = self.session.get(url, headers=self._get_auth_header())
+        self._handle_response(response)
+        return response.json()
 
-    def get_access_token(self):
-        url = f"{self.BASE_URL}/security/token"
-        headers = self.get_basic_auth_header()
-        response = self.session.post(url, headers=headers)
-        if response.status_code == 200:
-            token_data = response.json()
-            self.access_token = token_data["access_token"]
-            return self.access_token
-        else:
-            raise Exception(f"Failed to get token: {response.status_code}, {response.text}")
+    def post(self, data):
+        url = f"{self.base_url}/entity/{self.entity_name}"
+        response = self.session.post(url, headers=self._get_auth_header(), json=data)
+        self._handle_response(response)
+        return response.json()
 
-    def make_request(self, method, endpoint, headers=None, data=None):
-        url = f"{self.BASE_URL}/{endpoint}"
-        if not headers:
-            headers = self.get_token_auth_header()
-        response = self.session.request(method, url, headers=headers, json=data)
-        if response.status_code == 200:
-            return response.json()
-        else:
-            raise Exception(f"Request failed: {response.status_code}, {response.text}")
+    def put(self, id, data):
+        url = f"{self.base_url}/entity/{self.entity_name}/{id}"
+        response = self.session.put(url, headers=self._get_auth_header(), json=data)
+        self._handle_response(response)
+        return response.json()
 
-    def get_counterparties(self):
-        url = f"{self.BASE_URL}/entity/counterparty"
-        response = self.session.get(url, headers=self.get_basic_auth_header())
-        if response.status_code == 200:
-            return response.json()
-        else:
-            raise Exception(f"Failed to get counterparties: {response.status_code}, {response.text}")
+    def delete(self, id):
+        url = f"{self.base_url}/entity/{self.entity_name}/{id}"
+        response = self.session.delete(url, headers=self._get_auth_header())
+        self._handle_response(response)
+        return True
+
+    def _handle_response(self, response):
+        if response.status_code != 200 and response.status_code != 204: # 204 - No Content for DELETE
+            raise Exception(f"Request failed with status code {response.status_code}: {response.text}")
