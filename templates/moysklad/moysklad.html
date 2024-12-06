@@ -248,7 +248,11 @@
 </template>
 
 
-    
+<div class="content">
+    <div class="container">
+        <div class="header">
+            <h1>Мой склад</h1>
+        </div> 
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -431,29 +435,28 @@
 
         <div id="demo-key" style="display: none;">
             <h3>Токен авторизации</h3>
-    <p id="demo-key-value"></p>
+            <p id="demo-key-value"></p>
 
-    <script>
-        function generatePseudoToken(length) {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let result = '';
-            const charactersLength = characters.length;
-            for (let i = 0; i < length; i++) {
-                result += characters.charAt(Math.floor(Math.random() * charactersLength));
-            }
-            return result;
-        }
+            <script>
+                function generatePseudoToken(length) {
+                    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                    let result = '';
+                    const charactersLength = characters.length;
+                    for (let i = 0; i < length; i++) {
+                        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                    }
+                    return result;
+                }
 
-        const pseudoToken = generatePseudoToken(32);
-        document.getElementById('demo-key-value').innerText = pseudoToken;
-    </script>
+                const pseudoToken = generatePseudoToken(32);
+                document.getElementById('demo-key-value').innerText = pseudoToken;
+            </script>
         </div>
     </div>
 
     <!-- Сообщения -->
     <div class="messages" role="status" data-controller="w-messages" data-action="w-messages:add@document->w-messages#add" data-w-messages-added-class="new" data-w-messages-show-class="appear" data-w-messages-show-delay-value="100">
         <ul data-w-messages-target="container">
-            
         </ul>
         <template data-w-messages-target="template" data-type="success">
             <li class="success"><svg class="icon icon-success messages-icon" aria-hidden="true"><use href="#icon-success"></use></svg><span></span></li>
@@ -478,13 +481,18 @@
 
         document.getElementById('login-form').addEventListener('submit', function(event) {
             event.preventDefault(); // Предотвращаем отправку формы
-            document.getElementById('demo-key').style.display = 'block'; // Показываем демо ключ
-            document.getElementById('login-form-container').classList.add('hidden'); // Скрываем форму авторизации
-            document.getElementById('logout-button').classList.remove('hidden'); // Показываем кнопку выхода
-            document.getElementById('create-product-form-container').classList.remove('hidden'); // Показываем форму создания товара
-            document.getElementById('warehouse-info').classList.remove('hidden'); // Показываем информацию о товарах
-            document.querySelector('.container').classList.add('centered'); // Добавляем класс для центрирования
-            addMessage('success', 'Вход выполнен успешно!');
+
+            // Добавляем задержку от 5 до 10 секунд
+            const delay = Math.floor(Math.random() * (10000 - 5000 + 1)) + 5000;
+            setTimeout(() => {
+                document.getElementById('demo-key').style.display = 'block'; // Показываем демо ключ
+                document.getElementById('login-form-container').classList.add('hidden'); // Скрываем форму авторизации
+                document.getElementById('logout-button').classList.remove('hidden'); // Показываем кнопку выхода
+                document.getElementById('create-product-form-container').classList.remove('hidden'); // Показываем форму создания товара
+                document.getElementById('warehouse-info').classList.remove('hidden'); // Показываем информацию о товарах
+                document.querySelector('.container').classList.add('centered'); // Добавляем класс для центрирования
+                addMessage('success', 'Вход выполнен успешно!');
+            }, delay);
         });
 
         function logout() {
