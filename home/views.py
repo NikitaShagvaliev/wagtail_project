@@ -4,7 +4,7 @@ def index(request):
     return render(request, 'home/index.html')
 
 def company(request):
-    return render(request, 'home/company.html')
+    return render(request, 'home/1.html')
 
 def delivery(request):
     return render(request, 'home/delivery.html')

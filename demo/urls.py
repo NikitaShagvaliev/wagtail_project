@@ -14,6 +14,8 @@ urlpatterns = [
     path('documents/', include(wagtaildocs_urls)),
     path('moysklad/', include('moysklad.urls')),
     path('', include('home.urls')),  # Главная страница
+    path('Payment_services/', include('Payment_services.urls')),
+    
 ]
 
 if settings.DEBUG:

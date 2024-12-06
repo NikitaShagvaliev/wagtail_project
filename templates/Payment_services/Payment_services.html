@@ -74,7 +74,7 @@
         
         
         {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "images",            "label": "Images", "icon_name": "image", "classname": "", "attrs": {}, "url": "/cms/images/"}]}, 
-        {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "Платежные сервисы", "label": "Платежные сервисы", "icon_name": "Платежные сервисы", "classname": "", "attrs": {}, "url": "/moysklad"}]},
+        {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "Платежные сервисы", "label": "Платежные сервисы", "icon_name": "Платежные сервисы", "classname": "", "attrs": {}, "url": "/Payment_services"}]},
         {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "Мой склад",         "label": "Мой склад", "icon_name": "Мой склад", "classname": "", "attrs": {}, "url": "/moysklad"}]},
         {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "documents",         "label": "Documents", "icon_name": "doc-full-inverse", "classname": "", "attrs": {}, "url": "/cms/documents/"}]}, 
         {"_type": "wagtail.sidebar.SubMenuItem", "_args":  [{"name": "reports", "label": "Reports", "icon_name": "site", "classname": "", "attrs": {}, "footer_text": ""}, [{"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "locked-pages", "label": "Locked pages", "icon_name": "lock", "classname": "", "attrs": {}, "url": "/cms/reports/locked/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "workflows", "label": "Workflows", "icon_name": "tasks", "classname": "", "attrs": {}, "url": "/cms/reports/workflow/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "workflow-tasks", "label": "Workflow tasks", "icon_name": "thumbtack", "classname": "", "attrs": {}, "url": "/cms/reports/workflow_tasks/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "site-history", "label": "Site history", "icon_name": "history", "classname": "", "attrs": {}, "url": "/cms/reports/site-history/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "aging-pages", "label": "Aging pages", "icon_name": "time", "classname": "", "attrs": {}, "url": "/cms/reports/aging-pages/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "page-types-usage", "label": "Page types usage", "icon_name": "doc-empty-inverse", "classname": "", "attrs": {}, "url": "/cms/reports/page-types-usage/"}]}]]}, {"_type": "wagtail.sidebar.SubMenuItem", "_args": [{"name": "settings", "label": "Settings", "icon_name": "cogs", "classname": "", "attrs": {}, "footer_text": "Wagtail v6.3.1"}, [{"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "workflows", "label": "Workflows", "icon_name": "tasks", "classname": "", "attrs": {}, "url": "/cms/workflows/list/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "workflow-tasks", "label": "Workflow tasks", "icon_name": "thumbtack", "classname": "", "attrs": {}, "url": "/cms/workflows/tasks/index/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "users", "label": "Users", "icon_name": "user", "classname": "", "attrs": {}, "url": "/cms/users/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "groups", "label": "Groups", "icon_name": "group", "classname": "", "attrs": {}, "url": "/cms/groups/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "sites", "label": "Sites", "icon_name": "site", "classname": "", "attrs": {}, "url": "/cms/sites/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "collections", "label": "Collections", "icon_name": "folder-open-1", "classname": "", "attrs": {}, "url": "/cms/collections/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "redirects", "label": "Redirects", "icon_name": "redirect", "classname": "", "attrs": {}, "url": "/cms/redirects/"}]}]]}, {"_type": "wagtail.sidebar.SubMenuItem", "_args": [{"name": "help", "label": "Help", "icon_name": "help", "classname": "", "attrs": {"data-controller": "w-dismissible", "data-w-dismissible-dismissed-class": {"_val": "w-dismissible--dismissed", "_id": 8}, "data-w-dismissible-id-value": "help", "data-w-dismissible-dismissed-value": "true"}, "footer_text": ""}, [{"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": {"_val": "whats-new-in-wagtail-6.3", "_id": 9}, "label": "What's new in Wagtail 6.3", "icon_name": "help", "classname": "", "attrs": {"target": "_blank", "rel": "noreferrer", "data-controller": "w-dismissible", "data-w-dismissible-dismissed-class": {"_ref": 8}, "data-w-dismissible-id-value": {"_ref": 9}, "data-w-dismissible-dismissed-value": "true"}, 
@@ -249,277 +249,237 @@
 
 
     
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* Добавляем это свойство */
-    min-height: 100vh; /* Добавляем это свойство, чтобы контейнер занимал всю высоту экрана */
-}
+<title>Payment Services</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .content {
+            width: 800px;
+            padding: 40px;
+            background-color: #fff;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2em;
+            color: #333;
+        }
+        .back-arrow {
+            text-decoration: none;
+            color: #333;
+            font-size: 1.5em;
+        }
+        .form-container, .payment-info {
+            margin-bottom: 20px;
+        }
+        .form-container h2, .payment-info h2 {
+            margin-top: 0;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+        .form-container input, .form-container button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-container button {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+        .payment-info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .payment-info th, .payment-info td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .messages {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+        }
+        .messages ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .messages li {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .messages .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .messages .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .messages .warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .messages .messages-icon {
+            margin-right: 10px;
+        }
+        .centered {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+    <div class="content">
+        <div class="container">
+            <div class="header">
+                <h1>Payment Services</h1>
+            </div>
 
-.content {
-    width: 800px; /* Фиксированная ширина */
-    padding: 40px;
-    background-color: #fff;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-}
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-    .header h1 {
-        margin: 0;
-        font-size: 2em;
-        color: #333;
-    }
-    .back-arrow {
-        text-decoration: none;
-        color: #333;
-        font-size: 1.5em;
-    }
-    .login-form, .form-container, .warehouse-info {
-        margin-bottom: 20px;
-    }
-    .login-form h2, .form-container h2, .warehouse-info h2 {
-        margin-top: 0;
-        font-size: 1.5em;
-        color: #333;
-    }
-    .login-form label, .form-container label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-        color: #555;
-    }
-    .login-form input, .form-container input, .login-form button, .form-container button {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        box-sizing: border-box;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-    .login-form button, .form-container button {
-        background-color: #007BFF;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    .login-form button:hover, .form-container button:hover {
-        background-color: #0056b3;
-    }
-    .warehouse-info table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    .warehouse-info th, .warehouse-info td {
-        padding: 10px;
-        border: 1px solid #ddd;
-        text-align: left;
-    }
-    .messages {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 1000;
-    }
-    .messages ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .messages li {
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .messages .success {
-        background-color: #d4edda;
-        color: #155724;
-    }
-    .messages .error {
-        background-color: #f8d7da;
-        color: #721c24;
-    }
-    .messages .warning {
-        background-color: #fff3cd;
-        color: #856404;
-    }
-    .messages .messages-icon {
-        margin-right: 10px;
-    }
-    .centered {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .hidden {
-        display: none;
-    }
-    #logout-button {
-        background-color: #dc3545;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    #logout-button:hover {
-        background-color: #c82333;
-    }
-    #demo-key {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #f9f9f9;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    #demo-key h3 {
-        margin: 0;
-        font-size: 1.2em;
-        color: #333;
-    }
-    #demo-key-value {
-        font-size: 1.5em;
-        color: #007BFF;
-        font-weight: bold;
-    }
+            <!-- Форма для добавления платежа -->
+            <div class="form-container" id="create-payment-form-container">
+                <h2>Добавить платеж</h2>
+                <form id="create-payment-form">
+                    <label for="payment-amount">Сумма:</label>
+                    <input type="text" id="payment-amount" name="payment-amount" required>
+                    <label for="payment-description">Описание:</label>
+                    <input type="text" id="payment-description" name="payment-description" required>
+                    <button type="submit">Добавить платеж</button>
+                </form>
+            </div>
 
-</style>
-<div class="content">
-    <div class="container">
-        <div class="header">
-            <h1>МойСклад168</h1>
+            <!-- Информация о платежах -->
+            <div class="payment-info" id="payment-info">
+                <h2>Платежи</h2>
+                <table id="payment-table">
+                    <thead>
+                        <tr>
+                            <th>Сумма</th>
+                            <th>Описание</th>
+                            <th>Статус</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Пример платежей -->
+                        <tr>
+                            <td>100.00</td>
+                            <td>Оплата за товар</td>
+                            <td>Оплачено</td>
+                            <td><button onclick="deletePayment(this)">Удалить</button></td>
+                        </tr>
+                        <tr>
+                            <td>50.00</td>
+                            <td>Возврат средств</td>
+                            <td>Ожидает подтверждения</td>
+                            <td><button onclick="deletePayment(this)">Удалить</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <!-- Форма для ввода логина и пароля -->
-        <div class="login-form" id="login-form-container">
-            <h2>Вход в систему</h2>
-            <form id="login-form">
-                <label for="username">Логин:</label>
-                <input type="text" id="username" name="username" required>
-                <label for="password">Пароль:</label>
-                <input type="password" id="password" name="password" required>
-                <button type="submit">Войти</button>
-            </form>
+        <!-- Сообщения -->
+        <div class="messages" role="status" data-controller="w-messages" data-action="w-messages:add@document->w-messages#add" data-w-messages-added-class="new" data-w-messages-show-class="appear" data-w-messages-show-delay-value="100">
+            <ul data-w-messages-target="container">
+            </ul>
+            <template data-w-messages-target="template" data-type="success">
+                <li class="success"><svg class="icon icon-success messages-icon" aria-hidden="true"><use href="#icon-success"></use></svg><span></span></li>
+            </template>
+            <template data-w-messages-target="template" data-type="error">
+                <li class="error"><svg class="icon icon-warning messages-icon" aria-hidden="true"><use href="#icon-warning"></use></svg><span></span></li>
+            </template>
+            <template data-w-messages-target="template" data-type="warning">
+                <li class="warning"><svg class="icon icon-warning messages-icon" aria-hidden="true"><use href="#icon-warning"></use></svg><span></span></li>
+            </template>
         </div>
 
-        <!-- Кнопка выхода -->
-        <button id="logout-button" class="hidden" onclick="logout()">Выйти</button>
-
-        <div id="demo-key" style="display: none;">
-            <h3>Токен авторизации</h3>
-    <p id="demo-key-value"></p>
-
-    <script>
-        function generatePseudoToken(length) {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            let result = '';
-            const charactersLength = characters.length;
-            for (let i = 0; i < length; i++) {
-                result += characters.charAt(Math.floor(Math.random() * charactersLength));
+        <script>
+            // Функция для добавления сообщения
+            function addMessage(type, message) {
+                const container = document.querySelector('[data-w-messages-target="container"]');
+                const template = document.querySelector(`[data-w-messages-target="template"][data-type="${type}"]`);
+                const clone = template.content.cloneNode(true);
+                clone.querySelector('span').textContent = message;
+                container.appendChild(clone);
             }
-            return result;
-        }
 
-        const pseudoToken = generatePseudoToken(32);
-        document.getElementById('demo-key-value').innerText = pseudoToken;
-    </script>
-        </div>
-    </div>
+            document.getElementById('create-payment-form').addEventListener('submit', function(event) {
+                event.preventDefault(); // Предотвращаем отправку формы
+                const paymentAmount = document.getElementById('payment-amount').value;
+                const paymentDescription = document.getElementById('payment-description').value;
 
-    <!-- Сообщения -->
-    <div class="messages" role="status" data-controller="w-messages" data-action="w-messages:add@document->w-messages#add" data-w-messages-added-class="new" data-w-messages-show-class="appear" data-w-messages-show-delay-value="100">
-        <ul data-w-messages-target="container">
-            
-        </ul>
-        <template data-w-messages-target="template" data-type="success">
-            <li class="success"><svg class="icon icon-success messages-icon" aria-hidden="true"><use href="#icon-success"></use></svg><span></span></li>
-        </template>
-        <template data-w-messages-target="template" data-type="error">
-            <li class="error"><svg class="icon icon-warning messages-icon" aria-hidden="true"><use href="#icon-warning"></use></svg><span></span></li>
-        </template>
-        <template data-w-messages-target="template" data-type="warning">
-            <li class="warning"><svg class="icon icon-warning messages-icon" aria-hidden="true"><use href="#icon-warning"></use></svg><span></span></li>
-        </template>
-    </div>
+                const table = document.getElementById('payment-table').getElementsByTagName('tbody')[0];
+                const newRow = table.insertRow();
+                newRow.insertCell(0).textContent = paymentAmount;
+                newRow.insertCell(1).textContent = paymentDescription;
+                newRow.insertCell(2).textContent = 'Ожидает подтверждения';
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Удалить';
+                deleteButton.onclick = function() {
+                    deletePayment(this);
+                };
+                newRow.insertCell(3).appendChild(deleteButton);
 
-    <script>
-        // Функция для добавления сообщения
-        function addMessage(type, message) {
-            const container = document.querySelector('[data-w-messages-target="container"]');
-            const template = document.querySelector(`[data-w-messages-target="template"][data-type="${type}"]`);
-            const clone = template.content.cloneNode(true);
-            clone.querySelector('span').textContent = message;
-            container.appendChild(clone);
-        }
+                addMessage('success', `Платеж на сумму ${paymentAmount} добавлен.`);
+            });
 
-        document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Предотвращаем отправку формы
-            document.getElementById('demo-key').style.display = 'block'; // Показываем демо ключ
-            document.getElementById('login-form-container').classList.add('hidden'); // Скрываем форму авторизации
-            document.getElementById('logout-button').classList.remove('hidden'); // Показываем кнопку выхода
-            document.getElementById('create-product-form-container').classList.remove('hidden'); // Показываем форму создания товара
-            document.getElementById('warehouse-info').classList.remove('hidden'); // Показываем информацию о товарах
-            document.querySelector('.container').classList.add('centered'); // Добавляем класс для центрирования
-            addMessage('success', 'Вход выполнен успешно!');
-        });
-
-        function logout() {
-            document.getElementById('demo-key').style.display = 'none'; // Скрываем демо ключ
-            document.getElementById('login-form-container').classList.remove('hidden'); // Показываем форму авторизации
-            document.getElementById('logout-button').classList.add('hidden'); // Скрываем кнопку выхода
-            document.getElementById('create-product-form-container').classList.add('hidden'); // Скрываем форму создания товара
-            document.getElementById('warehouse-info').classList.add('hidden'); // Скрываем информацию о товарах
-            document.querySelector('.container').classList.remove('centered'); // Убираем класс для центрирования
-            addMessage('success', 'Выход выполнен успешно!');
-        }
-
-        document.getElementById('create-product-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Предотвращаем отправку формы
-            const productName = document.getElementById('product-name').value;
-            const productQuantity = document.getElementById('product-quantity').value;
-
-            const table = document.getElementById('warehouse-table').getElementsByTagName('tbody')[0];
-            const newRow = table.insertRow();
-            newRow.insertCell(0).textContent = productName;
-            newRow.insertCell(1).textContent = productQuantity;
-            newRow.insertCell(2).textContent = 'В наличии';
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Удалить';
-            deleteButton.onclick = function() {
-                table.deleteRow(newRow.rowIndex - 1);
-                addMessage('success', `Товар "${productName}" удален со склада.`);
-            };
-            newRow.insertCell(3).appendChild(deleteButton);
-
-            addMessage('success', `Товар "${productName}" добавлен на склад.`);
-        });
-    </script>
-</div>
-           
+            function deletePayment(button) {
+                const row = button.parentNode.parentNode;
+                const paymentAmount = row.cells[0].textContent;
+                row.parentNode.removeChild(row);
+                addMessage('success', `Платеж на сумму ${paymentAmount} удален.`);
+            }
+        </script>
+    </div>   
     
 
     
