@@ -248,286 +248,290 @@
 </template>
 
 
-<div class="content">
-    <div class="container">
-        <div class="header">
-            <h1>Мой склад</h1>
-        </div> 
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-    }
-    .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; /* Добавляем это свойство */
-    min-height: 100vh; /* Добавляем это свойство, чтобы контейнер занимал всю высоту экрана */
-}
+    
+<title>Т-банк 168</title>
+    <div class="content">
+        <div class="container">
+            <div class="header">
+                <h1>Платежные сервисы</h1>
+            </div>
 
-.content {
-    width: 800px; /* Фиксированная ширина */
-    padding: 40px;
-    background-color: #fff;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-}
-    .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 20px;
-    }
-    .header h1 {
-        margin: 0;
-        font-size: 2em;
-        color: #333;
-    }
-    .back-arrow {
-        text-decoration: none;
-        color: #333;
-        font-size: 1.5em;
-    }
-    .login-form, .form-container, .warehouse-info {
-        margin-bottom: 20px;
-    }
-    .login-form h2, .form-container h2, .warehouse-info h2 {
-        margin-top: 0;
-        font-size: 1.5em;
-        color: #333;
-    }
-    .login-form label, .form-container label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-        color: #555;
-    }
-    .login-form input, .form-container input, .login-form button, .form-container button {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        box-sizing: border-box;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-    .login-form button, .form-container button {
-        background-color: #007BFF;
-        color: #fff;
-        border: none;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    .login-form button:hover, .form-container button:hover {
-        background-color: #0056b3;
-    }
-    .warehouse-info table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    .warehouse-info th, .warehouse-info td {
-        padding: 10px;
-        border: 1px solid #ddd;
-        text-align: left;
-    }
-    .messages {
-        position: fixed;
-        top: 10px;
-        right: 10px;
-        z-index: 1000;
-    }
-    .messages ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .messages li {
-        padding: 10px;
-        margin-bottom: 10px;
-        border-radius: 5px;
-        display: flex;
-        align-items: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .messages .success {
-        background-color: #d4edda;
-        color: #155724;
-    }
-    .messages .error {
-        background-color: #f8d7da;
-        color: #721c24;
-    }
-    .messages .warning {
-        background-color: #fff3cd;
-        color: #856404;
-    }
-    .messages .messages-icon {
-        margin-right: 10px;
-    }
-    .centered {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .hidden {
-        display: none;
-    }
-    #logout-button {
-        background-color: #dc3545;
-        color: #fff;
-        border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s;
-    }
-    #logout-button:hover {
-        background-color: #c82333;
-    }
-    #demo-key {
-        margin-top: 20px;
-        padding: 10px;
-        background-color: #f9f9f9;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    #demo-key h3 {
-        margin: 0;
-        font-size: 1.2em;
-        color: #333;
-    }
-    #demo-key-value {
-        font-size: 1.5em;
-        color: #007BFF;
-        font-weight: bold;
-    }
-
-</style>
-<div class="content">
-    <div class="container">
-        <div class="header">
-            <h1>МойСклад168</h1>
-        </div>
-
-        <!-- Форма для ввода логина и пароля -->
-        <div class="login-form" id="login-form-container">
-            <h2>Вход в систему</h2>
-            <form id="login-form">
-                <label for="username">Логин:</label>
-                <input type="text" id="username" name="username" required>
-                <label for="password">Пароль:</label>
-                <input type="password" id="password" name="password" required>
-                <button type="submit">Войти</button>
-            </form>
-        </div>
-
-        <!-- Кнопка выхода -->
-        <button id="logout-button" class="hidden" onclick="logout()">Выйти</button>
-
-        <div id="demo-key" style="display: none;">
-            <h3>Токен авторизации</h3>
-            <p id="demo-key-value"></p>
-
-            <script>
-                function generatePseudoToken(length) {
-                    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-                    let result = '';
-                    const charactersLength = characters.length;
-                    for (let i = 0; i < length; i++) {
-                        result += characters.charAt(Math.floor(Math.random() * charactersLength));
-                    }
-                    return result;
+            
+    
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f4f4f4;
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
                 }
-
-                const pseudoToken = generatePseudoToken(32);
-                document.getElementById('demo-key-value').innerText = pseudoToken;
-            </script>
-        </div>
-    </div>
-
-    <!-- Сообщения -->
-    <div class="messages" role="status" data-controller="w-messages" data-action="w-messages:add@document->w-messages#add" data-w-messages-added-class="new" data-w-messages-show-class="appear" data-w-messages-show-delay-value="100">
-        <ul data-w-messages-target="container">
-        </ul>
-        <template data-w-messages-target="template" data-type="success">
-            <li class="success"><svg class="icon icon-success messages-icon" aria-hidden="true"><use href="#icon-success"></use></svg><span></span></li>
-        </template>
-        <template data-w-messages-target="template" data-type="error">
-            <li class="error"><svg class="icon icon-warning messages-icon" aria-hidden="true"><use href="#icon-warning"></use></svg><span></span></li>
-        </template>
-        <template data-w-messages-target="template" data-type="warning">
-            <li class="warning"><svg class="icon icon-warning messages-icon" aria-hidden="true"><use href="#icon-warning"></use></svg><span></span></li>
-        </template>
-    </div>
-
-    <script>
-        // Функция для добавления сообщения
-        function addMessage(type, message) {
-            const container = document.querySelector('[data-w-messages-target="container"]');
-            const template = document.querySelector(`[data-w-messages-target="template"][data-type="${type}"]`);
-            const clone = template.content.cloneNode(true);
-            clone.querySelector('span').textContent = message;
-            container.appendChild(clone);
-        }
-
-        document.getElementById('login-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Предотвращаем отправку формы
-
-            // Добавляем задержку от 5 до 10 секунд
-            const delay = Math.floor(Math.random() * (10000 - 5000 + 1)) + 5000;
-            setTimeout(() => {
-                document.getElementById('demo-key').style.display = 'block'; // Показываем демо ключ
-                document.getElementById('login-form-container').classList.add('hidden'); // Скрываем форму авторизации
-                document.getElementById('logout-button').classList.remove('hidden'); // Показываем кнопку выхода
-                document.getElementById('create-product-form-container').classList.remove('hidden'); // Показываем форму создания товара
-                document.getElementById('warehouse-info').classList.remove('hidden'); // Показываем информацию о товарах
-                document.querySelector('.container').classList.add('centered'); // Добавляем класс для центрирования
-                addMessage('success', 'Вход выполнен успешно!');
-            }, delay);
-        });
-
-        function logout() {
-            document.getElementById('demo-key').style.display = 'none'; // Скрываем демо ключ
-            document.getElementById('login-form-container').classList.remove('hidden'); // Показываем форму авторизации
-            document.getElementById('logout-button').classList.add('hidden'); // Скрываем кнопку выхода
-            document.getElementById('create-product-form-container').classList.add('hidden'); // Скрываем форму создания товара
-            document.getElementById('warehouse-info').classList.add('hidden'); // Скрываем информацию о товарах
-            document.querySelector('.container').classList.remove('centered'); // Убираем класс для центрирования
-            addMessage('success', 'Выход выполнен успешно!');
-        }
-
-        document.getElementById('create-product-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Предотвращаем отправку формы
-            const productName = document.getElementById('product-name').value;
-            const productQuantity = document.getElementById('product-quantity').value;
-
-            const table = document.getElementById('warehouse-table').getElementsByTagName('tbody')[0];
-            const newRow = table.insertRow();
-            newRow.insertCell(0).textContent = productName;
-            newRow.insertCell(1).textContent = productQuantity;
-            newRow.insertCell(2).textContent = 'В наличии';
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Удалить';
-            deleteButton.onclick = function() {
-                table.deleteRow(newRow.rowIndex - 1);
-                addMessage('success', `Товар "${productName}" удален со склада.`);
-            };
-            newRow.insertCell(3).appendChild(deleteButton);
-
-            addMessage('success', `Товар "${productName}" добавлен на склад.`);
-        });
-    </script>
-</div>
-           
+                .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center; /* Добавляем это свойство */
+                min-height: 100vh; /* Добавляем это свойство, чтобы контейнер занимал всю высоту экрана */
+            }
+            
+            .content {
+                width: 800px; /* Фиксированная ширина */
+                padding: 40px;
+                background-color: #fff;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                border-radius: 10px;
+                display: flex;
+                justify-content: center;
+            }
+                .header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+                }
+                .header h1 {
+                    margin: 0;
+                    font-size: 2em;
+                    color: #333;
+                }
+                .back-arrow {
+                    text-decoration: none;
+                    color: #333;
+                    font-size: 1.5em;
+                }
+                .login-form, .form-container, .warehouse-info {
+                    margin-bottom: 20px;
+                }
+                .login-form h2, .form-container h2, .warehouse-info h2 {
+                    margin-top: 0;
+                    font-size: 1.5em;
+                    color: #333;
+                }
+                .login-form label, .form-container label {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                    color: #555;
+                }
+                .login-form input, .form-container input, .login-form button, .form-container button {
+                    width: 100%;
+                    padding: 10px;
+                    margin-bottom: 10px;
+                    box-sizing: border-box;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                }
+                .login-form button, .form-container button {
+                    background-color: #007BFF;
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+                .login-form button:hover, .form-container button:hover {
+                    background-color: #0056b3;
+                }
+                .warehouse-info table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                .warehouse-info th, .warehouse-info td {
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    text-align: left;
+                }
+                .messages {
+                    position: fixed;
+                    top: 10px;
+                    right: 10px;
+                    z-index: 1000;
+                }
+                .messages ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+                .messages li {
+                    padding: 10px;
+                    margin-bottom: 10px;
+                    border-radius: 5px;
+                    display: flex;
+                    align-items: center;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+                .messages .success {
+                    background-color: #d4edda;
+                    color: #155724;
+                }
+                .messages .error {
+                    background-color: #f8d7da;
+                    color: #721c24;
+                }
+                .messages .warning {
+                    background-color: #fff3cd;
+                    color: #856404;
+                }
+                .messages .messages-icon {
+                    margin-right: 10px;
+                }
+                .centered {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .hidden {
+                    display: none;
+                }
+                #logout-button {
+                    background-color: #dc3545;
+                    color: #fff;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+                #logout-button:hover {
+                    background-color: #c82333;
+                }
+                #demo-key {
+                    margin-top: 20px;
+                    padding: 10px;
+                    background-color: #f9f9f9;
+                    border-radius: 5px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+                #demo-key h3 {
+                    margin: 0;
+                    font-size: 1.2em;
+                    color: #333;
+                }
+                #demo-key-value {
+                    font-size: 1.5em;
+                    color: #007BFF;
+                    font-weight: bold;
+                }
+            
+            </style>
+            <div class="content">
+                <div class="container">
+                    <div class="header">
+                        <h1>Т-банк168</h1>
+                    </div>
+            
+                    <!-- Форма для ввода логина и пароля -->
+                    <div class="login-form" id="login-form-container">
+                        <h2>Вход в систему</h2>
+                        <form id="login-form">
+                            <label for="username">Логин:</label>
+                            <input type="text" id="username" name="username" required>
+                            <label for="password">Пароль:</label>
+                            <input type="password" id="password" name="password" required>
+                            <button type="submit">Войти</button>
+                        </form>
+                    </div>
+            
+                    <!-- Кнопка выхода -->
+                    <button id="logout-button" class="hidden" onclick="logout()">Выйти</button>
+            
+                    <div id="demo-key" style="display: none;">
+                        <h3>Токен авторизации</h3>
+                        <p id="demo-key-value"></p>
+            
+                        <script>
+                            function generatePseudoToken(length) {
+                                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                                let result = '';
+                                const charactersLength = characters.length;
+                                for (let i = 0; i < length; i++) {
+                                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                                }
+                                return result;
+                            }
+            
+                            const pseudoToken = generatePseudoToken(32);
+                            document.getElementById('demo-key-value').innerText = pseudoToken;
+                        </script>
+                    </div>
+                </div>
+            
+                <!-- Сообщения -->
+                <div class="messages" role="status" data-controller="w-messages" data-action="w-messages:add@document->w-messages#add" data-w-messages-added-class="new" data-w-messages-show-class="appear" data-w-messages-show-delay-value="100">
+                    <ul data-w-messages-target="container">
+                    </ul>
+                    <template data-w-messages-target="template" data-type="success">
+                        <li class="success"><svg class="icon icon-success messages-icon" aria-hidden="true"><use href="#icon-success"></use></svg><span></span></li>
+                    </template>
+                    <template data-w-messages-target="template" data-type="error">
+                        <li class="error"><svg class="icon icon-warning messages-icon" aria-hidden="true"><use href="#icon-warning"></use></svg><span></span></li>
+                    </template>
+                    <template data-w-messages-target="template" data-type="warning">
+                        <li class="warning"><svg class="icon icon-warning messages-icon" aria-hidden="true"><use href="#icon-warning"></use></svg><span></span></li>
+                    </template>
+                </div>
+            
+                <script>
+                    // Функция для добавления сообщения
+                    function addMessage(type, message) {
+                        const container = document.querySelector('[data-w-messages-target="container"]');
+                        const template = document.querySelector(`[data-w-messages-target="template"][data-type="${type}"]`);
+                        const clone = template.content.cloneNode(true);
+                        clone.querySelector('span').textContent = message;
+                        container.appendChild(clone);
+                    }
+            
+                    document.getElementById('login-form').addEventListener('submit', function(event) {
+                        event.preventDefault(); // Предотвращаем отправку формы
+            
+                        // Добавляем задержку от 5 до 10 секунд
+                        const delay = Math.floor(Math.random() * (10000 - 5000 + 1)) + 5000;
+                        setTimeout(() => {
+                            document.getElementById('demo-key').style.display = 'block'; // Показываем демо ключ
+                            document.getElementById('login-form-container').classList.add('hidden'); // Скрываем форму авторизации
+                            document.getElementById('logout-button').classList.remove('hidden'); // Показываем кнопку выхода
+                            document.getElementById('create-product-form-container').classList.remove('hidden'); // Показываем форму создания товара
+                            document.getElementById('warehouse-info').classList.remove('hidden'); // Показываем информацию о товарах
+                            document.querySelector('.container').classList.add('centered'); // Добавляем класс для центрирования
+                            addMessage('success', 'Вход выполнен успешно!');
+                        }, delay);
+                    });
+            
+                    function logout() {
+                        document.getElementById('demo-key').style.display = 'none'; // Скрываем демо ключ
+                        document.getElementById('login-form-container').classList.remove('hidden'); // Показываем форму авторизации
+                        document.getElementById('logout-button').classList.add('hidden'); // Скрываем кнопку выхода
+                        document.getElementById('create-product-form-container').classList.add('hidden'); // Скрываем форму создания товара
+                        document.getElementById('warehouse-info').classList.add('hidden'); // Скрываем информацию о товарах
+                        document.querySelector('.container').classList.remove('centered'); // Убираем класс для центрирования
+                        addMessage('success', 'Выход выполнен успешно!');
+                    }
+            
+                    document.getElementById('create-product-form').addEventListener('submit', function(event) {
+                        event.preventDefault(); // Предотвращаем отправку формы
+                        const productName = document.getElementById('product-name').value;
+                        const productQuantity = document.getElementById('product-quantity').value;
+            
+                        const table = document.getElementById('warehouse-table').getElementsByTagName('tbody')[0];
+                        const newRow = table.insertRow();
+                        newRow.insertCell(0).textContent = productName;
+                        newRow.insertCell(1).textContent = productQuantity;
+                        newRow.insertCell(2).textContent = 'В наличии';
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Удалить';
+                        deleteButton.onclick = function() {
+                            table.deleteRow(newRow.rowIndex - 1);
+                            addMessage('success', `Товар "${productName}" удален со склада.`);
+                        };
+                        newRow.insertCell(3).appendChild(deleteButton);
+            
+                        addMessage('success', `Товар "${productName}" добавлен на склад.`);
+                    });
+                </script>
+            </div>
     
 
     

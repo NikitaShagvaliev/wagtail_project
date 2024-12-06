@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'wagtail',
     'demo',
     'moysklad',
-    'home'
+    'home',
+    'Payment_services'
 ]
 
 MIDDLEWARE = [
