@@ -15,6 +15,44 @@ def get_moysklad_client(entity_client_class):
     return entity_client_class(MOYSKLAD_LOGIN, MOYSKLAD_PASSWORD, MOYSKLAD_BASE_URL, verify_ssl=False)
 
 
+# Products
+def get_products(request, product_id=None):
+    client = get_moysklad_client(ProductClient)
+    if product_id!=None:
+        return handle_api_request(request, client, 'GET', id=product_id)
+    return handle_api_request(request, client, 'GET')
+
+def create_product(request):
+    if request.method == "POST":
+        data = {
+            "name": request.POST.get("name"),
+            "price": request.POST.get("price"),
+            "description": request.POST.get("description"),
+            "image_url": request.POST.get("image_url"),
+            "stock": request.POST.get("stock"),
+        }
+        client = get_moysklad_client(ProductClient)
+        return handle_api_request(request, client, 'POST', data=data)
+    return HttpResponseBadRequest("Invalid request method")
+
+def update_or_delete_product(request, product_id):
+    client = get_moysklad_client(ProductClient)
+    if request.method == "PUT":
+        data = {
+            "name": request.POST.get("name"),
+            "price": request.POST.get("price"),
+            "description": request.POST.get("description"),
+            "image_url": request.POST.get("image_url"),
+            "stock": request.POST.get("stock"),
+        }
+        return handle_api_request(request, client, 'PUT', id=product_id, data=data)
+    elif request.method == "DELETE":
+        return handle_api_request(request, client, 'DELETE', id=product_id)
+    return HttpResponseBadRequest("Invalid request method")
+
+
+
+
 def handle_api_request(request, client, method, id=None, data=None):
     try:
         if method == 'GET':
@@ -164,38 +202,7 @@ def update_or_delete_customer(request, customer_id):
         return handle_api_request(request, client, 'DELETE', id=customer_id)
     return HttpResponseBadRequest("Invalid request method")
 
-# Products
-def get_products(request):
-    client = get_moysklad_client(ProductClient)
-    return handle_api_request(request, client, 'GET')
 
-def create_product(request):
-    if request.method == "POST":
-        data = {
-            "name": request.POST.get("name"),
-            "price": request.POST.get("price"),
-            "description": request.POST.get("description"),
-            "image_url": request.POST.get("image_url"),
-            "stock": request.POST.get("stock"),
-        }
-        client = get_moysklad_client(ProductClient)
-        return handle_api_request(request, client, 'POST', data=data)
-    return HttpResponseBadRequest("Invalid request method")
-
-def update_or_delete_product(request, product_id):
-    client = get_moysklad_client(ProductClient)
-    if request.method == "PUT":
-        data = {
-            "name": request.POST.get("name"),
-            "price": request.POST.get("price"),
-            "description": request.POST.get("description"),
-            "image_url": request.POST.get("image_url"),
-            "stock": request.POST.get("stock"),
-        }
-        return handle_api_request(request, client, 'PUT', id=product_id, data=data)
-    elif request.method == "DELETE":
-        return handle_api_request(request, client, 'DELETE', id=product_id)
-    return HttpResponseBadRequest("Invalid request method")
 
 # Остальные сущности (аналогично)
 # Product Categories
