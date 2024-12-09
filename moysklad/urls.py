@@ -4,6 +4,11 @@ from .views import *
 urlpatterns = [
     path('', moysklad, name='moysklad'),
 
+    path('products/', get_products, name='get_products'),
+    path('products/create/', create_product, name='create_product'),
+    path('products/<str:product_id>/', get_products, name='get_products'),
+
+
     # Customer Orders
     path('customer-orders/', get_customer_orders, name='get_customer_orders'),
     path('customer-orders/create/', create_customer_order, name='create_customer_order'),

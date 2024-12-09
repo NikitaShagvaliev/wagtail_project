@@ -972,64 +972,60 @@
                                 КАТАЛОГ
                             </a>
                             <div class="t-menusub" data-submenu-hook="link_sub3_583215140" data-submenu-margin="15px" data-add-submenu-arrow="">
-                                <div class="t-menusub__menu">
-                                    <div class="t-menusub__content">
-                                        <ul role="list" class="t-menusub__list">
-                                            <li class="t-menusub__list-item t-name t-name_xs">
-                                                <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog' %}" data-menu-item-number="3">
-                                                    Все ароматы
-                                                </a>
-                                            </li>
-                                            <li class="t-menusub__list-item t-name t-name_xs">
-                                                <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog' %}?tfc_quantity[581517388]=y&amp;tfc_storepartuid[581517388]=Для+него&amp;tfc_quantity[594410498]=y&amp;tfc_div=:::" data-menu-item-number="3">
-                                                    Для него
-                                                </a>
-                                            </li>
-                                            <li class="t-menusub__list-item t-name t-name_xs">
-                                                <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog' %}?tfc_quantity[581517388]=y&amp;tfc_storepartuid[581517388]=Для+неё&amp;tfc_quantity[594410498]=y&amp;tfc_div=:::" data-menu-item-number="3">
-                                                    Для неё
-                                                </a>
-                                            </li>
-                                            <li class="t-menusub__list-item t-name t-name_xs">
-                                                <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog' %}?tfc_storepartuid[581517388]=Новинки&amp;tfc_div=:::" data-menu-item-number="3">
-                                                    Новинки
-                                                </a>
-                                            </li>
-                                            <li class="t-menusub__list-item t-name t-name_xs">
-                                                <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog' %}?tfc_storepartuid[581517388]=Хиты+Продаж&amp;tfc_div=:::" data-menu-item-number="3">
-                                                    Хиты продаж
-                                                </a>
-                                            </li>
-                                            <li class="t-menusub__list-item t-name t-name_xs">
-                                                <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog' %}?tfc_storepartuid[581517388]=Боксы&amp;tfc_div=:::" data-menu-item-number="3">
-                                                    Боксы
-                                                </a>
-                                            </li>
-                                            <li class="t-menusub__list-item t-name t-name_xs">
-                                                <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog' %}" data-menu-item-number="3">
-                                                    Целый флакон
-                                                </a>
-                                            </li>
-                                            <li class="t-menusub__list-item t-name t-name_xs">
-                                                <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog' %}?tfc_quantity[581517388]=y&amp;tfc_storepartuid[581517388]=SALE&amp;tfc_div=:::" data-menu-item-number="3">
-                                                    Sale
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                              <div class="t-menusub__menu">
+                                  <div class="t-menusub__content">
+                                      <ul role="list" class="t-menusub__list">
+                                          <li class="t-menusub__list-item t-name t-name_xs">
+                                              <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog' %}" data-menu-item-number="3">
+                                                  Все ароматы
+                                              </a>
+                                          </li>
+                                          <li class="t-menusub__list-item t-name t-name_xs">
+                                              <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog_category' 'for_him' %}" data-menu-item-number="3">
+                                                  Для него
+                                              </a>
+                                          </li>
+                                          <li class="t-menusub__list-item t-name t-name_xs">
+                                              <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog_category' 'for_her' %}" data-menu-item-number="3">
+                                                  Для неё
+                                              </a>
+                                          </li>
+                                          <li class="t-menusub__list-item t-name t-name_xs">
+                                              <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog_category' 'new_products' %}" data-menu-item-number="3">
+                                                  Новинки
+                                              </a>
+                                          </li>
+                                          <li class="t-menusub__list-item t-name t-name_xs">
+                                              <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog_category' 'sales_hits' %}" data-menu-item-number="3">
+                                                  Хиты продаж
+                                              </a>
+                                          </li>
+                                          <li class="t-menusub__list-item t-name t-name_xs">
+                                              <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog_category' 'boxes' %}" data-menu-item-number="3">
+                                                  Боксы
+                                              </a>
+                                          </li>
+                                          <li class="t-menusub__list-item t-name t-name_xs">
+                                              <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog_category' 'full_boxes' %}" data-menu-item-number="3">
+                                                  Целый флакон
+                                              </a>
+                                          </li>
+                                          <li class="t-menusub__list-item t-name t-name_xs">
+                                              <a class="t-menusub__link-item t-name t-name_xs" href="{% url 'catalog_category' 'sale' %}" data-menu-item-number="3">
+                                                  Sale
+                                              </a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
                         </li>
                         <li class="t228__list_item" style="padding: 0 15px">
                             <a class="t-menu__link-item" href="{% url 'delivery' %}" data-menu-submenu-hook="" data-menu-item-number="4">
                                 ДОСТАВКА
                             </a>
                         </li>
-                        <li class="t228__list_item" style="padding: 0 0 0 15px">
-                            <a class="t-menu__link-item" href="{% url 'contacts' %}" data-menu-submenu-hook="" data-menu-item-number="5">
-                                Личный кабинет
-                            </a>
-                        </li>
+                        
                     </ul>
                 </nav>
             </div>

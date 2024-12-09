@@ -74,6 +74,7 @@
         
         
         {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "images",            "label": "Images", "icon_name": "image", "classname": "", "attrs": {}, "url": "/cms/images/"}]}, 
+        {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "Мой сайт", "label": "Мой сайт", "icon_name": "Мой сайт", "classname": "", "attrs": {}, "url": "https://moodbox-ek.ru/"}]},
         {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "Платежные сервисы", "label": "Платежные сервисы", "icon_name": "Платежные сервисы", "classname": "", "attrs": {}, "url": "/Payment_services"}]},
         {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "Мой склад",         "label": "Мой склад", "icon_name": "Мой склад", "classname": "", "attrs": {}, "url": "/moysklad"}]},
         {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "documents",         "label": "Documents", "icon_name": "doc-full-inverse", "classname": "", "attrs": {}, "url": "/cms/documents/"}]}, 
@@ -432,7 +433,13 @@
 
         <!-- Кнопка выхода -->
         <button id="logout-button" class="hidden" onclick="logout()">Выйти</button>
+        <button id="my-warehouse-button" onclick="openMyWarehouse()">Мой склад</button>
 
+    <script>
+        function openMyWarehouse() {
+            window.open('https://online.moysklad.ru/app/#good', '_blank');
+        }
+</script>
         <div id="demo-key" style="display: none;">
             <h3>Токен авторизации</h3>
             <p id="demo-key-value"></p>
