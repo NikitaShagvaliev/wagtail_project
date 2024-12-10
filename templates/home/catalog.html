@@ -6,7 +6,7 @@
         {% for product in products %}
             <li>
                 <h2>{{ product.name }}</h2>
-                <p>ID: {{ product.id }}</p>
+                <p>ID: <a href="{% url 'catalog_id' product.id %}">{{ product.id }}</a></p>
                 <p>Code: {{ product.code }}</p>
                 <p>Price: {{ product.salePrices.0.value }}</p>
                 <!-- Добавьте другие поля, которые вам нужны -->
