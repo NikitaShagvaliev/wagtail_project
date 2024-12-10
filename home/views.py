@@ -10,7 +10,7 @@ def index(request):
     return render(request, 'home/index.html')
 
 def company(request):
-    return render(request, 'home/page40704823body.html')
+    return render(request, 'home/page39291702body.html')
 
 def delivery(request):
     return render(request, 'home/delivery.html')
