@@ -18,6 +18,8 @@ def company(request):
 def delivery(request):
     return render(request, 'home/delivery.html')
 
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 def catalog(request):
     url = "http://127.0.0.1:8000//moysklad/products/"
     response = requests.get(url, verify=False)
@@ -49,14 +51,26 @@ def catalog(request):
                             
                             if image_response.status_code == 200:
                                 image_base64 = base64.b64encode(image_response.content).decode('utf-8')
-                                
                                 product['image_base64'] = image_base64  # Добавляем изображение в словарь продукта
         
-        context = {'products': products}
-        print(context)
+        # Пагинация
+        paginator = Paginator(products, 6)  # Показывать по 10 товаров на странице
+        page = request.GET.get('page')  # Получаем текущую страницу из GET-параметра
+        
+        try:
+            products_page = paginator.page(page)
+        except PageNotAnInteger:
+            # Если страница не является целым числом, возвращаем первую страницу
+            products_page = paginator.page(1)
+        except EmptyPage:
+            # Если страница выходит за пределы допустимого диапазона, возвращаем последнюю страницу
+            products_page = paginator.page(paginator.num_pages)
+        
+        context = {'products': products_page}
         return render(request, 'home/catalog.html', context)
     
     return render(request, 'home/catalog.html', {'products': []})
+
 
 def catalog_category(request, category):
     url = "http://127.0.0.1:8000//moysklad/products/"
