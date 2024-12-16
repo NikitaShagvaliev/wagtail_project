@@ -1,17 +1,253 @@
 {% load static %}
 {% include 'base/header.html' %}
+<!--/header-->
+<div
+  id="rec590497430"
+  class="r t-rec t-rec_pt_75 t-rec_pb_15"
+  style="padding-top: 75px; padding-bottom: 15px"
+  data-record-type="60"
+>
+  <!-- T050 -->
+  <div class="t050">
+    <div class="t-container t-align_left">
+      <div class="t-col t-col_12">
+        <h1 class="t050__title t-title t-title_xxl" field="title">Каталог</h1>
+      </div>
+    </div>
+  </div>
+  <style>
+    @media screen and (min-width: 900px) {
+      #rec590497430 .t050__title {
+        font-size: 100px;
+      }
+    }
+    @media screen and (max-width: 480px),
+      (orientation: landscape) and (max-height: 480px) {
+      #rec590497430 .t050__title {
+        font-size: 60px;
+      }
+    }
+
+    /* Добавляем отступы */
+    #rec590497430 .t050__title {
+      padding: 50px 100px 50px 100px; /* Отступ сверху, справа, снизу, слева */
+    }
+  </style>
+</div>
+<div
+  id="rec581517388"
+  class="r t-rec t-rec_pt_45 t-rec_pb_60"
+  style="padding-top: 45px; padding-bottom: 60px"
+  data-animationappear="off"
+  data-record-type="951"
+>
+  <!-- t951 -->
+  <!-- @classes: t-text t-text_xxs t-name t-name_xs t-name_md t-name_xl t-descr t-descr_xxs t-btn t-btn_xs t-btn_sm t-btn_md data-zoomable="yes" t-uptitle t-uptitle_xxl t-align_center -->
+  <style>
+    /* Основной контейнер */
+    .catalog-container {
+        display: flex;
+        gap: 20px;
+    }
+
+    /* Левая панель фильтров */
+    .filter-panel {
+        width: 25%;
+        border-right: 1px solid #ccc;
+        padding: 15px;
+    }
+
+    /* Список продуктов */
+    .product-list {
+        width: 75%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: space-between;
+    }
+
+    /* Карточка продукта */
+    .product-card {
+        width: calc(33.333% - 20px); /* Три карточки в ряд с отступами */
+        border: 1px solid #ccc;
+        padding: 15px;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    /* Изображение продукта */
+    .product-image {
+        width: 100%;
+        height: 200px; /* Фиксированная высота для изображения */
+        background-size: cover;
+        background-position: center;
+        margin-bottom: 10px;
+    }
+
+    /* Заголовок продукта */
+    .product-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    /* Описание и цена */
+    .product-description, .product-price {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    /* Ссылка на продукт */
+    .product-link {
+        display: block;
+        margin-top: 10px;
+        color: #007BFF;
+        text-decoration: none;
+    }
+
+    /* Адаптивность */
+    @media (max-width: 768px) {
+        .product-card {
+            width: calc(50% - 20px); /* Две карточки в ряд на маленьких экранах */
+        }
+    }
+
+    @media (max-width: 480px) {
+        .product-card {
+            width: 100%; /* Одна карточка в ряд на очень маленьких экранах */
+        }
+    }
+</style>
+</head>
 <body>
-    <h1>Catalog of Products</h1>
-    <ul>
+<div class="catalog-container">
+    <!-- Левая панель фильтров -->
+    <div class="filter-panel">
+        <h3>Фильтры</h3>
+        <div>
+            <h4>Категории</h4>
+            <ul>
+                <li><label><input type="checkbox" value="Все"> Все</label></li>
+                <li><label><input type="checkbox" value="Яркая зима"> Яркая зима</label></li>
+                <li><label><input type="checkbox" value="Унисекс"> Унисекс</label></li>
+                <li><label><input type="checkbox" value="Новинки"> Новинки</label></li>
+                <li><label><input type="checkbox" value="Хиты Продаж"> Хиты Продаж</label></li>
+                <li><label><input type="checkbox" value="Боксы"> Боксы</label></li>
+                <li><label><input type="checkbox" value="Для него"> Для него</label></li>
+                <li><label><input type="checkbox" value="Для неё"> Для неё</label></li>
+                <li><label><input type="checkbox" value="SALE"> SALE</label></li>
+                <li><label><input type="checkbox" value="Диффузоры"> Диффузоры</label></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Цена</h4>
+            <ul>
+                <li><label><input type="checkbox" value="450 — 59900"> 450 — 59 900</label></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Объем</h4>
+            <ul>
+                <li><label><input type="checkbox" value="отливант 50 мл"> отливант 50 мл</label></li>
+                <li><label><input type="checkbox" value="Флакон 70 мл"> Флакон 70 мл</label></li>
+                <li><label><input type="checkbox" value="отливант 5 мл"> отливант 5 мл</label></li>
+                <li><label><input type="checkbox" value="отливант 20 мл"> отливант 20 мл</label></li>
+                <li><label><input type="checkbox" value="отливант 2 мл"> отливант 2 мл</label></li>
+                <li><label><input type="checkbox" value="отливант 10 мл"> отливант 10 мл</label></li>
+                <li><label><input type="checkbox" value="Флакон 90 мл"> Флакон 90 мл</label></li>
+                <li><label><input type="checkbox" value="Флакон 88 мл"> Флакон 88 мл</label></li>
+                <li><label><input type="checkbox" value="Флакон 80 мл"> Флакон 80 мл</label></li>
+                <li><label><input type="checkbox" value="Флакон 75 мл"> Флакон 75 мл</label></li>
+            </ul>
+        </div>
+        <div>
+            <h4>Бренд</h4>
+            <ul>
+                <li><label><input type="checkbox" value="Acqua Di Parma"> Acqua Di Parma</label></li>
+                <li><label><input type="checkbox" value="Afnan"> Afnan</label></li>
+                <li><label><input type="checkbox" value="Ajmal"> Ajmal</label></li>
+                <li><label><input type="checkbox" value="Akro"> Akro</label></li>
+                <li><label><input type="checkbox" value="Amouage"> Amouage</label></li>
+                <li><label><input type="checkbox" value="Ard Al Zaafaran"> Ard Al Zaafaran</label></li>
+                <li><label><input type="checkbox" value="Armaf"> Armaf</label></li>
+                <li><label><input type="checkbox" value="Armani Prive"> Armani Prive</label></li>
+                <li><label><input type="checkbox" value="Atelier Cologne"> Atelier Cologne</label></li>
+            </ul>
+        </div>
+        <div>
+            <h4>По характеру</h4>
+            <ul>
+                <li><label><input type="checkbox" value="Деликатные"> Деликатные</label></li>
+                <li><label><input type="checkbox" value="Мускусные"> Мускусные</label></li>
+                <li><label><input type="checkbox" value="Освежающие"> Освежающие</label></li>
+                <li><label><input type="checkbox" value="Соблазнительные"> Соблазнительные</label></li>
+                <li><label><input type="checkbox" value="Стойкие"> Стойкие</label></li>
+                <li><label><input type="checkbox" value="Шлейфовые"> Шлейфовые</label></li>
+            </ul>
+        </div>
+        <div>
+            <h4>По направлению</h4>
+            <ul>
+                <li><label><input type="checkbox" value="Акватические"> Акватические</label></li>
+                <li><label><input type="checkbox" value="Алкогольные"> Алкогольные</label></li>
+                <li><label><input type="checkbox" value="Гурманские"> Гурманские</label></li>
+                <li><label><input type="checkbox" value="Древесные"> Древесные</label></li>
+                <li><label><input type="checkbox" value="Кожаные"> Кожаные</label></li>
+                <li><label><input type="checkbox" value="Мускусные"> Мускусные</label></li>
+                <li><label><input type="checkbox" value="Пряные"> Пряные</label></li>
+                <li><label><input type="checkbox" value="Пудровые"> Пудровые</label></li>
+                <li><label><input type="checkbox" value="Табачные"> Табачные</label></li>
+                <li><label><input type="checkbox" value="Фруктовые"> Фруктовые</label></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Список продуктов -->
+    <div class="product-list">
         {% for product in products %}
-            <li>
-                <h2>{{ product.name }}</h2>
-                <p>ID: <a href="{% url 'catalog_id' product.id %}">{{ product.id }}</a></p>
-                <p>Code: {{ product.code }}</p>
-                <p>Price: {{ product.salePrices.0.value }}</p>
-                <!-- Добавьте другие поля, которые вам нужны -->
-            </li>
-        {% endfor %}
-    </ul>
-</body>
+    <div class="product-card">
+        {% if product.image_base64 %}
+            <img src="data:image/png;base64,{{ product.image_base64 }}" alt="{{ product.name }}">
+        {% else %}
+            <p>Image not available.</p>
+        {% endif %}
+        <div class="product-title">{{ product.name }}</div>
+        <div class="product-description">{{ product.description }}</div>
+        <div class="product-price">Price: {{ product.salePrices.0.value }}</div>
+        <a class="product-link" href="{% url 'catalog_id' product.id %}">View Details</a>
+    </div>
+{% endfor %}
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.filter-panel input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+        const selectedCategories = Array.from(document.querySelectorAll('.filter-panel input[type="checkbox"]:checked'))
+            .map(checkbox => checkbox.value);
+
+        document.querySelectorAll('.product-card').forEach(card => {
+            const category = card.getAttribute('data-category');
+            const volume = card.getAttribute('data-volume');
+            const brand = card.getAttribute('data-brand');
+            const price = card.getAttribute('data-price');
+            const character = card.getAttribute('data-character');
+            const direction = card.getAttribute('data-direction');
+
+            if (selectedCategories.includes('Все') || 
+                selectedCategories.includes(category) || 
+                selectedCategories.includes(volume) || 
+                selectedCategories.includes(brand) || 
+                selectedCategories.includes(price) || 
+                selectedCategories.includes(character) || 
+                selectedCategories.includes(direction)) {
+                card.style.display = 'block';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
+  
 {% include 'base/footer.html' %}
