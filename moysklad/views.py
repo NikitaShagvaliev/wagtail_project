@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseServerError
+from django.http import JsonResponse, HttpResponseBadRequest, HttpResponseServerError, HttpResponse
 from .entities.MoySkladApi import *
 
 # Замените ваши логин и пароль на реальные, но только для тестирования!
@@ -14,6 +14,16 @@ def moysklad(request):
 def get_moysklad_client(entity_client_class):
     return entity_client_class(MOYSKLAD_LOGIN, MOYSKLAD_PASSWORD, MOYSKLAD_BASE_URL, verify_ssl=False)
 
+def get_products_images(request, product_id=None, images_id=None):
+    client = get_moysklad_client(ProductClient_IMAGES)
+    if images_id!=None:
+        return handle_api_request(request, client, 'GET', id=product_id, images_id=images_id)
+    return handle_api_request(request, client, 'GET', id=product_id)
+
+def images(request, product_id=None, images_id=None):
+    client = get_moysklad_client(Images)
+    response_data = client.get(images_id)
+    return  HttpResponse(response_data, content_type="image/png")
 
 # Products
 def get_products(request, product_id=None):

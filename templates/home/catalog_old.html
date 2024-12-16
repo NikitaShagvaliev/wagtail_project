@@ -1,0 +1,21 @@
+{% load static %}
+{% include 'base/header.html' %}
+<body>
+    <h1>Catalog of Products</h1>
+    <ul>
+        {% for product in products %}
+            <li>
+                <h2>{{ product.name }}</h2>
+                <p>ID: <a href="{% url 'catalog_id' product.id %}">{{ product.id }}</a></p>
+                <p>Code: {{ product.code }}</p>
+                <p>Price: {{ product.salePrices.0.value }}</p>
+                <!-- Добавьте другие поля, которые вам нужны -->
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+{% include 'base/footer.html' %}
+
+
+
+

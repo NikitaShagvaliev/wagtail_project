@@ -8,6 +8,26 @@ class ProductClient(MoySkladBaseClient):
     def __init__(self, login, password, base_url, verify_ssl=True):
         super().__init__(login, password, base_url, "product", verify_ssl)
 
+class ProductClient_IMAGES(MoySkladBaseClient):
+    def __init__(self, login, password, base_url, verify_ssl=True):
+        super().__init__(login, password, base_url, "product", verify_ssl)
+
+    def get(self, id=None, images_id=None):
+        url = f"{self.base_url}/entity/{self.entity_name}{f'/{id}' if id else ''}/images{f'/{images_id}' if images_id else ''}"
+        response = self.session.get(url, headers=self._get_auth_header())
+        self._handle_response(response)
+        return response.json()
+
+class Images(MoySkladBaseClient):
+    def __init__(self, login, password, base_url, verify_ssl=True):
+        super().__init__(login, password, base_url, "download", verify_ssl)
+
+    def get(self, id=None):
+        url = f"{self.base_url}/download/{f'{id}' if id else ''}?miniature=true"
+        response = self.session.get(url, headers=self._get_auth_header())
+        return response.content
+
+
 class InvoiceClient(MoySkladBaseClient):
     def __init__(self, login, password, base_url, verify_ssl=True):
         super().__init__(login, password, base_url, "invoiceout", verify_ssl)
