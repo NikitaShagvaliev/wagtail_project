@@ -126,8 +126,6 @@ def catalog_id(request, product_id):
         context["product"] = product_data
         images_url = product_data.get('images', {}).get('meta', {})
         images_url = images_url.get('href')
-        # Если ссылка на изображения существует, выполняем запрос
-        print(images_url)
         if images_url:
             # для получения id_images
             url = f"http://127.0.0.1:8000//moysklad/products/{product_id}/images"
@@ -216,29 +214,54 @@ def checkout(request):
         return JsonResponse({"error": "Метод не поддерживается"}, status=405)
 
 def add_to_cart(request, product_id):
+    context = {}  
+    url = f"http://127.0.0.1:8000//moysklad/products/{product_id}/"
+    response = requests.get(url, verify=False)
+    if response.status_code == 200:
+        product_data = response.json()
+        context["product"] = product_data
+    print(context)
+    
     
     # Добавляем товар в корзину (в сессии)
     cart = request.session.get('cart', {})
-    cart_item = cart.get(str(product_id))
+    
+    cart_item = cart.get(product_id)
+   
     if cart_item:
         cart_item['quantity'] += 1
     else:
-        cart[str(product_id)] = {
+        # Используем динамическое имя из JSON
+        product_name = context["product"].get("name", f"Товар {product_id}")
+        product_price = context["product"].get("salePrices", [{}])[0].get("value", 100.00)  # Берем цену напрямую
+        
+        cart[product_id] = {
             'id': product_id,
-            'name': f"Товар {product_id}",  # Упрощенное имя товара
-            'price': 100.00,  # Упрощенная цена товара
+            'name': product_name,  # Динамическое имя из JSON
+            'price': product_price,  # Цена из API
             'quantity': 1,
         }
+    print(cart_item)
     request.session['cart'] = cart
     return redirect('view_cart')
 
 
+
 def view_cart(request):
     cart = request.session.get('cart', {})
-    total_amount = sum(item['price'] * item['quantity'] for item in cart.values())
+    
+    # Преобразуем корзину в список товаров для отображения
+    cart_items = []
+    total_amount = 0
+    for item_id, item in cart.items():
+        item['total_price'] = item['price'] * item['quantity']  # Рассчитываем итоговую стоимость
+        cart_items.append(item)
+        total_amount += item['total_price']  # Суммируем итоговую стоимость
+    
+    # Передаем данные в шаблон
     return render(request, 'home/cart.html', {
-        'cart': cart,
-        'total_amount': total_amount,
+        'cart_items': cart_items,  # Передаем список товаров
+        'total_amount': total_amount,  # Передаем итоговую сумму
     })
 
 from django.shortcuts import render, get_object_or_404

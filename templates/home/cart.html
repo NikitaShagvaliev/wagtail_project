@@ -1,5 +1,6 @@
 {% load static %}
 {% include 'base/header.html' %}
+
 <h1>Ваша корзина</h1>
 <table>
     <thead>
@@ -13,9 +14,9 @@
     <tbody>
         {% for item in cart_items %}
         <tr>
-            <td>{{ item.product.name }}</td>
+            <td>{{ item.name }}</td>
             <td>{{ item.quantity }}</td>
-            <td>{{ item.product.price }} руб.</td>
+            <td>{{ item.price }} руб.</td>
             <td>{{ item.total_price }} руб.</td>
         </tr>
         {% endfor %}
@@ -32,4 +33,5 @@
     {% csrf_token %}
     <button type="submit">Оформить заказ</button>
 </form>
+
 {% include 'base/footer.html' %}
