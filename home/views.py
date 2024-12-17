@@ -6,7 +6,7 @@ import urllib3
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from .models import CartItem
+from .models import Product, CartItem
 from Payment_services.tbank_service import TBankService
 
 # Отключаем предупреждения
@@ -180,30 +180,27 @@ def view_cart(request):
     })
 
 def checkout(request):
-    """
-    Представление для оформления заказа и перехода к оплате.
-    """
     if request.method == "POST":
         cart_items = CartItem.objects.filter(user=request.user)
         total_amount = sum(item.total_price for item in cart_items)
 
         # Данные для оплаты
         payment_data = {
-            "id": f"order_{request.user.id}_{cart_items.first().id}",  # Уникальный идентификатор платежа
+            "id": f"order_{request.user.id}_{cart_items.first().id}",
             "from": {
-                "accountNumber": "12345678900987654321",  # Укажите номер счета плательщика
+                "accountNumber": "12345678900987654321",
             },
             "to": {
-                "accountNumber": "98765432100123456789",  # Укажите номер счета получателя
-                "inn": "1234567890",  # ИНН получателя
-                "kpp": "123456789",  # КПП получателя
-                "bankBic": "044525225",  # БИК банка получателя
-                "bankName": "Банк получателя",  # Название банка получателя
-                "bankCorrAccount": "30101810400000000225",  # Корреспондентский счет банка получателя
+                "accountNumber": "98765432100123456789",
+                "inn": "1234567890",
+                "kpp": "123456789",
+                "bankBic": "044525225",
+                "bankName": "Банк получателя",
+                "bankCorrAccount": "30101810400000000225",
             },
-            "purpose": f"Оплата заказа от {request.user.username}",  # Назначение платежа
-            "amount": float(total_amount),  # Сумма платежа
-            "dueDate": "2024-12-31T23:59:59+03:00",  # Дата, до которой нужно провести платеж
+            "purpose": f"Оплата заказа от {request.user.username}",
+            "amount": float(total_amount),
+            "dueDate": "2024-12-31T23:59:59+03:00",
         }
 
         # Отправка данных на оплату через API Т-Банка
@@ -212,31 +209,37 @@ def checkout(request):
         if response and response.get("status") == "success":
             # Очистка корзины после успешной оплаты
             cart_items.delete()
-            return redirect(response.get("redirect_url"))  # Перенаправление на страницу оплаты
+            return redirect(response.get("redirect_url"))
         else:
             return JsonResponse({"error": "Ошибка при выполнении платежа"}, status=500)
     else:
         return JsonResponse({"error": "Метод не поддерживается"}, status=405)
-    
 
-def add_to_cart(request):
-    if request.method == "POST":
-        product_name = request.POST.get("product_name")
-        quantity = int(request.POST.get("quantity", 1))
-        price = float(request.POST.get("price", 0))
 
-        # Проверка, существует ли уже товар в корзине
-        cart_item, created = CartItem.objects.get_or_create(
-            user=request.user,
-            product_name=product_name,
-            defaults={"quantity": quantity, "price": price},
-        )
+def add_to_cart(request, product_id):
+    product = Product.objects.get(id=product_id)
+    cart_item, created = CartItem.objects.get_or_create(
+        user=request.user,
+        product=product,
+    )
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+    return redirect('view_cart')
 
-        # Если товар уже существует, увеличиваем количество
-        if not created:
-            cart_item.quantity += quantity
-            cart_item.save()
+def view_cart(request):
+    cart_items = CartItem.objects.filter(user=request.user)
+    total_amount = sum(item.total_price for item in cart_items)
+    return render(request, 'home/cart.html', {
+        'cart_items': cart_items,
+        'total_amount': total_amount,
+    })
 
-        return redirect("view_cart")  # Перенаправление на страницу корзины
-    else:
-        return JsonResponse({"error": "Метод не поддерживается"}, status=405)
+from django.shortcuts import render, get_object_or_404
+
+def product_detail(request, product_id):
+    """
+    Представление для отображения деталей товара.
+    """
+    product = get_object_or_404(Product, id=product_id)
+    return render(request, 'home/product_detail.html', {'product': product})
