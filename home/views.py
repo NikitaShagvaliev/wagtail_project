@@ -176,40 +176,42 @@ def view_cart(request):
         "cart_items": cart_items,
         "total_amount": total_amount,
     })
+import logging
+
+logger = logging.getLogger(__name__)
 
 def checkout(request):
     if request.method == "POST":
-        cart_items = CartItem.objects.filter(user=request.user)
-        total_amount = sum(item.total_price for item in cart_items)
+        # Получаем корзину из сессии
+        cart = request.session.get('cart', {})
+        
+        # Проверяем, есть ли товары в корзине
+        if not cart:
+            return JsonResponse({"error": "Корзина пуста"}, status=400)
+        
+        # Рассчитываем общую сумму заказа
+        total_amount = sum(item['price'] * item['quantity'] for item in cart.values())
 
         # Данные для оплаты
         payment_data = {
-            "id": f"order_{request.user.id}_{cart_items.first().id}",
-            "from": {
-                "accountNumber": "12345678900987654321",
-            },
-            "to": {
-                "accountNumber": "98765432100123456789",
-                "inn": "1234567890",
-                "kpp": "123456789",
-                "bankBic": "044525225",
-                "bankName": "Банк получателя",
-                "bankCorrAccount": "30101810400000000225",
-            },
-            "purpose": f"Оплата заказа от {request.user.username}",
-            "amount": float(total_amount),
-            "dueDate": "2024-12-31T23:59:59+03:00",
+            "payment_id": f"123",  # Уникальный ID заказа
+            "account_number": "12345678900987654321",  # Номер счета отправителя
+            "amount": float(total_amount),  # Сумма заказа
+            "purpose": f"Оплата заказа от {request.user.username}",  # Назначение платежа
         }
 
-        # Отправка данных на оплату через API Т-Банка
-        response = TBankService.perform_payment(payment_data)
-
-        if response and response.get("status") == "success":
+        # Отправка данных на http://localhost:8000/Payment_services/create-payment/
+        payment_url = "http://localhost:8000/Payment_services/create-payment/"
+        headers = {"Content-Type": "application/json"}
+        response = requests.post(payment_url, json=payment_data, headers=headers)
+        logger.error(f"Ответ от API Т-Банка: {response.text}")
+        # Обработка ответа
+        if response.status_code == 201:  # Успешный платеж
             # Очистка корзины после успешной оплаты
-            cart_items.delete()
-            return redirect(response.get("redirect_url"))
+            request.session['cart'] = {}
+            return JsonResponse({"message": "Платеж успешно создан", "redirect_url": response.json().get("redirect_url")}, status=200)
         else:
-            return JsonResponse({"error": "Ошибка при выполнении платежа"}, status=500)
+            return JsonResponse({"error": "Ошибка при выполнении платежа", "details": response.json()}, status=500)
     else:
         return JsonResponse({"error": "Метод не поддерживается"}, status=405)
 
