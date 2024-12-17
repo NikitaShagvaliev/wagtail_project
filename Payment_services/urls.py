@@ -1,6 +1,7 @@
 from django.urls import path
-from . import views
+from .views import create_payment, get_account_statement
 
 urlpatterns = [
-    path('', views.index, name='index')
+    path("create-payment/", create_payment, name="create_payment"),
+    path("get-statement/", get_account_statement, name="get_account_statement"),
 ]
