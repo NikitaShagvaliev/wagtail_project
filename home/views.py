@@ -215,23 +215,29 @@ def checkout(request):
     else:
         return JsonResponse({"error": "Метод не поддерживается"}, status=405)
 
-
 def add_to_cart(request, product_id):
-    product = Product.objects.get(id=product_id)
-    cart_item, created = CartItem.objects.get_or_create(
-        user=request.user,
-        product=product,
-    )
-    if not created:
-        cart_item.quantity += 1
-        cart_item.save()
+    
+    # Добавляем товар в корзину (в сессии)
+    cart = request.session.get('cart', {})
+    cart_item = cart.get(str(product_id))
+    if cart_item:
+        cart_item['quantity'] += 1
+    else:
+        cart[str(product_id)] = {
+            'id': product_id,
+            'name': f"Товар {product_id}",  # Упрощенное имя товара
+            'price': 100.00,  # Упрощенная цена товара
+            'quantity': 1,
+        }
+    request.session['cart'] = cart
     return redirect('view_cart')
 
+
 def view_cart(request):
-    cart_items = CartItem.objects.filter(user=request.user)
-    total_amount = sum(item.total_price for item in cart_items)
+    cart = request.session.get('cart', {})
+    total_amount = sum(item['price'] * item['quantity'] for item in cart.values())
     return render(request, 'home/cart.html', {
-        'cart_items': cart_items,
+        'cart': cart,
         'total_amount': total_amount,
     })
 
