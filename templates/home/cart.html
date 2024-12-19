@@ -1,0 +1,36 @@
+{% load static %}
+{% include 'base/header.html' %}
+
+<h1>Ваша корзина</h1>
+<table>
+    <thead>
+        <tr>
+            <th>Товар</th>
+            <th>Количество</th>
+            <th>Цена за единицу</th>
+            <th>Итого</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in cart_items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price }} руб.</td>
+            <td>{{ item.total_price }} руб.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3"><strong>Итого:</strong></td>
+            <td><strong>{{ total_amount }} руб.</strong></td>
+        </tr>
+    </tfoot>
+</table>
+
+<form method="post" action="{% url 'checkout' %}">
+    {% csrf_token %}
+    <button type="submit">Оформить заказ</button>
+</form>
+{% include 'base/footer.html' %}

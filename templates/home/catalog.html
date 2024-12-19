@@ -205,39 +205,43 @@
     <!-- Список продуктов -->
     <div class="product-list">
         {% for product in products %}
-    <div class="product-card">
-        {% if product.image_base64 %}
-            <img src="data:image/png;base64,{{ product.image_base64 }}" alt="{{ product.name }}">
-        {% else %}
-            <p>Image not available.</p>
-        {% endif %}
-        <div class="product-title">{{ product.name }}</div>
-        <div class="product-description">{{ product.description }}</div>
-        <div class="product-price">Price: {{ product.salePrices.0.value }}</div>
-        <a class="product-link" href="{% url 'catalog_id' product.id %}">View Details</a>
+        <div class="product-card">
+            {% if product.image_base64 %}
+                <img src="data:image/png;base64,{{ product.image_base64 }}" alt="{{ product.name }}">
+            {% else %}
+                <p>Image not available.</p>
+            {% endif %}
+            <div class="product-title">{{ product.name }}</div>
+            <div class="product-description">{{ product.description }}</div>
+            <div class="product-price">Price: {{ product.price }}</div>
+            <a class="product-link" href="{% url 'product_detail' product.id %}">View Details</a>
+            <form method="post" action="{% url 'add_to_cart' product.id %}">
+                {% csrf_token %}
+                <button type="submit" class="add-to-cart-button">Add to Cart</button>
+            </form>
+        </div>
+        {% endfor %}
     </div>
-{% endfor %}
-    </div>
-     <!-- Пагинация -->
-     <div class="pagination">
+    
+    <!-- Пагинация -->
+    <div class="pagination">
         <span class="step-links">
             {% if products.has_previous %}
                 <a href="?page=1">&laquo; first</a>
                 <a href="?page={{ products.previous_page_number }}">previous</a>
             {% endif %}
-
+    
             <span class="current">
                 Page {{ products.number }} of {{ products.paginator.num_pages }}.
             </span>
-
+    
             {% if products.has_next %}
                 <a href="?page={{ products.next_page_number }}">next</a>
                 <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
         </span>
     </div>
-</div>
-
+        
 <script>
     document.querySelectorAll('.filter-panel input[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener('change', () => {

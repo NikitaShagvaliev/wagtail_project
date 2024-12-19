@@ -1,0 +1,15 @@
+<form method="post" action="{% url 'create_payment' %}">
+    {% csrf_token %}
+    <input type="text" name="payment_id" placeholder="Идентификатор платежа" required>
+    <input type="text" name="account_number" placeholder="Номер счета плательщика" required>
+    <input type="text" name="receiver_account_number" placeholder="Номер счета получателя" required>
+    <input type="text" name="receiver_inn" placeholder="ИНН получателя" required>
+    <input type="text" name="receiver_kpp" placeholder="КПП получателя" required>
+    <input type="text" name="receiver_bank_bic" placeholder="БИК банка получателя" required>
+    <input type="text" name="receiver_bank_name" placeholder="Название банка получателя" required>
+    <input type="text" name="receiver_bank_corr_account" placeholder="Корр. счет банка получателя" required>
+    <input type="text" name="purpose" placeholder="Назначение платежа" required>
+    <input type="number" name="amount" placeholder="Сумма платежа" step="0.01" required>
+    <input type="date" name="due_date" placeholder="Дата платежа" required>
+    <button type="submit">Создать платеж</button>
+</form>
