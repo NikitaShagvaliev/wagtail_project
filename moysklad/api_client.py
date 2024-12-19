@@ -20,7 +20,7 @@ class MoySkladBaseClient:
         response = self.session.get(url, headers=self._get_auth_header())
         self._handle_response(response)
         return response.json()
-
+    
     def post(self, data):
         url = f"{self.base_url}/entity/{self.entity_name}"
         response = self.session.post(url, headers=self._get_auth_header(), json=data)

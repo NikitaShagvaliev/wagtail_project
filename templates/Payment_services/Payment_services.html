@@ -1,0 +1,590 @@
+
+<!doctype html>
+
+
+
+<html lang="en-us" dir="ltr" class="w-theme-system w-density-default w-contrast-system">
+    <head>
+        <meta charset="utf-8" />
+        <title>Dashboard - Wagtail</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="robots" content="noindex" />
+
+        
+    <link rel="stylesheet" href="/static/wagtailadmin/css/core.css?v=579a6c1a">
+
+    
+
+    
+    
+    
+
+
+
+        
+    <link rel="shortcut icon" href="/static/wagtailadmin/images/favicon.ico?v=579a6c1a" />
+
+    </head>
+    
+    
+    <body id="wagtail" class="" data-controller="w-init" data-w-init-ready-class="ready">
+        <div data-sprite></div>
+
+        <script src="/static/wagtailadmin/js/icons.js?v=579a6c1a" data-icon-url="/cms/sprite/?h=b489757f"></script>
+
+        <noscript class="capabilitymessage">
+            JavaScript is required to use Wagtail, but it is currently disabled.<br /> Here are the <a href="https://www.enable-javascript.com/" target="_blank" rel="noreferrer">instructions how to enable JavaScript in your web browser</a>.
+        </noscript>
+
+        
+    
+    <script id="wagtail-config" type="application/json">{"CSRF_TOKEN": "P3EB8Pbc3mihqS8PmOJ0SpCCQZlZxEXBa2VhYhGXcHWBKSocya9BthgSqHttbXzk", "CSRF_HEADER_NAME": "X-Csrftoken", "ADMIN_API": {"PAGES": "/cms/api/main/pages/", "DOCUMENTS": "/cms/api/main/documents/", "IMAGES": "/cms/api/main/images/", "EXTRA_CHILDREN_PARAMETERS": ""}, "ADMIN_URLS": {"DISMISSIBLES": "/cms/dismissibles/", "PAGES": "/cms/pages/"}, "I18N_ENABLED": false, "LOCALES": [{"code": "en", "display_name": "English"}], "STRINGS": {"MONTHS": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], "WEEKDAYS": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], "WEEKDAYS_SHORT": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], "BULK_ACTIONS": {"PAGE": {"SINGULAR": "1 page selected", "PLURAL": "%(objects)s pages selected", "ALL": "All %(objects)s pages on this screen selected", "ALL_IN_LISTING": "All pages in listing selected"}, "DOCUMENT": {"SINGULAR": "1 document selected", "PLURAL": "%(objects)s documents selected", "ALL": "All %(objects)s documents on this screen selected", "ALL_IN_LISTING": "All documents in listing selected"}, "IMAGE": {"SINGULAR": "1 image selected", "PLURAL": "%(objects)s images selected", "ALL": "All %(objects)s images on this screen selected", "ALL_IN_LISTING": "All images in listing selected"}, "USER": {"SINGULAR": "1 user selected", "PLURAL": "%(objects)s users selected", "ALL": "All %(objects)s users on this screen selected", "ALL_IN_LISTING": "All users in listing selected"}, "SNIPPET": {"SINGULAR": "1 snippet selected", "PLURAL": "%(objects)s snippets selected", "ALL": "All %(objects)s snippets on this screen selected", "ALL_IN_LISTING": "All snippets in listing selected"}, "ITEM": {"SINGULAR": "1 item selected", "PLURAL": "%(objects)s items selected", "ALL": "All %(objects)s items on this screen selected", "ALL_IN_LISTING": "All items in listing selected"}}}}</script>
+    <script src="/static/wagtailadmin/js/vendor/jquery-3.6.0.min.js?v=579a6c1a"></script>
+    <script src="/static/wagtailadmin/js/vendor/jquery-ui-1.13.2.min.js?v=579a6c1a"></script>
+    <script src="/static/wagtailadmin/js/vendor/jquery.datetimepicker.js?v=579a6c1a"></script>
+    <script src="/static/wagtailadmin/js/vendor/bootstrap-transition.js?v=579a6c1a"></script>
+    <script src="/static/wagtailadmin/js/vendor/bootstrap-modal.js?v=579a6c1a"></script>
+    <script src="/static/wagtailadmin/js/vendor/tag-it.js?v=579a6c1a"></script>
+    <script src="/cms/jsi18n/"></script>
+    <script src="/static/wagtailadmin/js/core.js?v=579a6c1a"></script>
+    <script src="/static/wagtailadmin/js/vendor.js?v=579a6c1a"></script>
+    <script src="/static/wagtailadmin/js/wagtailadmin.js?v=579a6c1a"></script>
+    <script src="/static/wagtailadmin/js/telepath/telepath.js?v=579a6c1a"></script>
+    <script src="/static/wagtailadmin/js/sidebar.js?v=579a6c1a">
+        
+
+    </script>
+    <script src="/static/wagtailadmin/js/modal-workflow.js?v=579a6c1a"></script>
+
+    
+
+    
+    
+    
+
+
+
+        <a class="skiplink button" href="#main" data-controller="w-skip-link" data-action="w-skip-link#skip">Skip to main content</a>
+
+        <div class="wrapper">
+            
+    <template data-wagtail-sidebar-branding-logo></template>
+    <script id="wagtail-sidebar-props" type="application/json">{"modules":  [{"_type": "wagtail.sidebar.WagtailBrandingModule", "_args": ["/cms/"]}, {"_type": "wagtail.sidebar.SearchModule", "_args": ["/cms/pages/search/"]}, {"_type": "wagtail.sidebar.MainMenuModule", "_args": [[{"_type": "wagtail.sidebar.PageExplorerMenuItem", "_args": [{"name": "explorer", "label": "Pages", "icon_name": "folder-open-inverse", "classname": "", "attrs": {}, "url": "/cms/pages/"}, 1]}, 
+        
+        
+        {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "images",            "label": "Images", "icon_name": "image", "classname": "", "attrs": {}, "url": "/cms/images/"}]}, 
+        {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "Мой сайт", "label": "Мой сайт", "icon_name": "Мой сайт", "classname": "", "attrs": {}, "url": "https://moodbox-ek.ru/"}]},
+        
+        {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "Платежные сервисы", "label": "Платежные сервисы", "icon_name": "Платежные сервисы", "classname": "", "attrs": {}, "url": "/Payment_services"}]},
+        {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "Мой склад",         "label": "Мой склад", "icon_name": "Мой склад", "classname": "", "attrs": {}, "url": "/moysklad"}]},
+        {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "documents",         "label": "Documents", "icon_name": "doc-full-inverse", "classname": "", "attrs": {}, "url": "/cms/documents/"}]}, 
+        {"_type": "wagtail.sidebar.SubMenuItem", "_args":  [{"name": "reports", "label": "Reports", "icon_name": "site", "classname": "", "attrs": {}, "footer_text": ""}, [{"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "locked-pages", "label": "Locked pages", "icon_name": "lock", "classname": "", "attrs": {}, "url": "/cms/reports/locked/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "workflows", "label": "Workflows", "icon_name": "tasks", "classname": "", "attrs": {}, "url": "/cms/reports/workflow/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "workflow-tasks", "label": "Workflow tasks", "icon_name": "thumbtack", "classname": "", "attrs": {}, "url": "/cms/reports/workflow_tasks/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "site-history", "label": "Site history", "icon_name": "history", "classname": "", "attrs": {}, "url": "/cms/reports/site-history/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "aging-pages", "label": "Aging pages", "icon_name": "time", "classname": "", "attrs": {}, "url": "/cms/reports/aging-pages/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "page-types-usage", "label": "Page types usage", "icon_name": "doc-empty-inverse", "classname": "", "attrs": {}, "url": "/cms/reports/page-types-usage/"}]}]]}, {"_type": "wagtail.sidebar.SubMenuItem", "_args": [{"name": "settings", "label": "Settings", "icon_name": "cogs", "classname": "", "attrs": {}, "footer_text": "Wagtail v6.3.1"}, [{"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "workflows", "label": "Workflows", "icon_name": "tasks", "classname": "", "attrs": {}, "url": "/cms/workflows/list/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "workflow-tasks", "label": "Workflow tasks", "icon_name": "thumbtack", "classname": "", "attrs": {}, "url": "/cms/workflows/tasks/index/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "users", "label": "Users", "icon_name": "user", "classname": "", "attrs": {}, "url": "/cms/users/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "groups", "label": "Groups", "icon_name": "group", "classname": "", "attrs": {}, "url": "/cms/groups/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "sites", "label": "Sites", "icon_name": "site", "classname": "", "attrs": {}, "url": "/cms/sites/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "collections", "label": "Collections", "icon_name": "folder-open-1", "classname": "", "attrs": {}, "url": "/cms/collections/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "redirects", "label": "Redirects", "icon_name": "redirect", "classname": "", "attrs": {}, "url": "/cms/redirects/"}]}]]}, {"_type": "wagtail.sidebar.SubMenuItem", "_args": [{"name": "help", "label": "Help", "icon_name": "help", "classname": "", "attrs": {"data-controller": "w-dismissible", "data-w-dismissible-dismissed-class": {"_val": "w-dismissible--dismissed", "_id": 8}, "data-w-dismissible-id-value": "help", "data-w-dismissible-dismissed-value": "true"}, "footer_text": ""}, [{"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": {"_val": "whats-new-in-wagtail-6.3", "_id": 9}, "label": "What's new in Wagtail 6.3", "icon_name": "help", "classname": "", "attrs": {"target": "_blank", "rel": "noreferrer", "data-controller": "w-dismissible", "data-w-dismissible-dismissed-class": {"_ref": 8}, "data-w-dismissible-id-value": {"_ref": 9}, "data-w-dismissible-dismissed-value": "true"}, 
+        "url": "https://guide.wagtail.org/en-6.3.x/releases/new-in-wagtail-6-3/"}]}, 
+        
+        {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "editor-guide", "label": "Editor Guide", "icon_name": "help", "classname": "", "attrs": {"target": "_blank", "rel": "noreferrer", "data-controller": "w-dismissible", "data-w-dismissible-dismissed-class": {"_ref": 8}, "data-w-dismissible-id-value": "editor-guide", "data-w-dismissible-dismissed-value": "true"}, "url": "https://guide.wagtail.org/en-6.3.x/"}]}, {"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "keyboard-shortcuts-trigger", "label": "Shortcuts", "icon_name": "keyboard", "classname": "", "attrs": {"role": "button", "data-a11y-dialog-show": "keyboard-shortcuts-dialog", "data-action": "w-action#noop:prevent:stop", "data-controller": "w-action"}, "url": "#"}]}]]}], [{"_type": "wagtail.sidebar.LinkMenuItem", "_args": [{"name": "account", "label": "Account", "icon_name": "user", "classname": "", "attrs": {}, "url": "/cms/account/"}]}, {"_type": "wagtail.sidebar.ActionMenuItem", "_args": [{"name": "logout", "label": "Log out", "icon_name": "logout", "classname": "", "attrs": {}, "action": "/cms/logout/", "method": "POST"}]}], {"name": "1", "avatarUrl": "//www.gravatar.com/avatar/59d1954ec400b4e1fd22bdbf6bd2fcb3?s=100\u0026d=mm"}]}]}</script>
+    <aside id="wagtail-sidebar" class="sidebar-loading" data-wagtail-sidebar aria-label="Sidebar"></aside>
+    
+
+<template
+    data-controller="w-teleport"
+    
+>
+    <div id="keyboard-shortcuts-dialog"
+         aria-labelledby="title-keyboard-shortcuts-dialog"
+         aria-hidden="true"
+         class="w-dialog w-keyboard-shortcuts"
+         data-controller="w-dialog"
+         data-action="w-dialog:hide->w-dialog#hide w-dialog:show->w-dialog#show"
+         
+         
+    >
+        <div class="w-dialog__overlay" data-action="click->w-dialog#hide"></div>
+        <div class="w-dialog__box">
+            <button type="button" class="w-dialog__close-button" aria-label="Close dialog" data-action="w-dialog#hide">
+                <svg class="icon icon-cross w-dialog__close-icon" aria-hidden="true"><use href="#icon-cross"></use></svg>
+            </button>
+
+            
+
+            <div class="w-dialog__content">
+                <div class="w-dialog__header">
+                    <h2 class="w-dialog__title w-h1" id="title-keyboard-shortcuts-dialog">
+                        
+                        <svg class="icon icon-keyboard w-dialog__icon" aria-hidden="true"><use href="#icon-keyboard"></use></svg>
+                        <span id="title-text-keyboard-shortcuts-dialog">Keyboard shortcuts</span>
+                    </h2>
+
+                    
+                </div>
+
+                <div class="w-dialog__body" data-w-dialog-target="body">
+                    
+    <table class="w-w-full">
+        <caption class="w-sr-only">
+            All keyboard shortcuts
+        </caption>
+        <thead class="w-sr-only">
+            <tr>
+                <th scope="col">Section</th>
+                <th scope="col">Keyboard shortcut</th>
+            </tr>
+        </thead>
+        
+            
+                <tbody class="w-w-full" id="keyboard-shortut-group-actions-common">
+                    <tr class="w-keyboard-shortcuts__category" colspan="2">
+                        <th class="w-h4" scope="rowgroup">Common actions</th>
+                    </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Copy</th>
+                            <td><kbd>Ctrl + c</kbd></td>
+                        </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Cut</th>
+                            <td><kbd>Ctrl + x</kbd></td>
+                        </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Paste</th>
+                            <td><kbd>Ctrl + v</kbd></td>
+                        </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Paste without formatting</th>
+                            <td><kbd>Ctrl + Shift + v</kbd></td>
+                        </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Undo</th>
+                            <td><kbd>Ctrl + z</kbd></td>
+                        </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Redo</th>
+                            <td><kbd>Ctrl + y</kbd></td>
+                        </tr>
+                    
+                </tbody>
+            
+                <tbody class="w-w-full" id="keyboard-shortut-group-actions-model">
+                    <tr class="w-keyboard-shortcuts__category" colspan="2">
+                        <th class="w-h4" scope="rowgroup">Actions</th>
+                    </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Save changes</th>
+                            <td><kbd>Ctrl + s</kbd></td>
+                        </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Preview</th>
+                            <td><kbd>Ctrl + p</kbd></td>
+                        </tr>
+                    
+                </tbody>
+            
+                <tbody class="w-w-full" id="keyboard-shortut-group-rich-text-content">
+                    <tr class="w-keyboard-shortcuts__category" colspan="2">
+                        <th class="w-h4" scope="rowgroup">Text content</th>
+                    </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Insert or edit a link</th>
+                            <td><kbd>Ctrl + k</kbd></td>
+                        </tr>
+                    
+                </tbody>
+            
+                <tbody class="w-w-full" id="keyboard-shortut-group-rich-text-formatting">
+                    <tr class="w-keyboard-shortcuts__category" colspan="2">
+                        <th class="w-h4" scope="rowgroup">Text formatting</th>
+                    </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Bold</th>
+                            <td><kbd>Ctrl + b</kbd></td>
+                        </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Italic</th>
+                            <td><kbd>Ctrl + i</kbd></td>
+                        </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Underline</th>
+                            <td><kbd>Ctrl + u</kbd></td>
+                        </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Monospace (code)</th>
+                            <td><kbd>Ctrl + j</kbd></td>
+                        </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Strike-through</th>
+                            <td><kbd>Ctrl + x</kbd></td>
+                        </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Superscript</th>
+                            <td><kbd>Ctrl + .</kbd></td>
+                        </tr>
+                    
+                        <tr class="w-keyboard_shortcuts__key">
+                            <th scope="row">Subscript</th>
+                            <td><kbd>Ctrl + ,</kbd></td>
+                        </tr>
+                    
+                </tbody>
+            
+        
+    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+
+    
+<title>Т-банк 168</title>
+    <div class="content">
+        <div class="container">
+            <div class="header">
+                <h1>Платежные сервисы</h1>
+            </div>
+
+            
+    
+            <style>
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f4f4f4;
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 100vh;
+                }
+                .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center; /* Добавляем это свойство */
+                min-height: 100vh; /* Добавляем это свойство, чтобы контейнер занимал всю высоту экрана */
+            }
+            
+            .content {
+                width: 800px; /* Фиксированная ширина */
+                padding: 40px;
+                background-color: #fff;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+                text-align: center;
+                border-radius: 10px;
+                display: flex;
+                justify-content: center;
+            }
+                .header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+                }
+                .header h1 {
+                    margin: 0;
+                    font-size: 2em;
+                    color: #333;
+                }
+                .back-arrow {
+                    text-decoration: none;
+                    color: #333;
+                    font-size: 1.5em;
+                }
+                .login-form, .form-container, .warehouse-info {
+                    margin-bottom: 20px;
+                }
+                .login-form h2, .form-container h2, .warehouse-info h2 {
+                    margin-top: 0;
+                    font-size: 1.5em;
+                    color: #333;
+                }
+                .login-form label, .form-container label {
+                    display: block;
+                    margin-bottom: 5px;
+                    font-weight: bold;
+                    color: #555;
+                }
+                .login-form input, .form-container input, .login-form button, .form-container button {
+                    width: 100%;
+                    padding: 10px;
+                    margin-bottom: 10px;
+                    box-sizing: border-box;
+                    border: 1px solid #ddd;
+                    border-radius: 5px;
+                }
+                .login-form button, .form-container button {
+                    background-color: #007BFF;
+                    color: #fff;
+                    border: none;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+                .login-form button:hover, .form-container button:hover {
+                    background-color: #0056b3;
+                }
+                .warehouse-info table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+                .warehouse-info th, .warehouse-info td {
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    text-align: left;
+                }
+                .messages {
+                    position: fixed;
+                    top: 10px;
+                    right: 10px;
+                    z-index: 1000;
+                }
+                .messages ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+                .messages li {
+                    padding: 10px;
+                    margin-bottom: 10px;
+                    border-radius: 5px;
+                    display: flex;
+                    align-items: center;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+                .messages .success {
+                    background-color: #d4edda;
+                    color: #155724;
+                }
+                .messages .error {
+                    background-color: #f8d7da;
+                    color: #721c24;
+                }
+                .messages .warning {
+                    background-color: #fff3cd;
+                    color: #856404;
+                }
+                .messages .messages-icon {
+                    margin-right: 10px;
+                }
+                .centered {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+                .hidden {
+                    display: none;
+                }
+                #logout-button {
+                    background-color: #dc3545;
+                    color: #fff;
+                    border: none;
+                    padding: 10px 20px;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    transition: background-color 0.3s;
+                }
+                #logout-button:hover {
+                    background-color: #c82333;
+                }
+                #demo-key {
+                    margin-top: 20px;
+                    padding: 10px;
+                    background-color: #f9f9f9;
+                    border-radius: 5px;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
+                #demo-key h3 {
+                    margin: 0;
+                    font-size: 1.2em;
+                    color: #333;
+                }
+                #demo-key-value {
+                    font-size: 1.5em;
+                    color: #007BFF;
+                    font-weight: bold;
+                }
+            
+            </style>
+            <div class="content">
+                <div class="container">
+                    <div class="header">
+                        <h1>Т-банк168</h1>
+                    </div>
+            
+                    <!-- Форма для ввода логина и пароля -->
+                    <div class="login-form" id="login-form-container">
+                        <h2>Вход в систему</h2>
+                        <form id="login-form">
+                            <label for="username">Логин:</label>
+                            <input type="text" id="username" name="username" required>
+                            <label for="password">Пароль:</label>
+                            <input type="password" id="password" name="password" required>
+                            <button type="submit">Войти</button>
+                        </form>
+                    </div>
+            
+                    <!-- Кнопка выхода -->
+                    <button id="logout-button" class="hidden" onclick="logout()">Выйти</button>
+            
+                    <div id="demo-key" style="display: none;">
+                        <h3>Токен авторизации</h3>
+                        <p id="demo-key-value"></p>
+            
+                        <script>
+                            function generatePseudoToken(length) {
+                                const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                                let result = '';
+                                const charactersLength = characters.length;
+                                for (let i = 0; i < length; i++) {
+                                    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                                }
+                                return result;
+                            }
+            
+                            const pseudoToken = generatePseudoToken(32);
+                            document.getElementById('demo-key-value').innerText = pseudoToken;
+                        </script>
+                    </div>
+                </div>
+            
+                <!-- Сообщения -->
+                <div class="messages" role="status" data-controller="w-messages" data-action="w-messages:add@document->w-messages#add" data-w-messages-added-class="new" data-w-messages-show-class="appear" data-w-messages-show-delay-value="100">
+                    <ul data-w-messages-target="container">
+                    </ul>
+                    <template data-w-messages-target="template" data-type="success">
+                        <li class="success"><svg class="icon icon-success messages-icon" aria-hidden="true"><use href="#icon-success"></use></svg><span></span></li>
+                    </template>
+                    <template data-w-messages-target="template" data-type="error">
+                        <li class="error"><svg class="icon icon-warning messages-icon" aria-hidden="true"><use href="#icon-warning"></use></svg><span></span></li>
+                    </template>
+                    <template data-w-messages-target="template" data-type="warning">
+                        <li class="warning"><svg class="icon icon-warning messages-icon" aria-hidden="true"><use href="#icon-warning"></use></svg><span></span></li>
+                    </template>
+                </div>
+            
+                <script>
+                    // Функция для добавления сообщения
+                    function addMessage(type, message) {
+                        const container = document.querySelector('[data-w-messages-target="container"]');
+                        const template = document.querySelector(`[data-w-messages-target="template"][data-type="${type}"]`);
+                        const clone = template.content.cloneNode(true);
+                        clone.querySelector('span').textContent = message;
+                        container.appendChild(clone);
+                    }
+            
+                    document.getElementById('login-form').addEventListener('submit', function(event) {
+                        event.preventDefault(); // Предотвращаем отправку формы
+            
+                        // Добавляем задержку от 5 до 10 секунд
+                        const delay = Math.floor(Math.random() * (10000 - 5000 + 1)) + 5000;
+                        setTimeout(() => {
+                            document.getElementById('demo-key').style.display = 'block'; // Показываем демо ключ
+                            document.getElementById('login-form-container').classList.add('hidden'); // Скрываем форму авторизации
+                            document.getElementById('logout-button').classList.remove('hidden'); // Показываем кнопку выхода
+                            document.getElementById('create-product-form-container').classList.remove('hidden'); // Показываем форму создания товара
+                            document.getElementById('warehouse-info').classList.remove('hidden'); // Показываем информацию о товарах
+                            document.querySelector('.container').classList.add('centered'); // Добавляем класс для центрирования
+                            addMessage('success', 'Вход выполнен успешно!');
+                        }, delay);
+                    });
+            
+                    function logout() {
+                        document.getElementById('demo-key').style.display = 'none'; // Скрываем демо ключ
+                        document.getElementById('login-form-container').classList.remove('hidden'); // Показываем форму авторизации
+                        document.getElementById('logout-button').classList.add('hidden'); // Скрываем кнопку выхода
+                        document.getElementById('create-product-form-container').classList.add('hidden'); // Скрываем форму создания товара
+                        document.getElementById('warehouse-info').classList.add('hidden'); // Скрываем информацию о товарах
+                        document.querySelector('.container').classList.remove('centered'); // Убираем класс для центрирования
+                        addMessage('success', 'Выход выполнен успешно!');
+                    }
+            
+                    document.getElementById('create-product-form').addEventListener('submit', function(event) {
+                        event.preventDefault(); // Предотвращаем отправку формы
+                        const productName = document.getElementById('product-name').value;
+                        const productQuantity = document.getElementById('product-quantity').value;
+            
+                        const table = document.getElementById('warehouse-table').getElementsByTagName('tbody')[0];
+                        const newRow = table.insertRow();
+                        newRow.insertCell(0).textContent = productName;
+                        newRow.insertCell(1).textContent = productQuantity;
+                        newRow.insertCell(2).textContent = 'В наличии';
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Удалить';
+                        deleteButton.onclick = function() {
+                            table.deleteRow(newRow.rowIndex - 1);
+                            addMessage('success', `Товар "${productName}" удален со склада.`);
+                        };
+                        newRow.insertCell(3).appendChild(deleteButton);
+            
+                        addMessage('success', `Товар "${productName}" добавлен на склад.`);
+                    });
+                </script>
+            </div>
+    
+
+    
+
+<div class="w-panel-upgrade w-flex w-mb-[-2rem] sm:w-mb-0 w-gap-5 w-items-center w-pl-slim-header w-pr-5 sm:w-px-[3.5rem] w-py-5 w-text-text-context w-bg-surface-info-panel w-border-b w-border-transparent"
+     data-controller="w-upgrade w-dismissible"
+     data-w-upgrade-current-version-value="6.3.1"
+     
+     data-w-dismissible-id-value="last_upgrade_check"
+     data-w-dismissible-dismissed-class="w-hidden"
+     hidden>
+    <svg class="icon icon-info-circle w-w-5 w-h-5 w-shrink-0 w-text-text-link-info w-ml-5 sm:w-ml-0" aria-hidden="true"><use href="#icon-info-circle"></use></svg>
+    <div>
+        <p class="w-mb-1"><strong>Wagtail upgrade available</strong></p>
+        <p class="w-mb-0">
+            Your version: <strong>6.3.1</strong>. New version: <strong data-w-upgrade-target="latestVersion"></strong>.
+            <a href=""
+               data-w-upgrade-target="link"
+               class="w-text-text-link-info hover:w-text-text-link-info w-underline w-underline-offset-[3px]">Read the release notes.</a>
+        </p>
+    </div>
+
+    <button
+        type="button"
+        data-action="w-dismissible#toggle"
+        
+        data-w-upgrade-target="dismiss"
+        class="w-ml-auto w-flex w-items-center w-justify-center w-bg-transparent w-rounded-full w-p-0 w-w-8 w-h-8
+               w-text-current
+               w-border
+               w-border-transparent
+               hover:w-text-text-link-hover
+               more-contrast:w-border-border-interactive-more-contrast
+               hover:more-contrast:w-border-border-interactive-more-contrast-hover
+              "
+    >
+        <svg class="icon icon-cross w-w-4 w-h-4" aria-hidden="true"><use href="#icon-cross"></use></svg>
+    </button>
+</div>
+
+   
+
+        </div>
+    </main>
+
+        </div>
+    </body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,21 @@
+{% load static %}
+{% include 'base/header.html' %}
+<body>
+    <h1>Product Detail</h1>
+    {% if product %}
+        <h2>{{ product.name }}</h2>
+        <p>ID: {{ product.id }}</p>
+        <p>Code: {{ product.code }}</p>
+        <p>Price: {{ product.salePrices.0.value }}</p>
+        <!-- Добавьте другие поля, которые вам нужны -->
+          <!-- Отображение изображения -->
+        {% if img %}
+            <img src="data:image/png;base64,{{ img }}" alt="Product Image">
+        {% else %}
+            <p>Image not available.</p>
+        {% endif %}
+    {% else %}
+        <p>Product not found.</p>
+    {% endif %}
+</body>
+{% include 'base/footer.html' %}

@@ -1,0 +1,108 @@
+{% load static %}
+{% include 'base/header.html' %}
+
+<div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: white;">
+
+    <div class="t050" style="width: 80%; max-width: 1200px; padding: 20px;">
+        <div
+          id="rec590497430"
+          class="r t-rec t-rec_pt_75 t-rec_pb_15"
+          style="padding-top: 0px; padding-bottom: 15px"
+          data-record-type="60"
+        >
+          <!-- T050 -->
+          <div class="t050">
+            <div class="t-container t-align_left">
+              <div class="t-col t-col_12">
+                <h1 class="t050__title t-title t-title_xxl" field="title">Afnan Supremacy Silver</h1>
+              </div>
+            </div>
+          </div>
+          <style>
+            @media screen and (min-width: 900px) {
+              #rec590497430 .t050__title {
+                font-size: 70px;
+              }
+            }
+            @media screen and (max-width: 480px),
+              (orientation: landscape) and (max-height: 480px) {
+              #rec590497430 .t050__title {
+                font-size: 60px;
+              }
+            }
+
+            /* Уменьшаем верхний отступ */
+            #rec590497430 .t050__title {
+              padding: 0px 1px 50px 100px;
+            }
+          </style>
+        </div>
+
+        <div class="product-details" style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div class="product-image" style="flex: 1; padding-right: 20px;">
+                <img src="https://static.tildacdn.com/stor6563-6335-4161-a161-653131383831/87024136.jpg" alt="Afnan Supremacy Silver" style="width: 100%; max-width: 400px;">
+            </div>
+            <div class="product-info" style="flex: 2;">
+                <div class="t706__sidebar-heading t-name t-name_xl" style="text-align: left;">
+                    6 800 р.
+                </div>
+
+                <!-- Объем -->
+                <div class="js-product-edition-option t-product__option" data-edition-option-id="Объем" data-view-type="select" data-option-type="regular" style="margin-bottom: 20px;">
+                    <div class="js-product-edition-option-name t-product__option-title t-typography__options t-descr t-descr_xxs" style="color:#919191;">Объем</div>
+                    <div class="t-product__option-variants t-product__option-variants_regular">
+                        <select class="js-product-edition-option-variants t-product__option-select t-typography__options t-descr t-descr_xxs">
+                            <option value="отливант 2 мл" disabled="disabled">отливант 2 мл</option>
+                            <option value="отливант 5 мл" disabled="disabled">отливант 5 мл</option>
+                            <option value="отливант 10 мл" disabled="disabled">отливант 10 мл</option>
+                            <option value="отливант 20 мл" disabled="disabled">отливант 20 мл</option>
+                            <option value="Флакон 100 мл">Флакон 100 мл</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Срок доставки -->
+                <div class="js-product-edition-option t-product__option" data-edition-option-id="Срок доставки" data-view-type="select" data-option-type="regular" style="margin-bottom: 20px;">
+                    <div class="js-product-edition-option-name t-product__option-title t-typography__options t-descr t-descr_xxs" style="color:#919191;">Срок доставки</div>
+                    <div class="t-product__option-variants t-product__option-variants_regular">
+                        <select class="js-product-edition-option-variants t-product__option-select t-typography__options t-descr t-descr_xxs">
+                            <option value="1-3 дня" disabled="disabled">1-3 дня</option>
+                            <option value="10-14 дней">10-14 дней</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="js-store-prod-text t-store__prod-popup__text t-typography__descr t-descr t-descr_xxs">
+                    <div class="js-store-prod-all-text">
+                        Освежающий, прохладный аромат, который будет уместен всегда: яркий ананас, кислинка смородины, терпкость бергамота и пачули создают мужественный сладковато-древесный шлейф. Вдохновлён популярным Creed Aventus<br><br>верхние ноты: ананас, яблоко, бергамот, смородина<br>средние ноты: береза, пачули, жасмин, роза <br>базовые ноты: мускус, мох, амбра, ваниль
+                    </div>
+                    <div class="js-store-prod-all-charcs" style="margin-top: 20px;">
+                        <p class="t-typography__characteristics js-store-prod-charcs">По характеру: Освежающие</p>
+                        <p class="t-typography__characteristics js-store-prod-charcs">По направлению: Мускусные</p>
+                        <p class="js-store-prod-dimensions t-typography__characteristics"></p>
+                        <p class="js-store-prod-weight t-typography__characteristics"></p>
+                    </div>
+                </div>
+
+                <div>
+                    <button class="add-to-cart" style="color:#ffffff;background-color:#37323e;font-family:Montserrat;font-weight:400; padding: 20px 50px; font-size: 22px; border: none; width: auto; display: inline-block;">
+                        Добавить в корзину
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% include 'base/footer.html' %}
+
+<script>
+    let quantity = 1;
+
+    function updateQuantity(change) {
+        quantity += change;
+        if (quantity < 1) quantity = 1;
+        document.getElementById('product-quantity').innerText = quantity;
+    }
+</script>
