@@ -15,7 +15,89 @@ def contacts(request):
     return render(request, 'home/contacts.html')
 
 def index(request):
-    return render(request, 'home/index.html')
+    # Определяем категорию (бренды), которые вы хотите отобразить
+    category = "popular brands"  
+    context = {}
+    
+    # URL для запроса продуктов из МойСклад
+    url = "http://127.0.0.1:8000//moysklad/products/"
+    response = requests.get(url, verify=False)
+    
+    if response.status_code == 200:
+        products_data = response.json()
+        products = products_data.get('rows', [])
+        
+        # Фильтруем продукты по значению "pathName"
+        filtered_products = [product for product in products if product.get('pathName') == category]
+        grouped_products = [filtered_products[i:i + 4] for i in range(0, len(products), 4)]
+        
+        sales_hits_products_3 = [product for product in products if product.get('pathName') == 'sales_hits'][:3]
+        new_products_products_3 = [product for product in products if product.get('pathName') == 'new_products'][:3]
+        
+        # Добавляем изображения для каждого продукта из sales_hits_products_3
+        for product in sales_hits_products_3:
+            product_id = product.get('id')
+            images_url = product.get('images', {}).get('meta', {}).get('href')
+            
+            if images_url:
+                # Получаем список изображений
+                url = f"http://127.0.0.1:8000//moysklad/products/{product_id}/images"
+                images_response = requests.get(url, verify=False)
+                
+                if images_response.status_code == 200:
+                    images_data = images_response.json()
+                    if images_data.get('rows'):
+                        # Получаем первое изображение
+                        first_image_meta = images_data.get('rows', [])[0].get('meta', {}).get('href')
+                        id_images = extract_uuid_from_href(first_image_meta)
+                        
+                        if id_images:
+                            # Получаем изображение в формате Base64
+                            url = f"http://127.0.0.1:8000//moysklad/products/{product_id}/images/{id_images}"
+                            image_response = requests.get(url, verify=False)
+                            
+                            if image_response.status_code == 200:
+                                image_base64 = base64.b64encode(image_response.content).decode('utf-8')
+                                product['image_base64'] = image_base64  # Добавляем изображение в словарь продукта
+        
+        # Добавляем изображения для каждого продукта из new_products_products_3
+        for product in new_products_products_3:
+            product_id = product.get('id')
+            images_url = product.get('images', {}).get('meta', {}).get('href')
+            
+            if images_url:
+                # Получаем список изображений
+                url = f"http://127.0.0.1:8000//moysklad/products/{product_id}/images"
+                images_response = requests.get(url, verify=False)
+                
+                if images_response.status_code == 200:
+                    images_data = images_response.json()
+                    if images_data.get('rows'):
+                        # Получаем первое изображение
+                        first_image_meta = images_data.get('rows', [])[0].get('meta', {}).get('href')
+                        id_images = extract_uuid_from_href(first_image_meta)
+                        
+                        if id_images:
+                            # Получаем изображение в формате Base64
+                            url = f"http://127.0.0.1:8000//moysklad/products/{product_id}/images/{id_images}"
+                            image_response = requests.get(url, verify=False)
+                            
+                            if image_response.status_code == 200:
+                                image_base64 = base64.b64encode(image_response.content).decode('utf-8')
+                                product['image_base64'] = image_base64  # Добавляем изображение в словарь продукта
+        
+        # Объединяем все данные в контекст
+        context = {
+            'grouped_products': grouped_products,
+            'sales_hits_products_3': sales_hits_products_3,
+            'new_products_products_3': new_products_products_3,
+        }
+        
+        return render(request, 'home/index.html', context)
+    
+    # Если запрос не удался, возвращаем пустой список продуктов
+    return render(request, 'home/index.html', {'products': []})
+
 
 def company(request):
     return render(request, 'home/company.html')
@@ -182,39 +264,53 @@ logger = logging.getLogger(__name__)
 
 def checkout(request):
     if request.method == "POST":
-        # Получаем корзину из сессии
         cart = request.session.get('cart', {})
         
-        # Проверяем, есть ли товары в корзине
         if not cart:
             return JsonResponse({"error": "Корзина пуста"}, status=400)
         
-        # Рассчитываем общую сумму заказа
         total_amount = sum(item['price'] * item['quantity'] for item in cart.values())
 
-        # Данные для оплаты
+        # Подготовка данных в правильном формате
         payment_data = {
-            "payment_id": f"123",  # Уникальный ID заказа
-            "account_number": "12345678900987654321",  # Номер счета отправителя
-            "amount": float(total_amount),  # Сумма заказа
-            "purpose": f"Оплата заказа от {request.user.username}",  # Назначение платежа
+            "id": "unique_payment_id_123",
+            "from": {
+                "accountNumber": "12345678901234567890"
+            },
+            "to": {
+                "name": "ООО Получатель",
+                "inn": "7707083893",  # Исправленный ИНН
+                "kpp": "123456789",
+                "bik": "044525225",
+                "bankName": "Банк Получателя",
+                "corrAccountNumber": "30101810400000000225",
+                "accountNumber": "98765432109876543210"
+            },
+            "purpose": "Оплата заказа №123",
+            "amount": float(total_amount),  # Убедитесь, что сумма корректная
+            "dueDate": "2024-12-25T12:00:00Z"
         }
 
-        # Отправка данных на http://localhost:8000/Payment_services/create-payment/
-        payment_url = "http://localhost:8000/Payment_services/create-payment/"
-        headers = {"Content-Type": "application/json"}
-        response = requests.post(payment_url, json=payment_data, headers=headers)
-        logger.error(f"Ответ от API Т-Банка: {response.text}")
-        # Обработка ответа
-        if response.status_code == 201:  # Успешный платеж
-            # Очистка корзины после успешной оплаты
-            request.session['cart'] = {}
-            return JsonResponse({"message": "Платеж успешно создан", "redirect_url": response.json().get("redirect_url")}, status=200)
-        else:
-            return JsonResponse({"error": "Ошибка при выполнении платежа", "details": response.json()}, status=500)
-    else:
-        return JsonResponse({"error": "Метод не поддерживается"}, status=405)
+        # Выполнение платежа через TBankService
+        result = TBankService.perform_payment(payment_data)
+        print(result)  # Для отладки
 
+        if result:
+            # Если платеж выполнен успешно
+            request.session['cart'] = {}  # Очищаем корзину
+            return JsonResponse({
+                "message": "Платеж успешно выполнен",
+                "details": result
+            }, status=200)
+        else:
+            # Если произошла ошибка
+            return JsonResponse({
+                "error": "Ошибка при выполнении платежа",
+                "details": result
+            }, status=500)
+            
+    return JsonResponse({"error": "Метод не поддерживается"}, status=405)
+            
 def add_to_cart(request, product_id):
     context = {}  
     url = f"http://127.0.0.1:8000//moysklad/products/{product_id}/"

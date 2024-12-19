@@ -2918,58 +2918,17 @@
                   </div>
                 </div>
               </div>
+              {% for group in grouped_products %}
               <div class="t016__col t-col t-col_3">
+                {% for product in group %}
                 <div class="t016__text t-text t-text_md" field="text2">
-                  <a
-                    href="https://moodbox-ek.ru/catalog?tfc_brand%5B581517388%5D=Attar+Collection&amp;tfc_div=:::"
-                    ><u>Attar</u></a
-                  ><br /><a
-                    href="https://moodbox-ek.ru/catalog?tfc_quantity%5B581517388%5D=y&amp;tfc_brand%5B581517388%5D=Byredo&amp;tfc_div=:::"
-                    ><u>Byredo</u></a
-                  >
-                  <br /><a
-                    href="https://moodbox-ek.ru/catalog?tfc_brand%5B581517388%5D=Escentric+Molecules&amp;tfc_div=:::"
-                    ><u>Escentric molecules</u></a
-                  ><br /><a
-                    href="https://moodbox-ek.ru/catalog?tfc_brand%5B581517388%5D=Ex+Nihilo&amp;tfc_div=:::"
-                    ><u>Ex Nihilio</u></a
-                  >
+                        <a href="{% url 'catalog_category' product.name %}"><u>{{ product.name }}</u></a><br />
+                   
                 </div>
+                {% endfor %}
               </div>
-              <div class="t016__col t-col t-col_3">
-                <div class="t016__text t-text t-text_md" field="text3">
-                  <a
-                    href="https://moodbox-ek.ru/catalog?tfc_brand%5B581517388%5D=Initio&amp;tfc_div=:::"
-                    ><u>INITIO</u></a
-                  ><br /><a
-                    href="https://moodbox-ek.ru/catalog?tfc_brand%5B581517388%5D=Kilian&amp;tfc_div=:::"
-                    ><u>Kilian</u></a
-                  ><br /><a
-                    href="https://moodbox-ek.ru/catalog?tfc_brand%5B581517388%5D=Maison+Francis+Kurkdjian&amp;tfc_div=:::"
-                    ><u>Maison Francis Kurkdjian</u></a
-                  ><br /><a
-                    href="https://moodbox-ek.ru/catalog?tfc_brand%5B581517388%5D=Memo&amp;tfc_div=:::"
-                    ><u>Memo</u></a
-                  >
-                </div>
-              </div>
-              <div class="t016__col t-col t-col_3">
-                <div class="t016__text t-text t-text_md" field="text4">
-                  <a
-                    href="https://moodbox-ek.ru/catalog?tfc_brand%5B581517388%5D=Montale&amp;tfc_div=:::"
-                    ><u>Montale</u></a
-                  ><br /><a
-                    href="https://moodbox-ek.ru/catalog?tfc_brand%5B581517388%5D=Tiziana+Terenzi&amp;tfc_div=:::"
-                    ><u>Tiziana Terenzi</u></a
-                  ><br /><a
-                    href="https://moodbox-ek.ru/catalog?tfc_brand%5B581517388%5D=Tom+Ford&amp;tfc_div=:::"
-                    ><u>Tom Ford</u></a
-                  ><br /><a
-                    href="https://moodbox-ek.ru/catalog?tfc_brand%5B581517388%5D=Vilhelm+Parfumerie&amp;tfc_div=:::"
-                    ><u>Vilhelm Parfumerie</u></a
-                  >
-                </div>
-              </div>
+              {% endfor %}
+              
             </div>
           </div>
         </div>
@@ -3186,247 +3145,47 @@
           <div
             class="t772__wrapper t-card__container t772__container t772__container_mobile-flex"
           >
-            <div
-              class="t-card__col t772__col t-col t-col_4 t-align_left t-item"
-            >
-              <div class="t772__content">
-                <div
-                  class="t772__imgwrapper"
-                  style="padding-bottom: 91.666666666667%"
-                >
-                  <div
-                    class="t772__bgimg t-bgimg"
-                    data-original="{% static 'images/tild3338-6364-4662-b735-646432376362__7.png' %}"
-                    bgimgfield="li_img__8144262249360"
-                    style="
-                      background-image: url('images/tild3338-6364-4662-b735-646432376362__-__resizeb__20x__7.png');
-                    "
-                    itemscope
-                    itemtype="http://schema.org/ImageObject"
-                  >
-                    <meta
-                      itemprop="image"
-                      content="{% static 'images/tild3338-6364-4662-b735-646432376362__7.png' %}"
-                    />
-                  </div>
+          {% for brand in sales_hits_products_3 %}
+    <div class="t-card__col t772__col t-col t-col_4 t-align_left t-item">
+        <div class="t772__content">
+            <div class="t772__imgwrapper" style="padding-bottom: 91.666666666667%">
+                <div class="t772__bgimg t-bgimg" 
+                     data-original="{% if brand.image_base64 %}data:image/jpeg;base64,{{ brand.image_base64 }}{% else %}{% static 'images/default.png' %}{% endif %}"
+                     bgimgfield="li_img__8144262249360"
+                     style="background-image: url('{% if brand.image_base64 %}data:image/jpeg;base64,{{ brand.image_base64 }}{% else %}{% static 'images/default.png' %}{% endif %}');"
+                     itemscope itemtype="http://schema.org/ImageObject">
+                    <meta itemprop="image" content="{% if brand.image_base64 %}data:image/jpeg;base64,{{ brand.image_base64 }}{% else %}{% static 'images/default.png' %}{% endif %}" />
                 </div>
-                <div class="t772__textwrapper">
-                  <div
-                    class="t-card__title t-name t-name_md"
-                    field="li_title__8144262249360"
-                  >
-                    <a
-                      href="/catalog/tproduct/590474706-256642103861-essential-parfums-bois-imperial"
-                      class="t-card__link"
-                      id="cardtitle1_658327255"
-                      aria-labelledby="cardtitle1_658327255 cardbtn1_658327255"
-                    >
-                      ESSENTIAL PARFUMS BOIS IMPERIAL
+            </div>
+            <div class="t772__textwrapper">
+                <div class="t-card__title t-name t-name_md" field="li_title__8144262249360">
+                    <a href="/catalog/tproduct/{{ brand.id }}" class="t-card__link" id="cardtitle1_658327255" aria-labelledby="cardtitle1_658327255 cardbtn1_658327255">
+                        {{ brand.name }}
                     </a>
-                  </div>
-                  <div
-                    class="t-card__descr t-descr t-descr_xxs"
-                    field="li_descr__8144262249360"
-                  >
-                    Туманный зимний лес, сильный морозный ветер...
-                  </div>
-                  <style>
+                </div>
+                <div class="t-card__descr t-descr t-descr_xxs" field="li_descr__8144262249360">
+                    {{ brand.description }}
+                </div>
+                <style>
                     #rec658327255 .t-card__title {
-                      color: #37323e;
-                      font-weight: 700;
-                      font-family: "drukwide";
+                        color: #37323e;
+                        font-weight: 700;
+                        font-family: "drukwide";
                     }
                     #rec658327255 .t-card__descr {
-                      font-weight: 400;
-                      font-family: "Montserrat";
+                        font-weight: 400;
+                        font-family: "Montserrat";
                     }
-                  </style>
-                </div>
-              </div>
-              <div class="t-card__btn-wrapper">
-                <div
-                  class="t-card__btn t-btn t-btn_sm"
-                  id="cardbtn1_658327255"
-                  style="
-                    color: #37323e;
-                    border: 1px solid #37323e;
-                    background-color: #ffffff;
-                    border-radius: 30px;
-                    -moz-border-radius: 30px;
-                    -webkit-border-radius: 30px;
-                    font-family: Montserrat;
-                    font-weight: 400;
-                  "
-                  data-field="li_buttontitle__8144262249360"
-                  aria-hidden="true"
-                  data-buttonfieldset="li_button"
-                  data-lid="8144262249360"
-                >
-                  ПОДРОБНЕЕ
-                </div>
-              </div>
+                </style>
             </div>
-            <div
-              class="t-card__col t772__col t-col t-col_4 t-align_left t-item"
-            >
-              <div class="t772__content">
-                <div
-                  class="t772__imgwrapper"
-                  style="padding-bottom: 91.666666666667%"
-                >
-                  <div
-                    class="t772__bgimg t-bgimg"
-                    data-original="{% static 'images/tild6335-6362-4562-a630-303566313932__ganymede.jpg' %}"
-                    bgimgfield="li_img__8144262249361"
-                    style="
-                      background-image: url('images/tild6335-6362-4562-a630-303566313932__-__resizeb__20x__ganymede.jpg');
-                    "
-                    itemscope
-                    itemtype="http://schema.org/ImageObject"
-                  >
-                    <meta
-                      itemprop="image"
-                      content="{% static 'images/tild6335-6362-4562-a630-303566313932__ganymede.jpg' %}"
-                    />
-                  </div>
-                </div>
-                <div class="t772__textwrapper">
-                  <div
-                    class="t-card__title t-name t-name_md"
-                    field="li_title__8144262249361"
-                  >
-                    <a
-                      href="/catalog/tproduct/581517388-792177503351-marc-antoine-barrois-ganymede"
-                      class="t-card__link"
-                      id="cardtitle2_658327255"
-                      aria-labelledby="cardtitle2_658327255 cardbtn2_658327255"
-                    >
-                      MARC-ANTOINE BARROIS GANYMEDE
-                    </a>
-                  </div>
-                  <div
-                    class="t-card__descr t-descr t-descr_xxs"
-                    field="li_descr__8144262249361"
-                  >
-                    Аромат глянцевых журналов, дорогой кожи и леденящего ветра
-                  </div>
-                  <style>
-                    #rec658327255 .t-card__title {
-                      color: #37323e;
-                      font-weight: 700;
-                      font-family: "drukwide";
-                    }
-                    #rec658327255 .t-card__descr {
-                      font-weight: 400;
-                      font-family: "Montserrat";
-                    }
-                  </style>
-                </div>
-              </div>
-              <div class="t-card__btn-wrapper">
-                <div
-                  class="t-card__btn t-btn t-btn_sm"
-                  id="cardbtn2_658327255"
-                  style="
-                    color: #37323e;
-                    border: 1px solid #37323e;
-                    background-color: #ffffff;
-                    border-radius: 30px;
-                    -moz-border-radius: 30px;
-                    -webkit-border-radius: 30px;
-                    font-family: Montserrat;
-                    font-weight: 400;
-                  "
-                  data-field="li_buttontitle__8144262249361"
-                  aria-hidden="true"
-                  data-buttonfieldset="li_button"
-                  data-lid="8144262249361"
-                >
-                  ПОДРОБНЕЕ
-                </div>
-              </div>
+        </div>
+        <div class="t-card__btn-wrapper">
+            <div class="t-card__btn t-btn t-btn_sm" id="cardbtn1_658327255" style="color: #37323e; border: 1px solid #37323e; background-color: #ffffff; border-radius: 30px; -moz-border-radius: 30px; -webkit-border-radius: 30px; font-family: Montserrat; font-weight: 400;" data-field="li_buttontitle__8144262249360" aria-hidden="true" data-buttonfieldset="li_button" data-lid="8144262249360">
+                ПОДРОБНЕЕ
             </div>
-            <div
-              class="t-card__col t772__col t-col t-col_4 t-align_left t-item"
-            >
-              <div class="t772__content">
-                <div
-                  class="t772__imgwrapper"
-                  style="padding-bottom: 91.666666666667%"
-                >
-                  <div
-                    class="t772__bgimg t-bgimg"
-                    data-original="{% static 'images/tild6233-3530-4134-b335-323038666162__9.png' %}"
-                    bgimgfield="li_img__8144262249362"
-                    style="
-                      background-image: url('images/tild6233-3530-4134-b335-323038666162__-__resizeb__20x__9.png');
-                    "
-                    itemscope
-                    itemtype="http://schema.org/ImageObject"
-                  >
-                    <meta
-                      itemprop="image"
-                      content="{% static 'images/tild6233-3530-4134-b335-323038666162__9.png' %}"
-                    />
-                  </div>
-                </div>
-                <div class="t772__textwrapper">
-                  <div
-                    class="t-card__title t-name t-name_md"
-                    field="li_title__8144262249362"
-                  >
-                    <a
-                      href="/catalog/tproduct/590474706-833057754331-ex-nihilo-fleur-narcotique"
-                      class="t-card__link"
-                      id="cardtitle3_658327255"
-                      aria-labelledby="cardtitle3_658327255 cardbtn3_658327255"
-                    >
-                      EX NIHILO FLEUR NARCOTIQUE
-                    </a>
-                  </div>
-                  <div
-                    class="t-card__descr t-descr t-descr_xxs"
-                    field="li_descr__8144262249362"
-                  >
-                    Аромат ледяных цветов, воздушный и роковой. Соблазнительный
-                    и утонченный.
-                  </div>
-                  <style>
-                    #rec658327255 .t-card__title {
-                      color: #37323e;
-                      font-weight: 700;
-                      font-family: "drukwide";
-                    }
-                    #rec658327255 .t-card__descr {
-                      font-weight: 400;
-                      font-family: "Montserrat";
-                    }
-                  </style>
-                </div>
-              </div>
-              <div class="t-card__btn-wrapper">
-                <div
-                  class="t-card__btn t-btn t-btn_sm"
-                  id="cardbtn3_658327255"
-                  style="
-                    color: #37323e;
-                    border: 1px solid #37323e;
-                    background-color: #ffffff;
-                    border-radius: 30px;
-                    -moz-border-radius: 30px;
-                    -webkit-border-radius: 30px;
-                    font-family: Montserrat;
-                    font-weight: 400;
-                  "
-                  data-field="li_buttontitle__8144262249362"
-                  aria-hidden="true"
-                  data-buttonfieldset="li_button"
-                  data-lid="8144262249362"
-                >
-                  ПОДРОБНЕЕ
-                </div>
-              </div>
-            </div>
+        </div>
+    </div>
+{% endfor %}
           </div>
         </div>
         <script type="text/javascript">
@@ -3963,243 +3722,47 @@
           <div
             class="t772__wrapper t-card__container t772__container t772__container_mobile-flex"
           >
-            <div
-              class="t-card__col t772__col t-col t-col_4 t-align_left t-item"
-            >
-              <div class="t772__content">
-                <div
-                  class="t772__imgwrapper"
-                  style="padding-bottom: 97.222222222222%"
-                >
-                  <div
-                    class="t772__bgimg t-bgimg"
-                    data-original="{% static 'images/tild6339-3131-4261-b166-323635313936__10.png' %}"
-                    bgimgfield="li_img__6526479079670"
-                    style="
-                      background-image: url('images/tild6339-3131-4261-b166-323635313936__-__resizeb__20x__10.png');
-                    "
-                    itemscope
-                    itemtype="http://schema.org/ImageObject"
-                  >
-                    <meta
-                      itemprop="image"
-                      content="{% static 'images/tild6339-3131-4261-b166-323635313936__10.png' %}"
-                    />
-                  </div>
+          {% for brand in new_products_products_3 %}
+    <div class="t-card__col t772__col t-col t-col_4 t-align_left t-item">
+        <div class="t772__content">
+            <div class="t772__imgwrapper" style="padding-bottom: 91.666666666667%">
+                <div class="t772__bgimg t-bgimg" 
+                     data-original="{% if brand.image_base64 %}data:image/jpeg;base64,{{ brand.image_base64 }}{% else %}{% static 'images/default.png' %}{% endif %}"
+                     bgimgfield="li_img__8144262249360"
+                     style="background-image: url('{% if brand.image_base64 %}data:image/jpeg;base64,{{ brand.image_base64 }}{% else %}{% static 'images/default.png' %}{% endif %}');"
+                     itemscope itemtype="http://schema.org/ImageObject">
+                    <meta itemprop="image" content="{% if brand.image_base64 %}data:image/jpeg;base64,{{ brand.image_base64 }}{% else %}{% static 'images/default.png' %}{% endif %}" />
                 </div>
-                <div class="t772__textwrapper">
-                  <div
-                    class="t-card__title t-name t-name_md"
-                    field="li_title__6526479079670"
-                  >
-                    <a
-                      href="https://moodbox-ek.ru/home/tproduct/594172851-418511219261-byredo-pulp"
-                      class="t-card__link"
-                      id="cardtitle1_658327256"
-                      aria-labelledby="cardtitle1_658327256 cardbtn1_658327256"
-                    >
-                      BYREDO PULP
-                    </a>
-                  </div>
-                  <div
-                    class="t-card__descr t-descr t-descr_xxs"
-                    field="li_descr__6526479079670"
-                  >
-                    Фруктовый десерт
-                  </div>
-                  <style>
-                    #rec658327256 .t-card__title {
-                      color: #37323e;
-                      font-weight: 700;
-                      font-family: "drukwide";
-                    }
-                    #rec658327256 .t-card__descr {
-                      font-weight: 400;
-                      font-family: "Montserrat";
-                    }
-                  </style>
-                </div>
-              </div>
-              <div class="t-card__btn-wrapper">
-                <div
-                  class="t-card__btn t-btn t-btn_sm"
-                  id="cardbtn1_658327256"
-                  style="
-                    color: #37323e;
-                    border: 1px solid #37323e;
-                    border-radius: 30px;
-                    -moz-border-radius: 30px;
-                    -webkit-border-radius: 30px;
-                    font-family: Montserrat;
-                    font-weight: 400;
-                  "
-                  data-field="li_buttontitle__6526479079670"
-                  aria-hidden="true"
-                  data-buttonfieldset="li_button"
-                  data-lid="6526479079670"
-                >
-                  ПОДРОБНЕЕ
-                </div>
-              </div>
             </div>
-            <div
-              class="t-card__col t772__col t-col t-col_4 t-align_left t-item"
-            >
-              <div class="t772__content">
-                <div
-                  class="t772__imgwrapper"
-                  style="padding-bottom: 97.222222222222%"
-                >
-                  <div
-                    class="t772__bgimg t-bgimg"
-                    data-original="{% static 'images/tild3835-6334-4334-b231-333834386333__11_2.png' %}"
-                    bgimgfield="li_img__6526479079671"
-                    style="
-                      background-image: url('images/tild3835-6334-4334-b231-333834386333__-__resizeb__20x__11_2.png');
-                    "
-                    itemscope
-                    itemtype="http://schema.org/ImageObject"
-                  >
-                    <meta
-                      itemprop="image"
-                      content="{% static 'images/tild3835-6334-4334-b231-333834386333__11_2.png' %}"
-                    />
-                  </div>
-                </div>
-                <div class="t772__textwrapper">
-                  <div
-                    class="t-card__title t-name t-name_md"
-                    field="li_title__6526479079671"
-                  >
-                    <a
-                      href="https://moodbox-ek.ru/home/tproduct/594172851-261390280831-chopard-musk-malaki"
-                      class="t-card__link"
-                      id="cardtitle2_658327256"
-                      aria-labelledby="cardtitle2_658327256 cardbtn2_658327256"
-                    >
-                      CHOPARD MUSK MALAKI
+            <div class="t772__textwrapper">
+                <div class="t-card__title t-name t-name_md" field="li_title__8144262249360">
+                    <a href="/catalog/tproduct/{{ brand.id }}" class="t-card__link" id="cardtitle1_658327255" aria-labelledby="cardtitle1_658327255 cardbtn1_658327255">
+                        {{ brand.name }}
                     </a>
-                  </div>
-                  <div
-                    class="t-card__descr t-descr t-descr_xxs"
-                    field="li_descr__6526479079671"
-                  >
-                    Перчатки из тонкой замши, черный перец и...
-                  </div>
-                  <style>
-                    #rec658327256 .t-card__title {
-                      color: #37323e;
-                      font-weight: 700;
-                      font-family: "drukwide";
-                    }
-                    #rec658327256 .t-card__descr {
-                      font-weight: 400;
-                      font-family: "Montserrat";
-                    }
-                  </style>
                 </div>
-              </div>
-              <div class="t-card__btn-wrapper">
-                <div
-                  class="t-card__btn t-btn t-btn_sm"
-                  id="cardbtn2_658327256"
-                  style="
-                    color: #37323e;
-                    border: 1px solid #37323e;
-                    border-radius: 30px;
-                    -moz-border-radius: 30px;
-                    -webkit-border-radius: 30px;
-                    font-family: Montserrat;
-                    font-weight: 400;
-                  "
-                  data-field="li_buttontitle__6526479079671"
-                  aria-hidden="true"
-                  data-buttonfieldset="li_button"
-                  data-lid="6526479079671"
-                >
-                  ПОДРОБНЕЕ
+                <div class="t-card__descr t-descr t-descr_xxs" field="li_descr__8144262249360">
+                    {{ brand.description }}
                 </div>
-              </div>
+                <style>
+                    #rec658327255 .t-card__title {
+                        color: #37323e;
+                        font-weight: 700;
+                        font-family: "drukwide";
+                    }
+                    #rec658327255 .t-card__descr {
+                        font-weight: 400;
+                        font-family: "Montserrat";
+                    }
+                </style>
             </div>
-            <div
-              class="t-card__col t772__col t-col t-col_4 t-align_left t-item"
-            >
-              <div class="t772__content">
-                <div
-                  class="t772__imgwrapper"
-                  style="padding-bottom: 97.222222222222%"
-                >
-                  <div
-                    class="t772__bgimg t-bgimg"
-                    data-original="{% static 'images/tild3162-6664-4563-a537-353231626533__12_2.png' %}"
-                    bgimgfield="li_img__6526479079672"
-                    style="
-                      background-image: url('images/tild3162-6664-4563-a537-353231626533__-__resizeb__20x__12_2.png');
-                    "
-                    itemscope
-                    itemtype="http://schema.org/ImageObject"
-                  >
-                    <meta
-                      itemprop="image"
-                      content="{% static 'images/tild3162-6664-4563-a537-353231626533__12_2.png' %}"
-                    />
-                  </div>
-                </div>
-                <div class="t772__textwrapper">
-                  <div
-                    class="t-card__title t-name t-name_md"
-                    field="li_title__6526479079672"
-                  >
-                    <a
-                      href="https://moodbox-ek.ru/home/tproduct/594172851-284818228511-escentric-molecules-molecule-01-black-te"
-                      class="t-card__link"
-                      id="cardtitle3_658327256"
-                      aria-labelledby="cardtitle3_658327256 cardbtn3_658327256"
-                    >
-                      ESCENTRIC MOLECULES MOLECULE 01 + BLACK TEA
-                    </a>
-                  </div>
-                  <div
-                    class="t-card__descr t-descr t-descr_xxs"
-                    field="li_descr__6526479079672"
-                  >
-                    Утонченный аромат горячего черного чая в прохладе...
-                  </div>
-                  <style>
-                    #rec658327256 .t-card__title {
-                      color: #37323e;
-                      font-weight: 700;
-                      font-family: "drukwide";
-                    }
-                    #rec658327256 .t-card__descr {
-                      font-weight: 400;
-                      font-family: "Montserrat";
-                    }
-                  </style>
-                </div>
-              </div>
-              <div class="t-card__btn-wrapper">
-                <div
-                  class="t-card__btn t-btn t-btn_sm"
-                  id="cardbtn3_658327256"
-                  style="
-                    color: #37323e;
-                    border: 1px solid #37323e;
-                    border-radius: 30px;
-                    -moz-border-radius: 30px;
-                    -webkit-border-radius: 30px;
-                    font-family: Montserrat;
-                    font-weight: 400;
-                  "
-                  data-field="li_buttontitle__6526479079672"
-                  aria-hidden="true"
-                  data-buttonfieldset="li_button"
-                  data-lid="6526479079672"
-                >
-                  ПОДРОБНЕЕ
-                </div>
-              </div>
+        </div>
+        <div class="t-card__btn-wrapper">
+            <div class="t-card__btn t-btn t-btn_sm" id="cardbtn1_658327255" style="color: #37323e; border: 1px solid #37323e; background-color: #ffffff; border-radius: 30px; -moz-border-radius: 30px; -webkit-border-radius: 30px; font-family: Montserrat; font-weight: 400;" data-field="li_buttontitle__8144262249360" aria-hidden="true" data-buttonfieldset="li_button" data-lid="8144262249360">
+                ПОДРОБНЕЕ
             </div>
+        </div>
+    </div>
+{% endfor %}
           </div>
         </div>
         <script type="text/javascript">
