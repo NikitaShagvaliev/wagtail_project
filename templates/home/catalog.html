@@ -216,88 +216,53 @@
                 </ul>
             </div>
         </div>
-
+        {% load custom_filters %}
         <!-- Основной контент с продуктами -->
         <div class="product-list panel" style="flex: 1; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
-
+            {% for product in products %}
             <div class="product-card" style="flex: 0 1 calc(33.333% - 20px); border: 1px solid #ccc; padding: 10px; border-radius: 8px; text-align: center;">
                 <div class="image-content" style="flex: 0 0 auto; padding-left: 20px;">
-                  <img src="https://static.tildacdn.com/stor6132-3734-4931-b930-366663663961/90395643.jpg"
-                       alt="Acqua Di Parma"
-                       class="common-image">
+                    {% if product.id in image_base64 %}
+                        <img src="data:image/jpeg;base64,{{ image_base64|get_item:product.id }}" alt="{{ product.name }}" class="common-image">
+                    {% else %}
+                        <p>Image not available.</p>
+                    {% endif %}
                 </div>
-                <div class="js-store-prod-name js-product-name t-store__card__title t-typography__title t-name t-name_md" field="st_title__333430710031" data-redactor-toolbar="no">MOODBOX Персональный</div>
-                <div class="js-store-prod-descr t-store__card__descr t-typography__descr t-descr t-descr_xxs" field="st_descr__333430710031" data-redactor-toolbar="no">Подберем 4 аромата в бокс, на основании ваших предпочтений. Вам лишь нужно ответить на вопросы анкеты</div>
+                <div class="js-store-prod-name js-product-name t-store__card__title t-typography__title t-name t-name_md" field="st_title__333430710031" data-redactor-toolbar="no">{{ product.name }}</div>
+                <div class="js-store-prod-descr t-store__card__descr t-typography__descr t-descr t-descr_xxs" field="st_descr__333430710031" data-redactor-toolbar="no">{{ product.description }}</div>
                 <div class="js-store-price-wrapper t-store__card__price-wrapper">
                     <div class="t-store__card__price t-store__card__price-item t-name t-name_xs">
-                        <div class="js-product-price js-store-prod-price-val t-store__card__price-value" translate="no" field="st_price__333430710031" data-redactor-toolbar="no" data-product-price-def="3000" data-product-price-def-str="3000">3 000 р.</div>
+                        <div class="js-product-price js-store-prod-price-val t-store__card__price-value" translate="no" field="st_price__333430710031" data-redactor-toolbar="no" data-product-price-def="3000" data-product-price-def-str="3000">{{ product.price }}</div>
                     </div>
+                    <a class="product-link" href="{% url 'catalog_id' product.id %}">View Details</a>
+            <form method="post" action="{% url 'add_to_cart' product.id %}">
+                {% csrf_token %}
+                <button type="submit" class="add-to-cart-button">Add to Cart</button>
+            </form>
+        </div>
                 </div>
             </div>
-            <div class="product-card" style="flex: 0 1 calc(33.333% - 20px); border: 1px solid #ccc; padding: 10px; border-radius: 8px; text-align: center;">
-                <a href="http://127.0.0.1:8000/cart/" style="text-decoration: none; display: block;">
-                <div class="image-content" style="flex: 0 0 auto; padding-left: 20px;">
-                  <img src="https://static.tildacdn.com/stor6563-6335-4161-a161-653131383831/87024136.jpg"
-                       alt="Acqua Di Parma"
-                       class="common-image">
-                </div>
-                <div class="js-store-prod-name js-product-name t-store__card__title t-typography__title t-name t-name_md" field="st_title__333430710031" data-redactor-toolbar="no">Afnan Supremacy Silver</div>
-                <div style="height: 20px; visibility: hidden;"></div>
-                <div class="js-store-price-wrapper t-store__card__price-wrapper">
-                    <div class="t-store__card__price t-store__card__price-item t-name t-name_xs">
-                        <div class="js-product-price js-store-prod-price-val t-store__card__price-value" translate="no" field="st_price__333430710031" data-redactor-toolbar="no" data-product-price-def="3000" data-product-price-def-str="3000">6 800 р.</div>
-                    </div>
-                </div>
-                </a>
-            </div>
-            <div class="product-card" style="flex: 0 1 calc(33.333% - 20px); border: 1px solid #ccc; padding: 10px; border-radius: 8px; text-align: center;">
-                <div class="image-content" style="flex: 0 0 auto; padding-left: 20px;">
-                  <img src="https://static.tildacdn.com/stor3334-6138-4830-b765-333435323333/14930385.jpg" class="common-image">
-                </div>
-                <div class="js-store-prod-name js-product-name t-store__card__title t-typography__title t-name t-name_md" field="st_title__333430710031" data-redactor-toolbar="no">Ajmal Amber Wood</div>
-                <div style="height: 20px; visibility: hidden;"></div>
-                <div class="js-store-price-wrapper t-store__card__price-wrapper">
-                    <div class="t-store__card__price t-store__card__price-item t-name t-name_xs">
-                        <div class="js-product-price js-store-prod-price-val t-store__card__price-value" translate="no" field="st_price__333430710031" data-redactor-toolbar="no" data-product-price-def="3000" data-product-price-def-str="3000">700 р.</div>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card" style="flex: 0 1 calc(33.333% - 20px); border: 1px solid #ccc; padding: 10px; border-radius: 8px; text-align: center;">
-                <img src="https://static.tildacdn.com/stor3163-6336-4464-b339-313237656566/27675980.jpg" class="common-image">
-                <div class="js-store-prod-name js-product-name t-store__card__title t-typography__title t-name t-name_md" field="st_title__333430710031" data-redactor-toolbar="no">Akro Awake</div>
-                <div style="height: 20px; visibility: hidden;"></div>
-                <div class="js-store-price-wrapper t-store__card__price-wrapper">
-                    <div class="t-store__card__price t-store__card__price-item t-name t-name_xs">
-                        <div class="js-product-price js-store-prod-price-val t-store__card__price-value" translate="no" field="st_price__333430710031" data-redactor-toolbar="no" data-product-price-def="3000" data-product-price-def-str="3000">750 р.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" style="flex: 0 1 calc(33.333% - 20px); border: 1px solid #ccc; padding: 10px; border-radius: 8px; text-align: center;">
-                <img src="https://static.tildacdn.com/stor3935-6436-4530-b130-646161396632/61688014.jpg" class="common-image">
-                <div class="js-store-prod-name js-product-name t-store__card__title t-typography__title t-name t-name_md" field="st_title__333430710031" data-redactor-toolbar="no">Akro Bake</div>
-                <div style="height: 20px; visibility: hidden;"></div>
-                <div class="js-store-price-wrapper t-store__card__price-wrapper">
-                    <div class="t-store__card__price t-store__card__price-item t-name t-name_xs">
-                        <div class="js-product-price js-store-prod-price-val t-store__card__price-value" translate="no" field="st_price__333430710031" data-redactor-toolbar="no" data-product-price-def="3000" data-product-price-def-str="3000">750 р.</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="product-card" style="flex: 0 1 calc(33.333% - 20px); border: 1px solid #ccc; padding: 10px; border-radius: 8px; text-align: center;">
-                <div class="image-content" style="flex: 0 0 auto; padding-left: 20px;">
-                  <img src="https://static.tildacdn.com/tild3235-3464-4236-a234-383761363461/IMG_1841.webp"
-                       alt="Acqua Di Parma"
-                       class="common-image">
-                </div>
-                <div class="js-store-prod-name js-product-name t-store__card__title t-typography__title t-name t-name_md" field="st_title__333430710031" data-redactor-toolbar="no">Acqua Di Parma Blu Mediterraneo Bergamotto Di Calabria</div>
-                <div style="height: 20px; visibility: hidden;"></div>
-                <div class="js-store-price-wrapper t-store__card__price-wrapper">
-                    <div class="t-store__card__price t-store__card__price-item t-name t-name_xs">
-                        <div class="js-product-price js-store-prod-price-val t-store__card__price-value" translate="no" field="st_price__333430710031" data-redactor-toolbar="no" data-product-price-def="3000" data-product-price-def-str="3000">650 р.</div>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
+        </div>
+         <!-- Пагинация -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if products.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ products.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ products.number }} of {{ products.paginator.num_pages }}.
+            </span>
+    
+            {% if products.has_next %}
+                <a href="?page={{ products.next_page_number }}">next</a>
+                <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+            
+        </span>
+    </div>
             <!-- Другие карточки продукта с таким же стилем -->
         </div>
 

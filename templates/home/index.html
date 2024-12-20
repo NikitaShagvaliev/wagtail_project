@@ -167,7 +167,7 @@
                                   </div>
                                   <div class="t734__button">
                                     <a
-                                      href="https://moodbox-ek.ru/catalog?tfc_quantity[581517388]=y&amp;tfc_storepartuid[581517388]=%D0%A3%D1%8E%D1%82%D0%BD%D0%B0%D1%8F+%D0%BE%D1%81%D0%B5%D0%BD%D1%8C&amp;tfc_div=:::"
+                                      href="{% url 'catalog_category' 'new_products' %}"
                                       target=""
                                       class="t-btn t-btn_md"
                                       style="
@@ -255,7 +255,7 @@
                                   </div>
                                   <div class="t734__button">
                                     <a
-                                      href="https://moodbox-ek.ru/catalog?tfc_storepartuid[581517388]=%D0%9D%D0%BE%D0%B2%D0%B8%D0%BD%D0%BA%D0%B8&amp;tfc_div=:::"
+                                      href="{% url 'catalog_category' 'new_products' %}"
                                       target=""
                                       class="t-btn t-btn_md"
                                       style="
@@ -346,7 +346,7 @@
                                   </div>
                                   <div class="t734__button">
                                     <a
-                                      href="https://moodbox-ek.ru/catalog/tproduct/581517388-437612531342-tom-ford-vanilla-sex"
+                                      href="{% url 'catalog_category' 'for_him' %}"
                                       target=""
                                       class="t-btn t-btn_md"
                                       style="
@@ -434,7 +434,7 @@
                                   </div>
                                   <div class="t734__button">
                                     <a
-                                      href="https://moodbox-ek.ru/catalog?tfc_quantity[581517388]=y&amp;tfc_storepartuid[581517388]=SALE&amp;tfc_div=:::"
+                                      href="{% url 'catalog_category' 'sale' %}"
                                       target=""
                                       class="t-btn t-btn_md"
                                       style="
@@ -616,7 +616,7 @@
                                   </div>
                                   <div class="t734__button">
                                     <a
-                                      href="/catalog?tfc_quantity[581517388]=y&amp;tfc_storepartuid[581517388]=Для+него&amp;tfc_div=:::"
+                                      href="{% url 'catalog_category' 'for_him' %}" 
                                       target=""
                                       class="t-btn t-btn_md"
                                       style="
@@ -702,7 +702,7 @@
                                   </div>
                                   <div class="t734__button">
                                     <a
-                                      href="/catalog/tproduct/581517388-865462481861-podarochnii-sertifikat"
+                                      href="{% url 'catalog_category' 'boxes' %}" 
                                       target=""
                                       class="t-btn t-btn_md"
                                       style="
@@ -788,7 +788,7 @@
                                   </div>
                                   <div class="t734__button">
                                     <a
-                                      href="/catalog"
+                                      href="{% url 'catalog_category' 'boxes' %}" 
                                       target=""
                                       class="t-btn t-btn_md"
                                       style="
@@ -3159,7 +3159,7 @@
             </div>
             <div class="t772__textwrapper">
                 <div class="t-card__title t-name t-name_md" field="li_title__8144262249360">
-                    <a href="/catalog/tproduct/{{ brand.id }}" class="t-card__link" id="cardtitle1_658327255" aria-labelledby="cardtitle1_658327255 cardbtn1_658327255">
+                    <a href="{% url 'catalog_category' 'new_products' %}" class="t-card__link" id="cardtitle1_658327255" aria-labelledby="cardtitle1_658327255 cardbtn1_658327255">
                         {{ brand.name }}
                     </a>
                 </div>
@@ -3736,7 +3736,7 @@
             </div>
             <div class="t772__textwrapper">
                 <div class="t-card__title t-name t-name_md" field="li_title__8144262249360">
-                    <a href="/catalog/tproduct/{{ brand.id }}" class="t-card__link" id="cardtitle1_658327255" aria-labelledby="cardtitle1_658327255 cardbtn1_658327255">
+                    <a href="{% url 'catalog_category' 'sale' %}" class="t-card__link" id="cardtitle1_658327255" aria-labelledby="cardtitle1_658327255 cardbtn1_658327255">
                         {{ brand.name }}
                     </a>
                 </div>
@@ -3757,9 +3757,9 @@
             </div>
         </div>
         <div class="t-card__btn-wrapper">
-            <div class="t-card__btn t-btn t-btn_sm" id="cardbtn1_658327255" style="color: #37323e; border: 1px solid #37323e; background-color: #ffffff; border-radius: 30px; -moz-border-radius: 30px; -webkit-border-radius: 30px; font-family: Montserrat; font-weight: 400;" data-field="li_buttontitle__8144262249360" aria-hidden="true" data-buttonfieldset="li_button" data-lid="8144262249360">
-                ПОДРОБНЕЕ
-            </div>
+          <a href="{% url 'catalog_category' 'new_products' %}" class="t-card__btn t-btn t-btn_sm" id="cardbtn1_658327255" style="color: #37323e; border: 1px solid #37323e; background-color: #ffffff; border-radius: 30px; -moz-border-radius: 30px; -webkit-border-radius: 30px; font-family: Montserrat; font-weight: 400;" data-field="li_buttontitle__8144262249360" aria-hidden="true" data-buttonfieldset="li_button" data-lid="8144262249360">
+            ПОДРОБНЕЕ
+        </a>
         </div>
     </div>
 {% endfor %}

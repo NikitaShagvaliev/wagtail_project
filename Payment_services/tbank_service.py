@@ -62,35 +62,35 @@ class TBankService:
             logging.error(f"Ошибка при получении выписки: {e}")
             return None
 
-# Пример данных для платежа
-payment_data = {
-    "id": "unique_payment_id_123",
-    "from": {
-        "accountNumber": "12345678901234567890"
-    },
-    "to": {
-        "name": "ООО Получатель",
-        "inn": "7707083893",  # Исправленный ИНН
-        "kpp": "123456789",
-        "bik": "044525225",
-        "bankName": "Банк Получателя",
-        "corrAccountNumber": "30101810400000000225",
-        "accountNumber": "98765432109876543210"
-    },
-    "purpose": "Оплата заказа №123",
-    "amount": 1000.50,
-    "dueDate": "2024-12-25T12:00:00Z"
-}
-# Пример данных для получения выписки
-account_number = "12345678901234567890"
-from_date = "2023-01-01T00:00:00Z"
-to_date = "2023-12-31T23:59:59Z"
+# # Пример данных для платежа
+# payment_data = {
+#     "id": "unique_payment_id_123",
+#     "from": {
+#         "accountNumber": "12345678901234567890"
+#     },
+#     "to": {
+#         "name": "ООО Получатель",
+#         "inn": "7707083893",  # Исправленный ИНН
+#         "kpp": "123456789",
+#         "bik": "044525225",
+#         "bankName": "Банк Получателя",
+#         "corrAccountNumber": "30101810400000000225",
+#         "accountNumber": "98765432109876543210"
+#     },
+#     "purpose": "Оплата заказа №123",
+#     "amount": 1000.50,
+#     "dueDate": "2024-12-25T12:00:00Z"
+# }
+# # Пример данных для получения выписки
+# account_number = "12345678901234567890"
+# from_date = "2023-01-01T00:00:00Z"
+# to_date = "2023-12-31T23:59:59Z"
 
-# Выполнение платежа
-result = TBankService.perform_payment(payment_data)
-print(result)
-if result:
-    print("Платеж успешно выполнен:", result)
-else:
-    print("Ошибка при выполнении платежа")
+# # Выполнение платежа
+# result = TBankService.perform_payment(payment_data)
+# print(result)
+# if result:
+#     print("Платеж успешно выполнен:", result)
+# else:
+#     print("Ошибка при выполнении платежа")
 

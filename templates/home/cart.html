@@ -1,7 +1,7 @@
 {% load static %}
 {% include 'base/header.html' %}
 
-<div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: white;">
+<div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
 
     <div class="t050" style="width: 80%; max-width: 1200px; padding: 20px;">
         <div
@@ -14,7 +14,7 @@
           <div class="t050">
             <div class="t-container t-align_left">
               <div class="t-col t-col_12">
-                <h1 class="t050__title t-title t-title_xxl" field="title">Afnan Supremacy Silver</h1>
+                <h1 class="t050__title t-title t-title_xxl" field="title">Корзина товаров</h1>
               </div>
             </div>
           </div>
@@ -33,76 +33,98 @@
 
             /* Уменьшаем верхний отступ */
             #rec590497430 .t050__title {
-              padding: 0px 1px 50px 100px;
+              padding: 0px 1px 50px 100px; /* Уменьшен верхний отступ (0px) */
             }
           </style>
         </div>
 
-        <div class="product-details" style="display: flex; justify-content: space-between; align-items: flex-start;">
-            <div class="product-image" style="flex: 1; padding-right: 20px;">
-                <img src="https://static.tildacdn.com/stor6563-6335-4161-a161-653131383831/87024136.jpg" alt="Afnan Supremacy Silver" style="width: 100%; max-width: 400px;">
+        <table style="width: 100%; border-collapse: collapse;">
+            <div class="t706__sidebar-top">
+                <div class="t706__sidebar-heading t-name t-name_xl">Ваш заказ</div>
+                <div style="border-top: 1px solid #ccc; margin-top: 10px; margin-bottom: 10px;"></div>
             </div>
-            <div class="product-info" style="flex: 2;">
-                <div class="t706__sidebar-heading t-name t-name_xl" style="text-align: left;">
-                    6 800 р.
+            <thead>
+                <tr>
+                    {% for item in cart_items %}
+            <div class="t706__product" data-cart-product-i="{{ forloop.counter0 }}">
+                <div class="t706__product-thumb">
+                    {% if product.image_base64 %}
+                        <div class="t706__product-imgdiv" style="background-image:url('data:image/png;base64,{{ product.image_base64 }}');"></div>
+                    {% else %}
+                        <p>Image not available.</p>
+                    {% endif %}
+                    
                 </div>
-
-                <!-- Объем -->
-                <div class="js-product-edition-option t-product__option" data-edition-option-id="Объем" data-view-type="select" data-option-type="regular" style="margin-bottom: 20px;">
-                    <div class="js-product-edition-option-name t-product__option-title t-typography__options t-descr t-descr_xxs" style="color:#919191;">Объем</div>
-                    <div class="t-product__option-variants t-product__option-variants_regular">
-                        <select class="js-product-edition-option-variants t-product__option-select t-typography__options t-descr t-descr_xxs">
-                            <option value="отливант 2 мл" disabled="disabled">отливант 2 мл</option>
-                            <option value="отливант 5 мл" disabled="disabled">отливант 5 мл</option>
-                            <option value="отливант 10 мл" disabled="disabled">отливант 10 мл</option>
-                            <option value="отливант 20 мл" disabled="disabled">отливант 20 мл</option>
-                            <option value="Флакон 100 мл">Флакон 100 мл</option>
-                        </select>
+                <div class="t706__product-title t-descr t-descr_sm">
+                    <a style="color: inherit" target="_blank" href="{{ item.product_url }}">{{ item.name }}</a>
+                    <div class="t706__product-title__option">
+                        <div>Объем: {{ item.volume }}</div>
+                        <div>Срок доставки: {{ item.delivery_time }}</div>
                     </div>
                 </div>
-
-                <!-- Срок доставки -->
-                <div class="js-product-edition-option t-product__option" data-edition-option-id="Срок доставки" data-view-type="select" data-option-type="regular" style="margin-bottom: 20px;">
-                    <div class="js-product-edition-option-name t-product__option-title t-typography__options t-descr t-descr_xxs" style="color:#919191;">Срок доставки</div>
-                    <div class="t-product__option-variants t-product__option-variants_regular">
-                        <select class="js-product-edition-option-variants t-product__option-select t-typography__options t-descr t-descr_xxs">
-                            <option value="1-3 дня" disabled="disabled">1-3 дня</option>
-                            <option value="10-14 дней">10-14 дней</option>
-                        </select>
-                    </div>
+                <div class="t706__product-plusminus t-descr t-descr_sm">
+                    <span class="t706__product-minus">
+                        <img src="https://static.tildacdn.com/lib/linea/c8eecd27-9482-6c4f-7896-3eb09f6a1091/arrows_circle_minus.svg" style="width:16px;height:16px;border:0;" onclick="updateQuantity({{ forloop.counter0 }}, -1)">
+                    </span>
+                    <span class="t706__product-quantity" id="product-quantity-{{ forloop.counter0 }}">{{ item.quantity }}</span>
+                    <span class="t706__product-plus">
+                        <img src="https://static.tildacdn.com/lib/linea/c47d1e0c-6880-dc39-ae34-521197f7fba7/arrows_circle_plus.svg" style="width:16px;height:16px;border:0;" onclick="updateQuantity({{ forloop.counter0 }}, 1)">
+                    </span>
                 </div>
-
-                <div class="js-store-prod-text t-store__prod-popup__text t-typography__descr t-descr t-descr_xxs">
-                    <div class="js-store-prod-all-text">
-                        Освежающий, прохладный аромат, который будет уместен всегда: яркий ананас, кислинка смородины, терпкость бергамота и пачули создают мужественный сладковато-древесный шлейф. Вдохновлён популярным Creed Aventus<br><br>верхние ноты: ананас, яблоко, бергамот, смородина<br>средние ноты: береза, пачули, жасмин, роза <br>базовые ноты: мускус, мох, амбра, ваниль
-                    </div>
-                    <div class="js-store-prod-all-charcs" style="margin-top: 20px;">
-                        <p class="t-typography__characteristics js-store-prod-charcs">По характеру: Освежающие</p>
-                        <p class="t-typography__characteristics js-store-prod-charcs">По направлению: Мускусные</p>
-                        <p class="js-store-prod-dimensions t-typography__characteristics"></p>
-                        <p class="js-store-prod-weight t-typography__characteristics"></p>
-                    </div>
+                <div class="t706__product-amount t-descr t-descr_sm">
+                    <div class="t706__cartwin-prodamount-price" id="product-price-{{ forloop.counter0 }}">{{ item.total_price }}</div>
+                    <div class="t706__cartwin-prodamount-currency">р.</div>
                 </div>
-
-                <div>
-                    <button class="add-to-cart" style="color:#ffffff;background-color:#37323e;font-family:Montserrat;font-weight:400; padding: 20px 50px; font-size: 22px; border: none; width: auto; display: inline-block;">
-                        Добавить в корзину
-                    </button>
+                <div class="t706__product-del-wrapper" style="display: table-cell; width: 20px; padding: 15px 0 15px 15px; vertical-align: middle;">
+                    <span class="t706__product-del">
+                        <img src="https://static.tildacdn.com/lib/linea/1bec3cd7-e9d1-2879-5880-19b597ef9f1a/arrows_circle_remove.svg" style="width:20px;height:20px;border:0;">
+                    </span>
                 </div>
             </div>
-        </div>
+            {% endfor %}
+                    </div>
+                </tr>
+            </thead>
+        </table>
+
+        <script>
+            // Начальные данные
+            const prices = [6800, 6800];  // Цены товаров
+            let quantities = [1, 1];      // Количества товаров
+
+            // Функция для обновления количества товара и пересчета суммы
+            function updateQuantity(productIndex, change) {
+                quantities[productIndex] += change;
+                if (quantities[productIndex] < 1) quantities[productIndex] = 1; // Количество не может быть меньше 1
+
+                document.getElementById(`product-quantity-${productIndex}`).innerText = quantities[productIndex];
+                updateTotalAmount();
+            }
+
+            // Функция для обновления общей суммы
+            function updateTotalAmount() {
+                let totalAmount = 0;
+                for (let i = 0; i < prices.length; i++) {
+                    totalAmount += prices[i] * quantities[i];
+                    document.getElementById(`product-price-${i}`).innerText = prices[i] * quantities[i];
+                }
+                document.getElementById('total-amount').innerText = totalAmount;
+            }
+        </script>
+
+<div class="t706__sidebar-bottom" style="text-align: center;">
+    <form method="post" action="{% url 'checkout' %}">
+        {% csrf_token %}
+        <button class="t706__sidebar-continue t-btn" style="color:#ffffff;background-color:#37323e;font-family:Montserrat;font-weight:400; padding: 20px 50px; font-size: 22px; border: none; width: auto; display: inline-block;">
+            ПЕРЕЙТИ К ОПЛАТЕ
+        </button>
+    </form>
+</div>
+
+
+
     </div>
 
 </div>
 
 {% include 'base/footer.html' %}
-
-<script>
-    let quantity = 1;
-
-    function updateQuantity(change) {
-        quantity += change;
-        if (quantity < 1) quantity = 1;
-        document.getElementById('product-quantity').innerText = quantity;
-    }
-</script>
