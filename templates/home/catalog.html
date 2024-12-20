@@ -91,6 +91,15 @@
         margin-bottom: 10px;
     }
 
+   /* Изображение товара */
+    .common-image {
+      width: 100%;
+      max-width: 300px; /* Максимальная ширина изображения */
+      height: 250px; /* Фиксированная высота для всех изображений */
+      object-fit: cover; /* Заполнение контейнера с сохранением пропорций */
+      border-radius: 10px; /* Слегка скругленные углы (по желанию) */
+    }
+
     /* Описание и цена */
     .product-description, .product-price {
         font-size: 14px;
@@ -117,6 +126,10 @@
             width: 100%; /* Одна карточка в ряд на очень маленьких экранах */
         }
     }
+
+
+
+
 </style>
 </head>
 
@@ -208,7 +221,11 @@
         <div class="product-list panel" style="flex: 1; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
 
             <div class="product-card" style="flex: 0 1 calc(33.333% - 20px); border: 1px solid #ccc; padding: 10px; border-radius: 8px; text-align: center;">
-                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.outsideonline.com%2Fculture%2Factive-families%2Fhow-to-read-dog-body-language-happy-aggressive%2F&psig=AOvVaw2ytgyy-jkDgYByWTpQVvvG&ust=1734723753374000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCIDKgdvLtIoDFQAAAAAdAAAAABAE" alt="Product Image">
+                <div class="image-content" style="flex: 0 0 auto; padding-left: 20px;">
+                  <img src="https://static.tildacdn.com/stor6132-3734-4931-b930-366663663961/90395643.jpg"
+                       alt="Acqua Di Parma"
+                       class="common-image">
+                </div>
                 <div class="js-store-prod-name js-product-name t-store__card__title t-typography__title t-name t-name_md" field="st_title__333430710031" data-redactor-toolbar="no">MOODBOX Персональный</div>
                 <div class="js-store-prod-descr t-store__card__descr t-typography__descr t-descr t-descr_xxs" field="st_descr__333430710031" data-redactor-toolbar="no">Подберем 4 аромата в бокс, на основании ваших предпочтений. Вам лишь нужно ответить на вопросы анкеты</div>
                 <div class="js-store-price-wrapper t-store__card__price-wrapper">
@@ -219,7 +236,11 @@
             </div>
             <div class="product-card" style="flex: 0 1 calc(33.333% - 20px); border: 1px solid #ccc; padding: 10px; border-radius: 8px; text-align: center;">
                 <a href="http://127.0.0.1:8000/cart/" style="text-decoration: none; display: block;">
-                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.outsideonline.com%2Fculture%2Factive-families%2Fhow-to-read-dog-body-language-happy-aggressive%2F&psig=AOvVaw2ytgyy-jkDgYByWTpQVvvG&ust=1734723753374000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCIDKgdvLtIoDFQAAAAAdAAAAABAE" alt="Product Image">
+                <div class="image-content" style="flex: 0 0 auto; padding-left: 20px;">
+                  <img src="https://static.tildacdn.com/stor6563-6335-4161-a161-653131383831/87024136.jpg"
+                       alt="Acqua Di Parma"
+                       class="common-image">
+                </div>
                 <div class="js-store-prod-name js-product-name t-store__card__title t-typography__title t-name t-name_md" field="st_title__333430710031" data-redactor-toolbar="no">Afnan Supremacy Silver</div>
                 <div style="height: 20px; visibility: hidden;"></div>
                 <div class="js-store-price-wrapper t-store__card__price-wrapper">
@@ -230,7 +251,9 @@
                 </a>
             </div>
             <div class="product-card" style="flex: 0 1 calc(33.333% - 20px); border: 1px solid #ccc; padding: 10px; border-radius: 8px; text-align: center;">
-                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.outsideonline.com%2Fculture%2Factive-families%2Fhow-to-read-dog-body-language-happy-aggressive%2F&psig=AOvVaw2ytgyy-jkDgYByWTpQVvvG&ust=1734723753374000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCIDKgdvLtIoDFQAAAAAdAAAAABAE" alt="Product Image">
+                <div class="image-content" style="flex: 0 0 auto; padding-left: 20px;">
+                  <img src="https://static.tildacdn.com/stor3334-6138-4830-b765-333435323333/14930385.jpg" class="common-image">
+                </div>
                 <div class="js-store-prod-name js-product-name t-store__card__title t-typography__title t-name t-name_md" field="st_title__333430710031" data-redactor-toolbar="no">Ajmal Amber Wood</div>
                 <div style="height: 20px; visibility: hidden;"></div>
                 <div class="js-store-price-wrapper t-store__card__price-wrapper">
@@ -240,7 +263,7 @@
                 </div>
             </div>
             <div class="product-card" style="flex: 0 1 calc(33.333% - 20px); border: 1px solid #ccc; padding: 10px; border-radius: 8px; text-align: center;">
-                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.outsideonline.com%2Fculture%2Factive-families%2Fhow-to-read-dog-body-language-happy-aggressive%2F&psig=AOvVaw2ytgyy-jkDgYByWTpQVvvG&ust=1734723753374000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCIDKgdvLtIoDFQAAAAAdAAAAABAE" alt="Product Image">
+                <img src="https://static.tildacdn.com/stor3163-6336-4464-b339-313237656566/27675980.jpg" class="common-image">
                 <div class="js-store-prod-name js-product-name t-store__card__title t-typography__title t-name t-name_md" field="st_title__333430710031" data-redactor-toolbar="no">Akro Awake</div>
                 <div style="height: 20px; visibility: hidden;"></div>
                 <div class="js-store-price-wrapper t-store__card__price-wrapper">
@@ -251,7 +274,7 @@
             </div>
 
             <div class="product-card" style="flex: 0 1 calc(33.333% - 20px); border: 1px solid #ccc; padding: 10px; border-radius: 8px; text-align: center;">
-                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.outsideonline.com%2Fculture%2Factive-families%2Fhow-to-read-dog-body-language-happy-aggressive%2F&psig=AOvVaw2ytgyy-jkDgYByWTpQVvvG&ust=1734723753374000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCIDKgdvLtIoDFQAAAAAdAAAAABAE" alt="Product Image">
+                <img src="https://static.tildacdn.com/stor3935-6436-4530-b130-646161396632/61688014.jpg" class="common-image">
                 <div class="js-store-prod-name js-product-name t-store__card__title t-typography__title t-name t-name_md" field="st_title__333430710031" data-redactor-toolbar="no">Akro Bake</div>
                 <div style="height: 20px; visibility: hidden;"></div>
                 <div class="js-store-price-wrapper t-store__card__price-wrapper">
@@ -262,7 +285,11 @@
             </div>
 
             <div class="product-card" style="flex: 0 1 calc(33.333% - 20px); border: 1px solid #ccc; padding: 10px; border-radius: 8px; text-align: center;">
-                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.outsideonline.com%2Fculture%2Factive-families%2Fhow-to-read-dog-body-language-happy-aggressive%2F&psig=AOvVaw2ytgyy-jkDgYByWTpQVvvG&ust=1734723753374000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCIDKgdvLtIoDFQAAAAAdAAAAABAE" alt="Product Image">
+                <div class="image-content" style="flex: 0 0 auto; padding-left: 20px;">
+                  <img src="https://static.tildacdn.com/tild3235-3464-4236-a234-383761363461/IMG_1841.webp"
+                       alt="Acqua Di Parma"
+                       class="common-image">
+                </div>
                 <div class="js-store-prod-name js-product-name t-store__card__title t-typography__title t-name t-name_md" field="st_title__333430710031" data-redactor-toolbar="no">Acqua Di Parma Blu Mediterraneo Bergamotto Di Calabria</div>
                 <div style="height: 20px; visibility: hidden;"></div>
                 <div class="js-store-price-wrapper t-store__card__price-wrapper">
