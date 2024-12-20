@@ -1,36 +1,130 @@
 {% load static %}
 {% include 'base/header.html' %}
 
-<h1>Ваша корзина</h1>
-<table>
-    <thead>
-        <tr>
-            <th>Товар</th>
-            <th>Количество</th>
-            <th>Цена за единицу</th>
-            <th>Итого</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for item in cart_items %}
-        <tr>
-            <td>{{ item.name }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.price }} руб.</td>
-            <td>{{ item.total_price }} руб.</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="3"><strong>Итого:</strong></td>
-            <td><strong>{{ total_amount }} руб.</strong></td>
-        </tr>
-    </tfoot>
-</table>
+<div class="container" style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
 
-<form method="post" action="{% url 'checkout' %}">
-    {% csrf_token %}
-    <button type="submit">Оформить заказ</button>
-</form>
+    <div class="t050" style="width: 80%; max-width: 1200px; padding: 20px;">
+        <div
+          id="rec590497430"
+          class="r t-rec t-rec_pt_75 t-rec_pb_15"
+          style="padding-top: 0px; padding-bottom: 15px"
+          data-record-type="60"
+        >
+          <!-- T050 -->
+          <div class="t050">
+            <div class="t-container t-align_left">
+              <div class="t-col t-col_12">
+                <h1 class="t050__title t-title t-title_xxl" field="title">Корзина товаров</h1>
+              </div>
+            </div>
+          </div>
+          <style>
+            @media screen and (min-width: 900px) {
+              #rec590497430 .t050__title {
+                font-size: 70px;
+              }
+            }
+            @media screen and (max-width: 480px),
+              (orientation: landscape) and (max-height: 480px) {
+              #rec590497430 .t050__title {
+                font-size: 60px;
+              }
+            }
+
+            /* Уменьшаем верхний отступ */
+            #rec590497430 .t050__title {
+              padding: 0px 1px 50px 100px; /* Уменьшен верхний отступ (0px) */
+            }
+          </style>
+        </div>
+
+        <table style="width: 100%; border-collapse: collapse;">
+            <div class="t706__sidebar-top">
+                <div class="t706__sidebar-heading t-name t-name_xl">Ваш заказ</div>
+                <div style="border-top: 1px solid #ccc; margin-top: 10px; margin-bottom: 10px;"></div>
+            </div>
+            <thead>
+                <tr>
+                    {% for item in cart_items %}
+            <div class="t706__product" data-cart-product-i="{{ forloop.counter0 }}">
+                <div class="t706__product-thumb">
+                    {% if product.image_base64 %}
+                        <div class="t706__product-imgdiv" style="background-image:url('data:image/png;base64,{{ product.image_base64 }}');"></div>
+                    {% else %}
+                        <p>Image not available.</p>
+                    {% endif %}
+                    
+                </div>
+                <div class="t706__product-title t-descr t-descr_sm">
+                    <a style="color: inherit" target="_blank" href="{{ item.product_url }}">{{ item.name }}</a>
+                    <div class="t706__product-title__option">
+                        <div>Объем: {{ item.volume }}</div>
+                        <div>Срок доставки: {{ item.delivery_time }}</div>
+                    </div>
+                </div>
+                <div class="t706__product-plusminus t-descr t-descr_sm">
+                    <span class="t706__product-minus">
+                        <img src="https://static.tildacdn.com/lib/linea/c8eecd27-9482-6c4f-7896-3eb09f6a1091/arrows_circle_minus.svg" style="width:16px;height:16px;border:0;" onclick="updateQuantity({{ forloop.counter0 }}, -1)">
+                    </span>
+                    <span class="t706__product-quantity" id="product-quantity-{{ forloop.counter0 }}">{{ item.quantity }}</span>
+                    <span class="t706__product-plus">
+                        <img src="https://static.tildacdn.com/lib/linea/c47d1e0c-6880-dc39-ae34-521197f7fba7/arrows_circle_plus.svg" style="width:16px;height:16px;border:0;" onclick="updateQuantity({{ forloop.counter0 }}, 1)">
+                    </span>
+                </div>
+                <div class="t706__product-amount t-descr t-descr_sm">
+                    <div class="t706__cartwin-prodamount-price" id="product-price-{{ forloop.counter0 }}">{{ item.total_price }}</div>
+                    <div class="t706__cartwin-prodamount-currency">р.</div>
+                </div>
+                <div class="t706__product-del-wrapper" style="display: table-cell; width: 20px; padding: 15px 0 15px 15px; vertical-align: middle;">
+                    <span class="t706__product-del">
+                        <img src="https://static.tildacdn.com/lib/linea/1bec3cd7-e9d1-2879-5880-19b597ef9f1a/arrows_circle_remove.svg" style="width:20px;height:20px;border:0;">
+                    </span>
+                </div>
+            </div>
+            {% endfor %}
+                    </div>
+                </tr>
+            </thead>
+        </table>
+
+        <script>
+            // Начальные данные
+            const prices = [6800, 6800];  // Цены товаров
+            let quantities = [1, 1];      // Количества товаров
+
+            // Функция для обновления количества товара и пересчета суммы
+            function updateQuantity(productIndex, change) {
+                quantities[productIndex] += change;
+                if (quantities[productIndex] < 1) quantities[productIndex] = 1; // Количество не может быть меньше 1
+
+                document.getElementById(`product-quantity-${productIndex}`).innerText = quantities[productIndex];
+                updateTotalAmount();
+            }
+
+            // Функция для обновления общей суммы
+            function updateTotalAmount() {
+                let totalAmount = 0;
+                for (let i = 0; i < prices.length; i++) {
+                    totalAmount += prices[i] * quantities[i];
+                    document.getElementById(`product-price-${i}`).innerText = prices[i] * quantities[i];
+                }
+                document.getElementById('total-amount').innerText = totalAmount;
+            }
+        </script>
+
+<div class="t706__sidebar-bottom" style="text-align: center;">
+    <form method="post" action="{% url 'checkout' %}">
+        {% csrf_token %}
+        <button class="t706__sidebar-continue t-btn" style="color:#ffffff;background-color:#37323e;font-family:Montserrat;font-weight:400; padding: 20px 50px; font-size: 22px; border: none; width: auto; display: inline-block;">
+            ПЕРЕЙТИ К ОПЛАТЕ
+        </button>
+    </form>
+</div>
+
+
+
+    </div>
+
+</div>
+
 {% include 'base/footer.html' %}

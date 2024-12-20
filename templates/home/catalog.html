@@ -50,7 +50,7 @@
         gap: 20px;
     }
 
-    /* Левая панель фильтров */
+     /* Левая панель фильтров */
     .filter-panel {
         width: 25%;
         border-right: 1px solid #ccc;
@@ -70,7 +70,7 @@
     .product-card {
         width: calc(33.333% - 20px); /* Три карточки в ряд с отступами */
         border: 1px solid #ccc;
-        padding: 15px;
+        padding: 1500px;
         box-sizing: border-box;
         text-align: center;
     }
@@ -89,6 +89,15 @@
         font-size: 18px;
         font-weight: bold;
         margin-bottom: 10px;
+    }
+
+   /* Изображение товара */
+    .common-image {
+      width: 100%;
+      max-width: 300px; /* Максимальная ширина изображения */
+      height: 250px; /* Фиксированная высота для всех изображений */
+      object-fit: cover; /* Заполнение контейнера с сохранением пропорций */
+      border-radius: 10px; /* Слегка скругленные углы (по желанию) */
     }
 
     /* Описание и цена */
@@ -117,113 +126,125 @@
             width: 100%; /* Одна карточка в ряд на очень маленьких экранах */
         }
     }
+
+
+
+
 </style>
 </head>
-<body>
-<div class="catalog-container">
-    <!-- Левая панель фильтров -->
-    <div class="filter-panel">
-        <h3>Фильтры</h3>
-        <div>
-            <h4>Категории</h4>
-            <ul>
-                <li><label><input type="checkbox" value="Все"> Все</label></li>
-                <li><label><input type="checkbox" value="Яркая зима"> Яркая зима</label></li>
-                <li><label><input type="checkbox" value="Унисекс"> Унисекс</label></li>
-                <li><label><input type="checkbox" value="Новинки"> Новинки</label></li>
-                <li><label><input type="checkbox" value="Хиты Продаж"> Хиты Продаж</label></li>
-                <li><label><input type="checkbox" value="Боксы"> Боксы</label></li>
-                <li><label><input type="checkbox" value="Для него"> Для него</label></li>
-                <li><label><input type="checkbox" value="Для неё"> Для неё</label></li>
-                <li><label><input type="checkbox" value="SALE"> SALE</label></li>
-                <li><label><input type="checkbox" value="Диффузоры"> Диффузоры</label></li>
-            </ul>
-        </div>
-        <div>
-            <h4>Цена</h4>
-            <ul>
-                <li><label><input type="checkbox" value="450 — 59900"> 450 — 59 900</label></li>
-            </ul>
-        </div>
-        <div>
-            <h4>Объем</h4>
-            <ul>
-                <li><label><input type="checkbox" value="отливант 50 мл"> отливант 50 мл</label></li>
-                <li><label><input type="checkbox" value="Флакон 70 мл"> Флакон 70 мл</label></li>
-                <li><label><input type="checkbox" value="отливант 5 мл"> отливант 5 мл</label></li>
-                <li><label><input type="checkbox" value="отливант 20 мл"> отливант 20 мл</label></li>
-                <li><label><input type="checkbox" value="отливант 2 мл"> отливант 2 мл</label></li>
-                <li><label><input type="checkbox" value="отливант 10 мл"> отливант 10 мл</label></li>
-                <li><label><input type="checkbox" value="Флакон 90 мл"> Флакон 90 мл</label></li>
-                <li><label><input type="checkbox" value="Флакон 88 мл"> Флакон 88 мл</label></li>
-                <li><label><input type="checkbox" value="Флакон 80 мл"> Флакон 80 мл</label></li>
-                <li><label><input type="checkbox" value="Флакон 75 мл"> Флакон 75 мл</label></li>
-            </ul>
-        </div>
-        <div>
-            <h4>Бренд</h4>
-            <ul>
-                <li><label><input type="checkbox" value="Acqua Di Parma"> Acqua Di Parma</label></li>
-                <li><label><input type="checkbox" value="Afnan"> Afnan</label></li>
-                <li><label><input type="checkbox" value="Ajmal"> Ajmal</label></li>
-                <li><label><input type="checkbox" value="Akro"> Akro</label></li>
-                <li><label><input type="checkbox" value="Amouage"> Amouage</label></li>
-                <li><label><input type="checkbox" value="Ard Al Zaafaran"> Ard Al Zaafaran</label></li>
-                <li><label><input type="checkbox" value="Armaf"> Armaf</label></li>
-                <li><label><input type="checkbox" value="Armani Prive"> Armani Prive</label></li>
-                <li><label><input type="checkbox" value="Atelier Cologne"> Atelier Cologne</label></li>
-            </ul>
-        </div>
-        <div>
-            <h4>По характеру</h4>
-            <ul>
-                <li><label><input type="checkbox" value="Деликатные"> Деликатные</label></li>
-                <li><label><input type="checkbox" value="Мускусные"> Мускусные</label></li>
-                <li><label><input type="checkbox" value="Освежающие"> Освежающие</label></li>
-                <li><label><input type="checkbox" value="Соблазнительные"> Соблазнительные</label></li>
-                <li><label><input type="checkbox" value="Стойкие"> Стойкие</label></li>
-                <li><label><input type="checkbox" value="Шлейфовые"> Шлейфовые</label></li>
-            </ul>
-        </div>
-        <div>
-            <h4>По направлению</h4>
-            <ul>
-                <li><label><input type="checkbox" value="Акватические"> Акватические</label></li>
-                <li><label><input type="checkbox" value="Алкогольные"> Алкогольные</label></li>
-                <li><label><input type="checkbox" value="Гурманские"> Гурманские</label></li>
-                <li><label><input type="checkbox" value="Древесные"> Древесные</label></li>
-                <li><label><input type="checkbox" value="Кожаные"> Кожаные</label></li>
-                <li><label><input type="checkbox" value="Мускусные"> Мускусные</label></li>
-                <li><label><input type="checkbox" value="Пряные"> Пряные</label></li>
-                <li><label><input type="checkbox" value="Пудровые"> Пудровые</label></li>
-                <li><label><input type="checkbox" value="Табачные"> Табачные</label></li>
-                <li><label><input type="checkbox" value="Фруктовые"> Фруктовые</label></li>
-            </ul>
-        </div>
-    </div>
 
-    <!-- Список продуктов -->
-    <div class="product-list">
-        {% for product in products %}
-        <div class="product-card">
-            {% if product.image_base64 %}
-                <img src="data:image/png;base64,{{ product.image_base64 }}" alt="{{ product.name }}">
-            {% else %}
-                <p>Image not available.</p>
-            {% endif %}
-            <div class="product-title">{{ product.name }}</div>
-            <div class="product-description">{{ product.description }}</div>
-            <div class="product-price">Price: {{ product.price }}</div>
-            <a class="product-link" href="{% url 'product_detail' product.id %}">View Details</a>
+<body>
+    <div class="container" style="display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
+        <!-- Правая панель с поиском -->
+        <div class="search panel" style="width: 250px; display: flex; flex-direction: column; visibility: hidden;">
+            <input class="t-store__filter__input js-store-filter-search" type="text" name="query" placeholder="Поиск">
+        </div>
+        <!-- Левая панель фильтров -->
+        <div class="filter-panel" style="width: 250px; display: flex; flex-direction: column; gap: 20px;">
+            <!-- Содержимое фильтров -->
+            <ul>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item t-store__parts-switch-btn-all t-active" data-storepart-link="#!/tstore/r/581517388/c/438912953971" data-storepart-uid="438912953971">Все</div>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item" data-storepart-link="#!/tstore/r/581517388/c/238719868742-Яркая зима" data-storepart-uid="238719868742">Яркая зима</div>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item" data-storepart-link="#!/tstore/r/581517388/c/568505374681-Унисекс" data-storepart-uid="568505374681">Унисекс</div>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item" data-storepart-link="#!/tstore/r/581517388/c/783166127191-Новинки" data-storepart-uid="783166127191">Новинки</div>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item" data-storepart-link="#!/tstore/r/581517388/c/331043863301-Хиты Продаж" data-storepart-uid="331043863301">Хиты Продаж</div>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item" data-storepart-link="#!/tstore/r/581517388/c/974346171401-Боксы" data-storepart-uid="974346171401">Боксы</div>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item" data-storepart-link="#!/tstore/r/581517388/c/201076719231-Для него" data-storepart-uid="201076719231">Для него</div>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item" data-storepart-link="#!/tstore/r/581517388/c/804136905281-SALE" data-storepart-uid="804136905281">Для нее</div>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item" data-storepart-link="#!/tstore/r/581517388/c/804136905281-SALE" data-storepart-uid="804136905281">SALE</div>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item" data-storepart-link="#!/tstore/r/581517388/c/326424281182-Диффузоры" data-storepart-uid="326424281182">Диффузоры</div>
+            </ul>
+            <div>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item t-store__parts-switch-btn-all t-active" data-storepart-link="#!/tstore/r/581517388/c/438912953971" data-storepart-uid="438912953971">Цена</div>
+                <ul>
+                    <div class="t-store__filter__item-controls-wrap t-store__filter__item-price-slider js-store-filter-item-controls-wr"><div class="t-store__filter__price-outer t-store__filter__price-outer_start" style="width: 0%;"></div><div class="t-store__filter__price-outer t-store__filter__price-outer_end" style="width: 0%;"></div><input class="t-store__filter__range t-store__filter__range_min" type="range" name="price_range" min="450" max="59900" step="1" data-min-val="450" value="450"><input class="t-store__filter__range t-store__filter__range_max" type="range" name="price_range" min="450" max="59900" step="1" data-max-val="59900" value="59900"><div class="t-store__filter__range_bg"></div></div>
+                </ul>
+            </div>
+            <div>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item t-store__parts-switch-btn-all t-active" data-storepart-link="#!/tstore/r/581517388/c/438912953971" data-storepart-uid="438912953971">Объем</div>
+                <ul>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="отливант 50 мл" data-filter-value="отливант 50 мл"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">отливант 50 мл</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Флакон 70 мл" data-filter-value="Флакон 70 мл"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Флакон 70 мл</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="отливант 20 мл" data-filter-value="отливант 20 мл"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">отливант 50 мл</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="отливант 2 мл" data-filter-value="отливант 2 мл"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">отливант 2 мл</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="отливант 10 мл" data-filter-value="отливант 10 мл"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">отливант 10 мл</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Флакон 90 мл" data-filter-value="Флакон 90 мл"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Флакон 90 мл</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Флакон 88 мл" data-filter-value="Флакон 88 мл"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Флакон 88 мл</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Флакон 80 мл" data-filter-value="Флакон 80 мл"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Флакон 80 мл</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Флакон 75 мл" data-filter-value="Флакон 75 мл"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Флакон 75 мл</span></label>
+                </ul>
+            </div>
+            <div>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item t-store__parts-switch-btn-all t-active" data-storepart-link="#!/tstore/r/581517388/c/438912953971" data-storepart-uid="438912953971">Бренд</div>
+                <ul>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Acqua Di Parma" data-filter-value="Acqua Di Parma"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Acqua Di Parma</span></label>                <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Afnan" data-filter-value="Afnan"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Afnan</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Ajmal" data-filter-value="Ajmal"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Ajmal</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Akro" data-filter-value="Akro"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Akro</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Amouage" data-filter-value="Amouage"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Amouage</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Ard Al Zaafaran" data-filter-value="Ard Al Zaafaran"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Ard Al Zaafaran</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name=Armaf" data-filter-value="Armaf"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title"> Armaf</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Armani Prive" data-filter-value="Armani Prive"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Armani Prive</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Atelier Cologne" data-filter-value="Atelier Cologne"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Atelier Cologne</span></label>
+                </ul>
+                <button class="t-store__filter__btn-expand js-store-filter-btn-expand" data-expanded="no" type="button"><span class="t-store__filter__btn-text t-descr t-descr_xxs">Показать все</span></button>
+            </div>
+            <div>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item t-store__parts-switch-btn-all t-active" data-storepart-link="#!/tstore/r/581517388/c/438912953971" data-storepart-uid="438912953971">По характеру</div>
+                <ul>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Деликатные" data-filter-value="Деликатные"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Деликатные</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Мускусные" data-filter-value="Мускусные"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Мускусные</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Освежающие" data-filter-value="Освежающие"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Освежающие</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Соблазнительные" data-filter-value="Соблазнительные"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Соблазнительные</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Стойкие" data-filter-value="Стойкие"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Стойкие</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Шлейфовые" data-filter-value="Шлейфовые"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Шлейфовые</span></label>
+                </ul>
+            </div>
+            <div>
+                <div class="js-store-parts-switcher t-store__parts-switch-btn t-name t-name_xs t-menu__link-item t-store__parts-switch-btn-all t-active" data-storepart-link="#!/tstore/r/581517388/c/438912953971" data-storepart-uid="438912953971">По направлению</div>
+                <ul>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Акватические" data-filter-value="Акватические"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Акватические</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Алкогольные" data-filter-value="Алкогольные"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Алкогольные</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Гурманские" data-filter-value="Гурманские"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Гурманские</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Древесные" data-filter-value="Древесные"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Древесные</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Кожаные" data-filter-value="Кожаные"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Кожаные</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Мускусные" data-filter-value="Мускусные"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Мускусные</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Пряные" data-filter-value="Пряные"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Пряные</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Пудровые" data-filter-value="Пудровые"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Пудровые</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Табачные" data-filter-value="Табачные"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Табачные</span></label>
+                    <label class="t-checkbox__control t-store__filter__checkbox t-descr t-descr_xxs"><input class="t-checkbox js-store-filter-opt-chb" type="checkbox" name="Фруктовые" data-filter-value="Фруктовые"><div class="t-checkbox__indicator"></div><span class="t-store__filter__title">Фруктовые</span></label>
+
+                </ul>
+            </div>
+        </div>
+        {% load custom_filters %}
+        <!-- Основной контент с продуктами -->
+        <div class="product-list panel" style="flex: 1; display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+            {% for product in products %}
+            <div class="product-card" style="flex: 0 1 calc(33.333% - 20px); border: 1px solid #ccc; padding: 10px; border-radius: 8px; text-align: center;">
+                <div class="image-content" style="flex: 0 0 auto; padding-left: 20px;">
+                    {% if product.id in image_base64 %}
+                        <img src="data:image/jpeg;base64,{{ image_base64|get_item:product.id }}" alt="{{ product.name }}" class="common-image">
+                    {% else %}
+                        <p>Image not available.</p>
+                    {% endif %}
+                </div>
+                <div class="js-store-prod-name js-product-name t-store__card__title t-typography__title t-name t-name_md" field="st_title__333430710031" data-redactor-toolbar="no">{{ product.name }}</div>
+                <div class="js-store-prod-descr t-store__card__descr t-typography__descr t-descr t-descr_xxs" field="st_descr__333430710031" data-redactor-toolbar="no">{{ product.description }}</div>
+                <div class="js-store-price-wrapper t-store__card__price-wrapper">
+                    <div class="t-store__card__price t-store__card__price-item t-name t-name_xs">
+                        <div class="js-product-price js-store-prod-price-val t-store__card__price-value" translate="no" field="st_price__333430710031" data-redactor-toolbar="no" data-product-price-def="3000" data-product-price-def-str="3000">{{ product.price }}</div>
+                    </div>
+                    <a class="product-link" href="{% url 'catalog_id' product.id %}">View Details</a>
             <form method="post" action="{% url 'add_to_cart' product.id %}">
                 {% csrf_token %}
                 <button type="submit" class="add-to-cart-button">Add to Cart</button>
             </form>
         </div>
-        {% endfor %}
-    </div>
-    
-    <!-- Пагинация -->
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+         <!-- Пагинация -->
     <div class="pagination">
         <span class="step-links">
             {% if products.has_previous %}
@@ -239,37 +260,12 @@
                 <a href="?page={{ products.next_page_number }}">next</a>
                 <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
             {% endif %}
+            
         </span>
     </div>
-        
-<script>
-    document.querySelectorAll('.filter-panel input[type="checkbox"]').forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-        const selectedCategories = Array.from(document.querySelectorAll('.filter-panel input[type="checkbox"]:checked'))
-            .map(checkbox => checkbox.value);
+            <!-- Другие карточки продукта с таким же стилем -->
+        </div>
 
-        document.querySelectorAll('.product-card').forEach(card => {
-            const category = card.getAttribute('data-category');
-            const volume = card.getAttribute('data-volume');
-            const brand = card.getAttribute('data-brand');
-            const price = card.getAttribute('data-price');
-            const character = card.getAttribute('data-character');
-            const direction = card.getAttribute('data-direction');
 
-            if (selectedCategories.includes('Все') || 
-                selectedCategories.includes(category) || 
-                selectedCategories.includes(volume) || 
-                selectedCategories.includes(brand) || 
-                selectedCategories.includes(price) || 
-                selectedCategories.includes(character) || 
-                selectedCategories.includes(direction)) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    });
-});
-</script>
-  
-{% include 'base/footer.html' %}
+    </div>
+</body>
